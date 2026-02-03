@@ -1,0 +1,47 @@
+.example-card {
+  margin: 16px;
+  max-width: 400px;
+}
+
+.example-header-image {
+  background-image: url('https://material.angular.dev/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}
+
+.event-title {
+  font-size: 16px;
+  font-weight: 900;
+}
+
+.favorite {
+  position: absolute;
+  font-size: 26px;
+  color: aqua;
+  z-index: 100;
+  top: 10px;
+  right: 10px;
+
+  &__selected {
+    color: red;
+  }
+}
+
+.event-detail-container {
+  margin: 0px 16px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.event-detail-container p {
+  margin: 0.12rem 0;
+  font-size: 12px;
+}
+
+.detaled-info-cta {
+  margin: 16px 0;
+}
+
+.detaled-info-cta button {
+  width: 100%;
+}

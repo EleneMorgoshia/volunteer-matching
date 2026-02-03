@@ -1,0 +1,24 @@
+<mat-card class="example-card" appearance="outlined">
+  <mat-icon class="favorite" [ngClass]="{ favorite__selected: selected }">favorite</mat-icon>
+  <img mat-card-image [src]="imagePath" alt="Event Image" />
+  <mat-card-content>
+    <p class="event-title">{{ eventName() }}</p>
+  </mat-card-content>
+
+  <div class="event-detail-container">
+    <div class="organisation-detail">
+      <p>{{ organisationName() }}</p>
+      <p>{{ theme() }}</p>
+    </div>
+    <p>{{ date() | date: 'longDate' }}</p>
+  </div>
+
+  <mat-card-content>
+    <p class="event-description">
+      {{ eventDescription() }}
+    </p>
+  </mat-card-content>
+  <mat-card-actions class="detaled-info-cta">
+    <button matButton="tonal">იხილეთ მეტი</button>
+  </mat-card-actions>
+</mat-card>
