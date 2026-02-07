@@ -1,0 +1,13 @@
+<mat-form-field>
+  <mat-label>Email</mat-label>
+  <input matInput [formField]="loginForm.email" />
+</mat-form-field>
+<mat-form-field>
+  <mat-label>Password</mat-label>
+  <input matInput [formField]="loginForm.password" />
+</mat-form-field>
+
+<button matButton="elevated" (click)="onLogin()">Login</button>
+<button matButton="elevated" (click)="onRegiter()">Register</button>
+
+
