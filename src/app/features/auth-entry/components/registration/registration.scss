@@ -1,0 +1,28 @@
+.Registration-container{
+  display: flex;
+  flex-direction: column;
+  // justify-content: center;
+  align-items: center;
+
+}
+
+.role-container{
+  display: flex;
+  gap:3rem;
+}
+
+.role-btn, .send-btn{
+  padding:1rem 1.2rem;
+  border-radius: 0.5rem;
+  border:none;
+  font-size:12px;
+
+  
+  &:hover {
+    background-color: grey;
+    color: white; 
+    transform: scale(1.05); 
+    cursor: pointer;
+  }
+}
+

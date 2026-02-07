@@ -1,0 +1,26 @@
+.volunteer {
+  display: flex;
+  flex-direction: column;
+  // justify-items:center;
+  gap: 1.2rem;
+}
+.input-div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.input-div input {
+  border-radius: 0.5rem;
+  border: none;
+  font-size: 12px;
+  padding: 1rem 1.4rem;
+}
+
+.example-label {
+  font-size: 12px;
+}
+
+.big-input {
+  height: 3rem;
+}
