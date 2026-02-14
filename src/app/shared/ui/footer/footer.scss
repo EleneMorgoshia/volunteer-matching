@@ -1,0 +1,32 @@
+.footer-container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 10px;
+  font-family: 'Inter';
+
+  .footer-logo {
+  }
+
+  .footer-body {
+    display: flex;
+    padding: 72px 0;
+    .footer-body-card {
+      flex: 1;
+      ul {
+        list-style-type: none;
+        li {
+          padding: 8px 0;
+        }
+        li:first-child {
+          font-size: 18px;
+          font-weight: 800;
+        }
+      }
+    }
+  }
+
+  .footer-legal-info {
+    display: flex;
+    justify-content: space-between;
+  }
+}
