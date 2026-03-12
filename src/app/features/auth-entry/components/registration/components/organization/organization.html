@@ -1,0 +1,54 @@
+<div>
+  <div class="input-div">
+    <label for="name">Organisation Name:</label>
+    <input
+      placeholder="Enter Your Name"
+      type="text"
+      id="name"
+      [formField]="form.organisationName"
+    />
+    @if (!isValid(form.organisationName)) {
+      <p>{{ getErrors(form.organisationName) }}</p>
+    }
+  </div>
+
+  <div class="input-div">
+    <label for="organisationDescription">Organisation Description:</label>
+    <input
+      class="big-input"
+      placeholder="Tell Us About You"
+      type="text"
+      id="organisationDescription"
+      [formField]="form.description"
+    />
+    @if (!isValid(form.description)) {
+      <p>{{ getErrors(form.description) }}</p>
+    }
+  </div>
+
+  <div class="input-div">
+    <label for="email">Email:</label>
+    <input placeholder="Enter Your Email" type="text" id="email" [formField]="form.email" />
+    @if (!isValid(form.email)) {
+      <p [innerHTML]="getErrors(form.email)"></p>
+    }
+  </div>
+
+  <div class="input-div">
+    <label for="password">Password</label>
+    <input id="password" type="text" placeholder="Enter Password" [formField]="form.password" />
+    @if (!isValid(form.password)) {
+      <p>{{ getErrors(form.password) }}</p>
+    }
+  </div>
+
+  <div class="input-div">
+    <label for="password">Password Again</label>
+    <input id="password" type="text" placeholder="Enter Password" [formField]="form.password" />
+    @if (!isValid(form.password)) {
+      <p>{{ getErrors(form.password) }}</p>
+    }
+  </div>
+
+  <button class="send-btn" (click)="onSend()">Send</button>
+</div>

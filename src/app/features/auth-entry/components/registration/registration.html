@@ -1,0 +1,19 @@
+<!-- Volunteer VS Organisation -->
+
+<div class="Registration-container">
+  <h1>Registration</h1>
+
+  <div class="role-container">
+    <button class="role-btn" (click)="selectVolunteer()">Volunteer</button>
+    <button class="role-btn" (click)="selectOrganisation()">Organisation</button>
+  </div>
+
+  <!-- VOLUNTEER -->
+  @if (volunteer) {
+    <app-volunteer></app-volunteer>
+  }
+
+  @if (organisation) {
+    <app-organization></app-organization>
+  }
+</div>

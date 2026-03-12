@@ -1,0 +1,122 @@
+<Form class="volunteer">
+  <div class="input-div">
+    <label for="name">Name:</label>
+    <input
+      placeholder="Enter Your Name"
+      type="text"
+      id="name"
+      [formField]="registrationVolunteerForm.name"
+    />
+  </div>
+
+  <div class="input-div">
+    <label for="lastName">LastName:</label>
+    <input
+      placeholder="Enter Your Lastname"
+      type="text"
+      id="lastName"
+      [formField]="registrationVolunteerForm.lastname"
+    />
+  </div>
+
+  <div class="input-div">
+    <label for="email">Email:</label>
+    <input
+      placeholder="Enter Your Email"
+      type="email"
+      id="email"
+      [formField]="registrationVolunteerForm.email"
+    />
+  </div>
+
+  <div class="input-div">
+    <label for="date">BirthDate:</label>
+    <input
+      placeholder="Enter Your Full Birth Date"
+      type="date"
+      id="date"
+      [formField]="registrationVolunteerForm.birthdate"
+    />
+  </div>
+
+  <div class="input-div">
+    <label for="citizenship">Citizenship</label>
+    <input
+      placeholder="Enter Your Citizenship"
+      type="text"
+      id="citizenship"
+      [formField]="registrationVolunteerForm.citizenship"
+    />
+  </div>
+
+  <div class="input-div">
+    <label for="languages">Languages</label>
+    <input
+      id="languages"
+      type="text"
+      placeholder="Enter Languages"
+      id="languages"
+      [formField]="registrationVolunteerForm.languages"
+    />
+  </div>
+
+  <div class="input-div">
+    <label for="profession">Profession</label>
+    <input
+      id="profession"
+      type="text"
+      placeholder="Enter Profession"
+      id="profession"
+      [formField]="registrationVolunteerForm.profession"
+    />
+  </div>
+
+  <div class="input-div">
+    <label for="skills">Skills</label>
+    <label for="skills" class="example-label"
+      >E.x communication, Teaching/Tutoring, Graphic Design..</label
+    >
+    <input
+      class="big-input"
+      id="skills"
+      type="text"
+      placeholder="Enter Skills"
+      id="skills"
+      [formField]="registrationVolunteerForm.skills"
+    />
+  </div>
+
+  <div class="input-div">
+    <label for="interests">Interests</label>
+    <label for="interests" class="example-label"
+      >E.x Reading books or literature, Dancing, Yoga or meditation..</label
+    >
+    <input
+      class="big-input"
+      id="interests"
+      type="text"
+      placeholder="Enter interests"
+      id="interests"
+    />
+  </div>
+
+  <div class="input-div">
+    <label for="theme">Theme</label>
+    <select id="theme" name="theme">
+      <option value="education">Education</option>
+      <option value="environment">Environment</option>
+    </select>
+  </div>
+
+  <div class="input-div">
+    <label for="password">Password</label>
+    <input id="password" type="text" placeholder="Enter Password" />
+  </div>
+
+  <div class="input-div">
+    <label for="password">Password Again</label>
+    <input id="password" type="text" placeholder="Enter Password" />
+  </div>
+
+  <button class="send-btn">Send</button>
+</Form>
