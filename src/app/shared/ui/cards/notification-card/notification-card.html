@@ -1,0 +1,60 @@
+<mat-card class="example-card" appearance="outlined">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-subtitle
+      >{{ eventDetails()?.organizationName }}-მა გამოგიგზავნათ მოთხოვნა</mat-card-subtitle
+    >
+    <mat-card-subtitle>{{ eventDetails()?.eventTitle }} - ივენთში მოხალისეობაზე</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="main-content-container">
+      <p>{{ eventDetails()?.eventTitle }}</p>
+      <p>{{ eventDetails()?.organizationName }}</p>
+      <p>
+        The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from
+        Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was
+        originally bred for hunting.
+      </p>
+      <div class="detailed-info">
+        <!-- location div -->
+        <div>
+          <!-- icon -->
+          <p>{{ eventDetails()?.eventLocation }}</p>
+        </div>
+
+        <!-- date time -->
+        <div>
+          <!-- icon -->
+          <mat-icon
+            aria-hidden="false"
+            aria-label="Example home icon"
+            fontIcon="access_time"
+          ></mat-icon>
+          <mat-icon
+            aria-hidden="false"
+            aria-label="Example home icon"
+            fontIcon="location_on"
+          ></mat-icon>
+          <mat-icon
+            aria-hidden="false"
+            aria-label="Example home icon"
+            fontIcon="auto_awesome"
+          ></mat-icon>
+          <p>{{ eventDetails()?.eventLastingPeriod }}</p>
+        </div>
+
+        <div>
+          <!-- icon -->
+          <!-- აქ ჯერარ არის მოფიქრებული რამდენი თემატიკა შეიძლება გამოჩნდეს და ზოგადა დთმატიკა რა ფორმატში იქნება -->
+          <p>Theme</p>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+  @if (!eventDetails()?.status) {
+    <mat-card-actions class="action-button-placement">
+      <button matButton>LIKE</button>
+      <button matButton>SHARE</button>
+    </mat-card-actions>
+  }
+</mat-card>

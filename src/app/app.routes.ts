@@ -5,9 +5,9 @@ import { REGISTRATION_ROUTES } from './features/auth-entry/components/registrati
 export const routes: Routes = [
   ...LOGIN_ROUTES,
   ...REGISTRATION_ROUTES,
-  {
-    path: '',
-    redirectTo: 'login',
-    pathMatch: 'full',
-  },
+  // {
+  //   path: '',
+  //   redirectTo: 'login',
+  //   pathMatch: 'full',
+  // },
 ];

@@ -1,0 +1,38 @@
+<div class="favourite-card-container">
+  <div class="image-container">
+    <img src="" />
+  </div>  
+
+  <!-- text div -->
+  <div class="text-content-container">
+    <div class="name-icon-container">
+      <div>
+        <p>{{FavouriteEventDetails()?.eventTitle}}</p>
+        <p>{{FavouriteEventDetails()?.organizationName}}</p>
+      </div>
+      <!-- x icon -->
+    </div>
+
+    <p>
+      {{FavouriteEventDetails()?.eventDescription}}
+    </p>
+
+    <div class="detailed-info-container">
+      <div class="date-container detailed-info">
+        <!-- icon -->
+        <p>{{FavouriteEventDetails()?.eventDateTime}}</p>
+      </div>
+
+      <div class="locaiton-container ">
+        <!-- icon -->
+        <p>{{FavouriteEventDetails()?.eventLocation}}</p>
+      </div>
+
+      <div class="theme-conatiner ">
+        <!-- icon -->
+        <p>theme</p>
+      </div>
+    </div>
+    
+  </div>
+</div>

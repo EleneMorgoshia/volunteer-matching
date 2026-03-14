@@ -1,0 +1,21 @@
+.favourite-card-container{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.text-content-container{
+  display:flex;
+  flex-direction: column;
+}
+
+.name-icon-container{
+  display:flex;
+  align-items: center;
+}
+
+.detailed-info-container{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
