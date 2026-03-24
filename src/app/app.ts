@@ -6,10 +6,13 @@ import { Footer } from './shared/ui/footer/footer';
 import { NotificationCard } from './shared/ui/cards/notification-card/notification-card';
 import { EventModel } from './models/event.model';
 import { FavouritesCard } from './shared/ui/cards/favourites-card/favourites-card';
+import { NotificationOverlay } from "./shared/ui/overlays/notification-overlay/notification-overlay";
+import { EventCard } from "./shared/ui/cards/event-card/event-card";
+import { SearchedUserCard } from "./shared/ui/cards/searched-user-card/searched-user-card";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Header, Footer, Loader, NotificationCard, FavouritesCard],
+  imports: [RouterOutlet, Header, Footer, Loader, NotificationCard, FavouritesCard, NotificationOverlay, EventCard, SearchedUserCard],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
@@ -24,7 +27,8 @@ export class App {
       eventLastingPeriod: new Date('2026-04-10'),
       status: false,
       eventDescription:
-        'A workshop where young volunteers learn teamwork and community engagement.',
+        'A dynamic and engaging workshop designed for young volunteers to develop essential teamwork skills and strengthen...',
+      eventLocation:"Goergia, Tbilisi"
     },
     {
       eventPhoto: 'assets/images/event-photo.jpg',
@@ -35,6 +39,7 @@ export class App {
       status: true,
       eventDescription:
         'A workshop where young volunteers learn teamwork and community engagement.',
+      eventLocation:"Goergia, Tbilisi"
     },
   ];
 }

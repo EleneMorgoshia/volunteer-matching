@@ -3,8 +3,19 @@
 <router-outlet></router-outlet>
 <!-- <app-footer></app-footer> -->
 
-@for (item of eventExample; track $index) {
-  <app-notification-card [eventDetails]="item"></app-notification-card>
+<!-- <app-notification-overlay>
+  @for (item of eventExample; track $index) {
+    <app-notification-card [eventDetails]="item" OGAttribute></app-notification-card>
+  }
+  @for (item of eventExample; track $index) {
+    <app-notification-card [eventDetails]="item" myAttribute></app-notification-card>
+  }
+</app-notification-overlay> -->
+
+
+@for(item of eventExample; track $index){
+  <app-favourites-card  [eventDetails]="item" myAttribute></app-favourites-card>
 }
 
-<!-- <app-favourites-card></app-favourites-card> -->
+<!-- <app-event-card></app-event-card> -->
+<!-- <app-searched-user-card></app-searched-user-card> -->

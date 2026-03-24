@@ -1,7 +1,19 @@
 <!-- This button triggers the overlay and is it's origin -->
-<button (click)="isOpen = !isOpen" type="button" cdkOverlayOrigin #trigger="cdkOverlayOrigin">
-  {{ isOpen ? 'Close' : 'Open' }}
-</button>
+<div
+  style="
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 1400px;
+    height: 1400px;
+  "
+>
+  <button (click)="isOpen = !isOpen" type="button" cdkOverlayOrigin #mariDaElene="cdkOverlayOrigin">
+    {{ isOpen ? 'Close' : 'Open' }}
+  </button>
+
+  <button #trigger>gamarjobaaaa</button>
+</div>
 
 <!-- This template displays the overlay content and is connected to the button -->
 <ng-template
@@ -13,6 +25,21 @@
 >
   <!-- <ng-container></ng-container> -->
   <div style="display: flex; flex-direction: column">
-    <ng-content></ng-content>
+    <ng-content select="[OGAttribute]"></ng-content>
+  </div>
+</ng-template>
+<ng-template
+  cdkConnectedOverlay
+  [cdkConnectedOverlayOrigin]="mariDaElene"
+  [cdkConnectedOverlayPositions]="[
+    { originX: 'end', originY: 'top', overlayX: 'start', overlayY: 'bottom' },
+  ]"
+  [cdkConnectedOverlayOpen]="isOpen"
+  (detach)="isOpen = false"
+  (overlayOutsideClick)="isOpen = false"
+>
+  <!-- <ng-container></ng-container> -->
+  <div style="display: flex; flex-direction: column">
+    <ng-content select="[myAttribute]"></ng-content>
   </div>
 </ng-template>
