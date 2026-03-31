@@ -1,6 +1,11 @@
 <app-loader></app-loader>
 <!-- <app-header></app-header> -->
+<app-header></app-header>
+<div class="container">
 <router-outlet></router-outlet>
+
+</div>
+<app-footer></app-footer>
 <!-- <app-footer></app-footer> -->
 
 <!-- <app-notification-overlay>
@@ -12,10 +17,9 @@
   }
 </app-notification-overlay> -->
 
-
-@for(item of eventExample; track $index){
+<!-- @for(item of eventExample; track $index){
   <app-favourites-card  [eventDetails]="item" myAttribute></app-favourites-card>
-}
+} -->
 
 <!-- <app-event-card></app-event-card> -->
 <!-- <app-searched-user-card></app-searched-user-card> -->
