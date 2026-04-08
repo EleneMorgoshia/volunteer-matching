@@ -1,14 +1,37 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { EventCard } from '../../../shared/ui/cards/event-card/event-card';
+import { Pagination } from '../../../shared/ui/pagination/pagination';
 
 @Component({
   selector: 'app-event-list',
-  imports: [EventCard],
+  imports: [EventCard, Pagination],
   templateUrl: './event-list.html',
   styleUrl: './event-list.scss',
 })
-export class EventList {
+export class EventList implements OnInit {
   //todo: აქ დავამატოთ ინფუთები ამ შემტხვევაში ევენთ ქარდების მასივი
+  currentPage = 1;
+  perPage = 12;
 
-  tmpArr: number[] = new Array(12).fill(0); // ეგ წასაშლელია
+  allCards: number[] = [];
+  tmpArr: number[] = []; // ეგ წასაშლელია
+
+  onPageChange(page: number) {
+    this.currentPage = page;
+    this.handlePageChange(page);
+  }
+
+  ngOnInit(): void {
+    for (let i = 1; i < 29; i++) {
+      this.allCards.push(i);
+    }
+    this.handlePageChange(1);
+  }
+
+  private handlePageChange(page: number) {
+    this.tmpArr = this.allCards.slice(
+      (this.currentPage - 1) * this.perPage, //0
+      this.currentPage * this.perPage, //
+    );
+  }
 }

@@ -1,0 +1,15 @@
+<nav aria-label="pagination">
+  <ul class="pagination">
+    @for (item of paginationItems(); track item.key) {
+      <li>
+        <button
+          class="page-btn"
+          [class.active]="item.value === currentPage()"
+          (click)="onPageChange(item.value)"
+        >
+          {{ item.value }}
+        </button>
+      </li>
+    }
+  </ul>
+</nav>
