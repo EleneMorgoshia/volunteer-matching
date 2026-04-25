@@ -8,5 +8,5 @@ import {MatIconModule} from '@angular/material/icon';
   styleUrl: './event-card.scss',
 })
 export class EventCard {
-
+  
 }
