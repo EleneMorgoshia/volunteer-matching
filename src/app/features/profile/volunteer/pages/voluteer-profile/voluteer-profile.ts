@@ -1,10 +1,16 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-voluteer-profile',
-  imports: [RouterOutlet],
+  imports: [MatIconModule],
   templateUrl: './voluteer-profile.html',
   styleUrl: './voluteer-profile.scss',
 })
-export class VoluteerProfile {}
+export class VoluteerProfile {
+  private router = inject(Router);
+  onNavigateToEdit() {
+    this.router.navigateByUrl('volunteer/edit').then();
+  }
+}
