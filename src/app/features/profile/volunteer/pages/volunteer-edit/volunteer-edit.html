@@ -1,1 +1,165 @@
-<p>volunteer-edit works!</p>
+<form>
+  <mat-form-field>
+    <mat-label>სურათი</mat-label>
+    <input matInput [formField]="editForm.image" />
+    @if (formSubmitted && editForm.image().invalid()) {
+      @for (error of editForm.image().errors(); track error) {
+        <mat-error>{{ error.message }}</mat-error>
+      }
+    }
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>სახელი</mat-label>
+    <input matInput [formField]="editForm.firstName" />
+    @if (formSubmitted &&  editForm.firstName().invalid()) {
+      @for (error of editForm.firstName().errors(); track error) {
+        <mat-error>{{ error.message }}</mat-error>
+      }
+    }
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>გვარი</mat-label>
+    <input matInput [formField]="editForm.lastName" />
+    @if (formSubmitted && editForm.lastName().invalid()) {
+      @for (error of editForm.lastName().errors(); track error) {
+        <mat-error>{{ error.message }}</mat-error>
+      }
+    }
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>იმეილი</mat-label>
+    <input matInput [formField]="editForm.email" />
+    @if (formSubmitted && editForm.email().invalid()) {
+      @for (error of editForm.email().errors(); track error) {
+        <mat-error>{{ error.message }}</mat-error>
+      }
+    }
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>დაბადების თარიღი</mat-label>
+    <input matInput [formField]="editForm.birthDate" />
+    @if (formSubmitted && editForm.birthDate().invalid()) {
+      @for (error of editForm.birthDate().errors(); track error) {
+        <mat-error>{{ error.message }}</mat-error>
+      }
+    }
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>ეროვნება</mat-label>
+    <input matInput [formField]="editForm.nationality" />
+    @if (formSubmitted && editForm.nationality().invalid()) {
+      @for (error of editForm.nationality().errors(); track error) {
+        <mat-error>{{ error.message }}</mat-error>
+      }
+    }
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>LinkedIn</mat-label>
+    <input matInput [formField]="editForm.linkedIn" />
+    @if (formSubmitted && editForm.linkedIn().invalid()) {
+      @for (error of editForm.linkedIn().errors(); track error) {
+        <mat-error>{{ error.message }}</mat-error>
+      }
+    }
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>ჩემ შესახებ</mat-label>
+    <textarea matInput [formField]="editForm.aboutMe"></textarea>
+    @if (formSubmitted && editForm.aboutMe().invalid()) {
+      @for (error of editForm.aboutMe().errors(); track error) {
+        <mat-error>{{ error.message }}</mat-error>
+      }
+    }
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>გამოცდილება</mat-label>
+    <textarea matInput [formField]="editForm.experience"></textarea>
+    @if (formSubmitted && editForm.experience().invalid()) {
+      @for (error of editForm.experience().errors(); track error) {
+        <mat-error>{{ error.message }}</mat-error>
+      }
+    }
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>ტექნოლოგიები</mat-label>
+    <input matInput [formField]="editForm.technologies" />
+    @if (formSubmitted && editForm.technologies().invalid()) {
+      @for (error of editForm.technologies().errors(); track error) {
+        <mat-error>{{ error.message }}</mat-error>
+      }
+    }
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>განათლება</mat-label>
+    <input matInput [formField]="editForm.educatoin" />
+    @if (formSubmitted && editForm.educatoin().invalid()) {
+      @for (error of editForm.educatoin().errors(); track error) {
+        <mat-error>{{ error.message }}</mat-error>
+      }
+    }
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>ენები</mat-label>
+    <input matInput [formField]="editForm.languages" />
+    @if (formSubmitted && editForm.languages().invalid()) {
+      @for (error of editForm.languages().errors(); track error) {
+        <mat-error>{{ error.message }}</mat-error>
+      }
+    }
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>უნარები</mat-label>
+    <mat-select multiple [formField]="editForm.skills">
+      @for (skill of [{ skill: 'bla' }]; track skill) {
+        <mat-option [value]="skill.skill">{{ skill.skill }}</mat-option>
+      }
+    </mat-select>
+    @if (formSubmitted && editForm.skills().invalid()) {
+      @for (error of editForm.skills().errors(); track error) {
+        <mat-error>{{ error.message }}</mat-error>
+      }
+    }
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>ინტერესები</mat-label>
+    <mat-select multiple [formField]="editForm.interests">
+      @for (interest of [{ interest: 'bla' }]; track interest) {
+        <mat-option [value]="interest.interest">{{ interest.interest }}</mat-option>
+      }
+    </mat-select>
+    @if (formSubmitted && editForm.interests().invalid()) {
+      @for (error of editForm.interests().errors(); track error) {
+        <mat-error>{{ error.message }}</mat-error>
+      }
+    }
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>თემები</mat-label>
+    <mat-select multiple [formField]="editForm.themes">
+      @for (theme of [{ theme: 'bla' }, { theme: 'bla2' }]; track theme) {
+        <mat-option [value]="theme.theme">{{ theme.theme }}</mat-option>
+      }
+    </mat-select>
+    @if (formSubmitted && editForm.themes().invalid()) {
+      @for (error of editForm.themes().errors(); track error) {
+        <mat-error>{{ error.message }}</mat-error>
+      }
+    }
+  </mat-form-field>
+
+  <button mat-raised-button (click)="onSubmit($event)">შენახვა</button>
+</form>
