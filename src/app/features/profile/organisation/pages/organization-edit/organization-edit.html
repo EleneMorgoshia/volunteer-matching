@@ -1,1 +1,80 @@
-<p>organization-edit works!</p>
+<form class="edit-form">
+  <h1>ორგანიზაციის რედაქტირება</h1>
+  <div class="form-grid">
+    
+    <!-- Image + organization info -->
+    <div class="organization-info-div">
+      <div class="img-div">
+        <mat-form-field class="image-pill">
+          <mat-label>სურათი</mat-label>
+          <input matInput [formField]="editForm.image" />
+          @if (formSubmitted && editForm.image().invalid()) {
+            @for (error of editForm.image().errors(); track error) {
+              <mat-error>{{ error.message }}</mat-error>
+            }
+          }
+        </mat-form-field>
+      </div>
+
+      <div class="organization-information">
+        <mat-form-field>
+          <mat-label>ორგანიზაციის სახელი</mat-label>
+          <input matInput [formField]="editForm.name" />
+          @if (formSubmitted && editForm.name().invalid()) {
+            @for (error of editForm.name().errors(); track error) {
+              <mat-error>{{ error.message }}</mat-error>
+            }
+          }
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>იმეილი</mat-label>
+          <input matInput [formField]="editForm.email" />
+          @if (formSubmitted && editForm.email().invalid()) {
+            @for (error of editForm.email().errors(); track error) {
+              <mat-error>{{ error.message }}</mat-error>
+            }
+          }
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>LinkedIn</mat-label>
+          <input matInput [formField]="editForm.linkedIn" />
+          @if (formSubmitted && editForm.linkedIn().invalid()) {
+            @for (error of editForm.linkedIn().errors(); track error) {
+              <mat-error>{{ error.message }}</mat-error>
+            }
+          }
+        </mat-form-field>
+      </div>
+    </div>
+
+    <mat-form-field>
+      <mat-label>ჩემს შესახებ</mat-label>
+      <textarea matInput [formField]="editForm.aboutMe"></textarea>
+      @if (formSubmitted && editForm.aboutMe().invalid()) {
+        @for (error of editForm.aboutMe().errors(); track error) {
+          <mat-error>{{ error.message }}</mat-error>
+        }
+      }
+    </mat-form-field>
+  </div>
+
+  <!-- Current Events Section -->
+  <div class="current-events">
+    <h2>მიმდინარე ივენთები</h2>
+    <div class="events-grid">
+      <!-- Later you will loop through events from events.ts -->
+      <!-- Example placeholder layout: 4 per row -->
+      @for (event of [{title:'Event 1'}, {title:'Event 2'}, {title:'Event 3'}, {title:'Event 4'}, {title:'Event 5'}]; track event) {
+        <div class="event-card">
+          <!-- Replace with real event data -->
+          <h3>{{ event.title }}</h3>
+          <p>Event details here...</p>
+        </div>
+      }
+    </div>
+  </div>
+
+  <button mat-raised-button (click)="onSubmit($event)">შენახვა</button>
+</form>

@@ -1,0 +1,164 @@
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.edit-form h1 {
+  margin-bottom: 50px;
+  font-size: 2rem;
+  color: #333;
+  text-align:left;
+}
+
+.organization-info-div {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 40px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.img-div {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+}
+
+.organization-information {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  flex: 1;
+}
+
+.form-grid mat-form-field {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+textarea[matInput] {
+  min-height: 120px;
+}
+
+/* Button styling */
+button[mat-raised-button] {
+  background-color: #7919d2;
+  color: white;
+  font-size: 1.1rem;
+  padding: 12px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+  margin-top: 50px;  
+  width: 100%;      
+  cursor:pointer;
+}
+
+button[mat-raised-button]:hover {
+  background-color: #5e14a3;
+}
+
+/* Current Events Section */
+.current-events {
+  margin-top: 40px;
+}
+
+.current-events h2 {
+  font-size: 1.6rem;
+  margin-bottom: 20px;
+  color: #333;
+  text-align:left;
+}
+
+.events-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.event-card {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  text-align: center;
+}
+
+.event-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: #444;
+}
+
+.event-card p {
+  font-size: 0.95rem;
+  color: #666;
+}
+
+@media (max-width: 992px) {
+  .edit-form {
+    width: 90%;
+    padding: 20px;
+  }
+
+  .organization-info-div {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .organization-information {
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+
+  textarea[matInput] {
+    min-height: 100px;
+  }
+
+  button[mat-raised-button] {
+    font-size: 1rem;
+    margin-top: 40px;
+  }
+
+  .events-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .edit-form h1 {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+  }
+
+  .organization-info-div {
+    gap: 15px;
+  }
+
+  .image-pill {
+    width: 90px;
+    height: 90px;
+  }
+
+  button[mat-raised-button] {
+    font-size: 0.95rem;
+    padding: 10px;
+    margin-top: 30px;
+  }
+
+  .events-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .event-card {
+    padding: 15px;
+  }
+}

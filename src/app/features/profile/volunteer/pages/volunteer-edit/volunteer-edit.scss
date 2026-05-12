@@ -1,0 +1,133 @@
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.edit-form h1 {
+  margin-bottom: 50px;
+  font-size: 2rem;
+  color: #333;
+  text-align:left;
+}
+
+.personal-info-div {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 40px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.img-div {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+}
+
+.personal-information {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  flex: 1;
+}
+
+.form-grid mat-form-field {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+textarea[matInput] {
+  min-height: 120px;
+}
+
+button[mat-raised-button] {
+  background-color: #7919d2;
+  color: white;
+  font-size: 1.1rem;
+  padding: 10px 30px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+button[mat-raised-button]:hover {
+  background-color: #5e14a3;
+}
+
+mat-form-field[formField="editForm.technologies"],
+mat-form-field[formField="editForm.educatoin"] {
+  min-height: 80px;
+  font-size: 1.05rem;
+}
+
+@media (max-width: 992px) {
+  .edit-form {
+    width: 90%;
+    padding: 20px;
+  }
+
+  .personal-info-div {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .personal-information {
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+
+  .img-div {
+    justify-content: center;
+  }
+
+  textarea[matInput] {
+    min-height: 100px;
+  }
+
+  button[mat-raised-button] {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+  }
+
+  mat-form-field[formField="editForm.technologies"],
+  mat-form-field[formField="editForm.educatoin"] {
+    min-height: 70px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .edit-form h1 {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+  }
+
+  .personal-info-div {
+    gap: 15px;
+  }
+
+  .image-pill {
+    width: 90px;
+    height: 90px;
+  }
+
+  button[mat-raised-button] {
+    font-size: 0.95rem;
+    padding: 10px;
+  }
+
+  mat-form-field[formField="editForm.technologies"],
+  mat-form-field[formField="editForm.educatoin"] {
+    min-height: 60px;
+    font-size: 0.95rem;
+  }
+}

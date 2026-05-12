@@ -2,6 +2,7 @@ import { Component, computed, signal } from '@angular/core';
 import { email, form, minLength, required, FormField } from '@angular/forms/signals';
 import { MatFormField, MatLabel, MatError, MatOption, MatSelect } from '@angular/material/select';
 import { MatInput } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
 
 interface EditForm {
   image: string;
@@ -23,7 +24,16 @@ interface EditForm {
 
 @Component({
   selector: 'app-volunteer-edit',
-  imports: [MatFormField, MatLabel, MatInput, FormField, MatError, MatOption, MatSelect],
+  imports: [
+    MatFormField,
+    MatLabel,
+    MatInput,
+    FormField,
+    MatError,
+    MatOption,
+    MatSelect,
+    MatIconModule,
+  ],
   templateUrl: './volunteer-edit.html',
   styleUrl: './volunteer-edit.scss',
 })
