@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { authGuard, organizationGuard } from '../../../core/auth/auth.guard';
 
 export const ORGANIZATION_ROUTES: Routes = [
   {
@@ -7,10 +8,12 @@ export const ORGANIZATION_ROUTES: Routes = [
       import('./pages/organization-profile/organization-profile').then(
         (m) => m.OrganizationProfile,
       ),
+    canActivate: [authGuard, organizationGuard],
   },
   {
     path: 'organization/edit',
     loadComponent: () =>
       import('./pages/organization-edit/organization-edit').then((m) => m.OrganizationEdit),
+    canActivate: [authGuard, organizationGuard],
   },
 ];

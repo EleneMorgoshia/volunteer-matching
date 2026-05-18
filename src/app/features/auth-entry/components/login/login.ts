@@ -1,4 +1,4 @@
-import { Component, effect, signal } from '@angular/core';
+import { Component, effect, inject, signal } from '@angular/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -7,6 +7,8 @@ import { form, FormField } from '@angular/forms/signals';
 import { LoginInfo } from './login.model';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../../../core/auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -30,6 +32,8 @@ export class Login {
   });
 
   loginForm = form(this.loginModel);
+  authService = inject(AuthService);
+  router = inject(Router);
 
   constructor() {
     effect(() => {
@@ -43,9 +47,14 @@ export class Login {
     console.log('login');
     console.log(this.loginForm.email());
     console.log(this.loginForm.password());
+    this.authService.login(this.loginForm().value()).subscribe({
+      next: () =>{},
+        
+      error: (e) => console.error(e), // ვაჩვენოთ ერორი
+    });
   }
 
   onRegiter() {
-    console.log('register');
+    this.router.navigateByUrl('registration');
   }
 }

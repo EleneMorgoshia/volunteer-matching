@@ -11,9 +11,9 @@ export const routes: Routes = [
   ...HOME_ROUTES,
   ...VOLUNTEER_ROUTES,
   ...ORGANIZATION_ROUTES,
-  // {
-  //   path: '',
-  //   redirectTo: 'login',
-  //   pathMatch: 'full',
-  // },
+  {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full',
+  },
 ];
