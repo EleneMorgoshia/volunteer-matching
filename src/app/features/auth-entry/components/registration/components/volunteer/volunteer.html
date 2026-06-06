@@ -1,122 +1,115 @@
-<Form class="volunteer">
+<form class="volunteer">
+  <h1 class="form-title">რეგისტრაცია</h1>
+
   <div class="input-div">
-    <label for="name">Name:</label>
+    <label for="firstName">სახელი</label>
     <input
-      placeholder="Enter Your Name"
+      id="firstName"
       type="text"
-      id="name"
-      [formField]="registrationVolunteerForm.name"
+      placeholder="შეიყვანეთ თქვენი სახელი"
+      [formField]="form.firstName"
     />
   </div>
 
   <div class="input-div">
-    <label for="lastName">LastName:</label>
+    <label for="lastName">გვარი</label>
     <input
-      placeholder="Enter Your Lastname"
-      type="text"
       id="lastName"
-      [formField]="registrationVolunteerForm.lastname"
-    />
-  </div>
-
-  <div class="input-div">
-    <label for="email">Email:</label>
-    <input
-      placeholder="Enter Your Email"
-      type="email"
-      id="email"
-      [formField]="registrationVolunteerForm.email"
-    />
-  </div>
-
-  <div class="input-div">
-    <label for="date">BirthDate:</label>
-    <input
-      placeholder="Enter Your Full Birth Date"
-      type="date"
-      id="date"
-      [formField]="registrationVolunteerForm.birthdate"
-    />
-  </div>
-
-  <div class="input-div">
-    <label for="citizenship">Citizenship</label>
-    <input
-      placeholder="Enter Your Citizenship"
       type="text"
+      placeholder="შეიყვანეთ თქვენი გვარი"
+      [formField]="form.lastName"
+    />
+  </div>
+
+  <div class="input-div">
+    <label for="email">იმეილი</label>
+    <input id="email" type="email" placeholder="შეიყვანეთ თქვენი იმეილი" [formField]="form.email" />
+  </div>
+
+  <div class="input-div">
+    <label for="birthDate">დაბადების თარიღი</label>
+    <input id="birthDate" type="date" (input)="birthDateString.set($any($event.target).value)" />
+  </div>
+
+  <div class="input-div">
+    <label for="citizenship">მოქალაქეობა</label>
+    <input
       id="citizenship"
-      [formField]="registrationVolunteerForm.citizenship"
-    />
-  </div>
-
-  <div class="input-div">
-    <label for="languages">Languages</label>
-    <input
-      id="languages"
       type="text"
-      placeholder="Enter Languages"
-      id="languages"
-      [formField]="registrationVolunteerForm.languages"
+      placeholder="შეიყვანეთ თქვენი მოქალაქეობა"
+      [formField]="form.citizenship"
     />
   </div>
 
   <div class="input-div">
-    <label for="profession">Profession</label>
+    <label for="languages">ენები</label>
+    <input id="languages" type="text" placeholder="რა ენებს ფლობთ?" [formField]="form.languages" />
+  </div>
+
+  <div class="input-div">
+    <label for="profession">პროფესია</label>
     <input
       id="profession"
       type="text"
-      placeholder="Enter Profession"
-      id="profession"
-      [formField]="registrationVolunteerForm.profession"
+      placeholder="რა პროფესიის ხართ?"
+      [formField]="form.profession"
     />
   </div>
 
   <div class="input-div">
-    <label for="skills">Skills</label>
-    <label for="skills" class="example-label"
-      >E.x communication, Teaching/Tutoring, Graphic Design..</label
-    >
-    <input
-      class="big-input"
+    <label for="skills">უნარები</label>
+    <span class="example-label">მაგ: კომუნიკაცია, სწავლება, გრაფიკული დიზაინი...</span>
+    <textarea
       id="skills"
-      type="text"
-      placeholder="Enter Skills"
-      id="skills"
-      [formField]="registrationVolunteerForm.skills"
-    />
-  </div>
-
-  <div class="input-div">
-    <label for="interests">Interests</label>
-    <label for="interests" class="example-label"
-      >E.x Reading books or literature, Dancing, Yoga or meditation..</label
-    >
-    <input
       class="big-input"
+      placeholder="ჩაწერეთ თქვენი უნარები"
+      [formField]="form.skills"
+    ></textarea>
+  </div>
+
+  <div class="input-div">
+    <label for="interests">ინტერესები</label>
+    <span class="example-label">მაგ: კითხვა, ცეკვა, იოგა, მედიტაცია...</span>
+    <textarea
       id="interests"
-      type="text"
-      placeholder="Enter interests"
-      id="interests"
+      class="big-input"
+      placeholder="ჩაწერეთ თქვენი ინტერესები"
+      [formField]="form.interests"
+    ></textarea>
+  </div>
+
+  <div class="input-div">
+    <label>თემატიკა</label>
+
+    <label class="checkbox-label">
+      <input
+        type="checkbox"
+        value="3fa85f64-5717-4562-b3fc-2c963f66afa6"
+        (change)="onTagChange($event)"
+      />
+      განათლება
+    </label>
+  </div>
+
+  <div class="input-div">
+    <label for="password">პაროლი</label>
+    <input
+      id="password"
+      type="password"
+      placeholder="შეიყვანეთ პაროლი"
+      [formField]="form.password"
     />
   </div>
 
   <div class="input-div">
-    <label for="theme">Theme</label>
-    <select id="theme" name="theme">
-      <option value="education">Education</option>
-      <option value="environment">Environment</option>
-    </select>
+    <label for="confirmPassword">პაროლის დადასტურება</label>
+    <input
+      id="confirmPassword"
+      type="password"
+      placeholder="გაიმეორეთ პაროლი"
+      [formField]="form.confirmPassword"
+    />
   </div>
 
-  <div class="input-div">
-    <label for="password">Password</label>
-    <input id="password" type="text" placeholder="Enter Password" />
-  </div>
-
-  <div class="input-div">
-    <label for="password">Password Again</label>
-    <input id="password" type="text" placeholder="Enter Password" />
-  </div>
-
-  <button class="send-btn">Send</button>
-</Form>
+  <button class="send-btn" type="button" (click)="onSend()">რეგისტრაცია</button>
+</form>

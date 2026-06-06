@@ -1,4 +1,4 @@
-import { Component, effect, signal } from '@angular/core';
+import { Component, effect, inject, signal } from '@angular/core';
 import { RegistrationOrganisationInfo } from '../../registration.model';
 import {
   email,
@@ -9,6 +9,8 @@ import {
   minLength,
   required,
 } from '@angular/forms/signals';
+import { RegistrationService } from '../../registration.service';
+import { AuthService } from '../../../../../../core/auth/auth.service';
 
 @Component({
   selector: 'app-organization',
@@ -18,21 +20,27 @@ import {
 })
 export class Organization {
   registrationOrganisationModel = signal<RegistrationOrganisationInfo>({
-    organisationName: '',
+    organizationName: '',
     email: '',
     password: '',
     description: '',
+    confirmPassword: '',
   });
 
   form = form(this.registrationOrganisationModel, (schema) => {
-    required(schema.organisationName, { message: 'გთხოვთ შეავსოთ' });
+    required(schema.organizationName, { message: 'გთხოვთ შეავსოთ' });
     required(schema.description, { message: 'გთხოვთ შეავსოთ' });
     required(schema.email, { message: 'გთხოვთ შეავსოთ' });
     email(schema.email, { message: 'გთხოვთ გამოიყენოთ სწორი ფორმატი' });
     required(schema.password, { message: 'გთხოვთ შეავსოთ' });
     minLength(schema.password, 8, { message: 'მინამული სიმბოლოების რაოდენობაა 8' });
+    required(schema.confirmPassword, { message: 'გთხოვთ შეავსოთ' });
+    minLength(schema.confirmPassword, 8, { message: 'მინამული სიმბოლოების რაოდენობაა 8' });
     required(schema.description, { message: 'გთხოვთ შეავსოთ' });
   });
+
+  private registrationService = inject(RegistrationService);
+  private authService = inject(AuthService);
 
   submitted = false;
 
@@ -50,6 +58,11 @@ export class Organization {
     }
     const values = this.form().value();
     console.log('გასაგზავნი მნიშვნელობები: ', values);
+    // this.registrationService.registerOrganisation(values).subscribe();
+
+    this.registrationService
+      .registerOrganisation(values)
+      .subscribe((res) => this.authService.navigateToCorrectProfile());
   }
 
   isValid(formField: FieldTree<string, any>) {

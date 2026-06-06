@@ -1,30 +1,142 @@
-.volunteer {
-  display: flex;
-  flex-direction: column;
-  // justify-items:center;
-  gap: 1.2rem;
+.organization-form {
+  width: 100%;
+  max-width: 1250px;
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px 50px;
+
+  background: #ffffff;
+
+  padding: 35px 55px;
+  border-radius: 28px;
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
+
+.form-title {
+  grid-column: 1 / -1;
+
+  margin: 0 0 18px;
+
+  text-align: center;
+
+  font-size: 48px;
+  font-weight: 600;
+  color: #151016;
+}
+
 .input-div {
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
+  gap: 8px;
 }
 
-.input-div input {
-  border-radius: 0.5rem;
+.input-div label {
+  font-size: 16px;
+  font-weight: 600;
+  color: #151016;
+}
+
+.input-div input,
+.input-div textarea {
+  width: 100%;
+  box-sizing: border-box;
+
   border: none;
-  font-size: 12px;
-  padding: 1rem 1.4rem;
+  outline: none;
+  border-radius: 30px;
+
+  background: #f1f1f1;
+
+  padding: 18px 28px;
+
+  font-size: 15px;
+  font-family: inherit;
+  color: #151016;
 }
 
-.example-label {
-  font-size: 12px;
+.input-div input::placeholder,
+.input-div textarea::placeholder {
+  color: #9b9b9b;
+  font-size: 14px;
+  font-weight: 400;
 }
 
 .big-input {
-  height: 3rem;
+  height: 140px;
+  resize: none;
+}
+
+.input-div:has(.big-input) {
+  grid-column: 1 / -1;
+}
+
+.send-btn {
+  grid-column: 1 / -1;
+
+  height: 58px;
+
+  border: none;
+  border-radius: 30px;
+
+  background: #c13de6;
+  color: #ffffff;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.send-btn:hover {
+  background: #b030d8;
 }
 
 p {
+  margin: 0;
   color: red;
+  font-size: 12px;
+}
+
+/* TABLET */
+@media (max-width: 768px) {
+  .organization-form {
+    max-width: 100%;
+    grid-template-columns: 1fr;
+
+    padding: 28px;
+    gap: 16px;
+  }
+
+  .form-title {
+    font-size: 38px;
+  }
+}
+
+/* MOBILE */
+@media (max-width: 480px) {
+  .organization-form {
+    padding: 22px;
+    border-radius: 22px;
+  }
+
+  .form-title {
+    font-size: 30px;
+    margin-bottom: 20px;
+  }
+
+  .input-div input,
+  .input-div textarea {
+    padding: 16px 18px;
+  }
+
+  .big-input {
+    height: 120px;
+  }
+
+  .send-btn {
+    height: 52px;
+  }
 }

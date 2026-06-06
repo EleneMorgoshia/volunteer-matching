@@ -1,24 +1,13 @@
-<app-loader></app-loader>
-<!-- <app-header></app-header> -->
-<app-header></app-header>
-<div class="container">
-  <router-outlet></router-outlet>
+<div class="app-layout">
+  <app-loader></app-loader>
+
+  <div class="page-wrapper">
+    <app-header></app-header>
+
+    <main class="container">
+      <router-outlet></router-outlet>
+    </main>
+
+    <app-footer></app-footer>
+  </div>
 </div>
-<app-footer></app-footer>
-<!-- <app-footer></app-footer> -->
-
-<!-- <app-notification-overlay>
-  @for (item of eventExample; track $index) {
-    <app-notification-card [eventDetails]="item" OGAttribute></app-notification-card>
-  }
-  @for (item of eventExample; track $index) {
-    <app-notification-card [eventDetails]="item" myAttribute></app-notification-card>
-  }
-</app-notification-overlay> -->
-
-<!-- @for(item of eventExample; track $index){
-  <app-favourites-card  [eventDetails]="item" myAttribute></app-favourites-card>
-} -->
-
-<!-- <app-event-card></app-event-card> -->
-<!-- <app-searched-user-card></app-searched-user-card> -->

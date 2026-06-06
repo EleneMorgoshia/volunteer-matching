@@ -1,13 +1,27 @@
-<mat-form-field>
-  <mat-label>Email</mat-label>
-  <input matInput [formField]="loginForm.email" />
-</mat-form-field>
-<mat-form-field>
-  <mat-label>Password</mat-label>
-  <input matInput [formField]="loginForm.password" />
-</mat-form-field>
+<section class="login-page">
+  <div class="login-card">
+    <h1>ავტორიზაცია</h1>
 
-<button matButton="elevated" (click)="onLogin()">Login</button>
-<button matButton="elevated" (click)="onRegiter()">Register</button>
+    <mat-form-field appearance="fill">
+      <mat-label>იმეილი</mat-label>
+      <input matInput placeholder="შეიყვანეთ თქვენი იმეილი" [formField]="loginForm.email" />
+    </mat-form-field>
 
+    <mat-form-field appearance="fill">
+      <mat-label>პაროლი</mat-label>
+      <input
+        matInput
+        type="password"
+        placeholder="შეიყვანეთ თქვენი პაროლი"
+        [formField]="loginForm.password"
+      />
+    </mat-form-field>
 
+    <div class="button-group">
+      <button class="login-btn" matButton="elevated" (click)="onLogin()">შესვლა</button>
+
+   
+      <button class="register-link" (click)="onRegiter()">არ გაქვთ ექაუნთი? <span>რეგისტრაცია</span> </button>
+    </div>
+  </div>
+</section>

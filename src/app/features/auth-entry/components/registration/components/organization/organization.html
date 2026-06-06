@@ -1,54 +1,74 @@
-<div>
+<div class="organization-form">
+  <h1 class="form-title">რეგისტრაცია</h1>
+  
   <div class="input-div">
-    <label for="name">Organisation Name:</label>
+    <label for="name">ორგანიზაციის დასახელება</label>
     <input
-      placeholder="Enter Your Name"
-      type="text"
       id="name"
-      [formField]="form.organisationName"
-    />
-    @if (!isValid(form.organisationName)) {
-      <p>{{ getErrors(form.organisationName) }}</p>
-    }
-  </div>
-
-  <div class="input-div">
-    <label for="organisationDescription">Organisation Description:</label>
-    <input
-      class="big-input"
-      placeholder="Tell Us About You"
       type="text"
-      id="organisationDescription"
-      [formField]="form.description"
+      placeholder="შეიყვანეთ ორგანიზაციის სახელი"
+      [formField]="form.organizationName"
     />
-    @if (!isValid(form.description)) {
-      <p>{{ getErrors(form.description) }}</p>
+
+    @if (!isValid(form.organizationName)) {
+      <p>{{ getErrors(form.organizationName) }}</p>
     }
   </div>
 
   <div class="input-div">
-    <label for="email">Email:</label>
-    <input placeholder="Enter Your Email" type="text" id="email" [formField]="form.email" />
+    <label for="email">ელ. ფოსტა</label>
+    <input
+      id="email"
+      type="text"
+      placeholder="შეიყვანეთ ორგანიზაციის იმეილი"
+      [formField]="form.email"
+    />
+
     @if (!isValid(form.email)) {
       <p [innerHTML]="getErrors(form.email)"></p>
     }
   </div>
 
   <div class="input-div">
-    <label for="password">Password</label>
-    <input id="password" type="text" placeholder="Enter Password" [formField]="form.password" />
+    <label for="organisationDescription">ორგანიზაციის შესახებ</label>
+    <textarea
+      class="big-input"
+      placeholder="მოგვიყევით თქვენი ორგანიზაციის შესახებ"
+      [formField]="form.description"
+    ></textarea>
+
+    @if (!isValid(form.description)) {
+      <p>{{ getErrors(form.description) }}</p>
+    }
+  </div>
+
+  <div class="input-div">
+    <label for="password">პაროლი</label>
+    <input
+      id="password"
+      type="password"
+      placeholder="შეიყვანეთ სასურველი პაროლი"
+      [formField]="form.password"
+    />
+
     @if (!isValid(form.password)) {
       <p>{{ getErrors(form.password) }}</p>
     }
   </div>
 
   <div class="input-div">
-    <label for="password">Password Again</label>
-    <input id="password" type="text" placeholder="Enter Password" [formField]="form.password" />
-    @if (!isValid(form.password)) {
-      <p>{{ getErrors(form.password) }}</p>
+    <label for="confirmPassword">პაროლის დადასტურება</label>
+    <input
+      id="confirmPassword"
+      type="password"
+      placeholder="შეიყვანეთ პაროლი კიდევ ერთხელ"
+      [formField]="form.confirmPassword"
+    />
+
+    @if (!isValid(form.confirmPassword)) {
+      <p>{{ getErrors(form.confirmPassword) }}</p>
     }
   </div>
 
-  <button class="send-btn" (click)="onSend()">Send</button>
+  <button class="send-btn" (click)="onSend()">რეგისტრაცია</button>
 </div>

@@ -1,22 +1,26 @@
 import { CommonModule } from '@angular/common';
-import { Component, effect, signal } from '@angular/core';
+import { Component, effect, inject, signal } from '@angular/core';
 import { RegistrationOrganisationInfo, RegistrationVolunteerInfo } from './registration.model';
 import { form, FormField } from '@angular/forms/signals';
 import { Volunteer } from './components/volunteer/volunteer';
 import { Organization } from './components/organization/organization';
 import { CdkOverlayOrigin } from '@angular/cdk/overlay';
+import { ActivatedRoute } from '@angular/router';
+
 
 export const fields: (keyof RegistrationVolunteerInfo)[] = [
-  'name',
-  'lastname',
-  'birthdate',
+  'firstName',
+  'lastName',
+  'birthDate',
   'citizenship',
   'languages',
   'profession',
+  'skills',
   'interests',
-  'theme',
-  'email',
   'password',
+  'confirmPassword',
+  'email',
+  'selectedTagIds',
 ];
 
 @Component({
@@ -28,18 +32,19 @@ export const fields: (keyof RegistrationVolunteerInfo)[] = [
 export class Registration {
   organisation = false;
   volunteer = false;
+ private route = inject(ActivatedRoute);
+ 
 
   constructor() {
     effect(() => {});
   }
 
-  selectVolunteer() {
-    this.volunteer = true;
-    this.organisation = false;
-  }
+   ngOnInit(): void {
+    this.route.queryParams.subscribe((params) => {
+      const role = params['role'];
 
-  selectOrganisation() {
-    this.organisation = true;
-    this.volunteer = false;
+      this.volunteer = role === 'volunteer';
+      this.organisation = role === 'organization';
+    });
   }
 }

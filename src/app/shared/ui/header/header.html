@@ -1,57 +1,17 @@
-<mat-toolbar class="custom-spacing">
-  <div class="heder-left">
-    <button matIconButton class="example-icon" aria-label="Example icon-button with menu icon">
-      <mat-icon>menu</mat-icon>
-    </button>
-  </div>
+<div class="header">
+  <a class="header-left" routerLink="/login">
+    <img class="LOGO" src="assets/LOGO.png" alt="logo" />
+  </a>
 
-  <nav class="header-nav">
-    <a
-      mat-button
-      routerLink="/"
-      routerLinkActive="active"
-      [routerLinkActiveOptions]="{ exact: true }"
-      >Home</a
-    >
-    <a
-      mat-button
-      routerLink="/"
-      routerLinkActive="active"
-      [routerLinkActiveOptions]="{ exact: true }"
-      >About Us</a
-    >
-    <a
-      mat-button
-      routerLink="/"
-      routerLinkActive="active"
-      [routerLinkActiveOptions]="{ exact: true }"
-      >My profile</a
-    >
-    <a
-      mat-button
-      routerLink="/login"
-      routerLinkActive="active"
-      [routerLinkActiveOptions]="{ exact: true }"
-      >Login</a
-    >
-    <a
-      mat-button
-      routerLink="/registration"
-      routerLinkActive="active"
-      [routerLinkActiveOptions]="{ exact: true }"
-      [queryParams]="{ debug: true }"
-      >organization register</a
-    >
-    <a
-      mat-button
-      routerLink="/registration"
-      routerLinkActive="active"
-      [routerLinkActiveOptions]="{ exact: true }"
-      [queryParams]="{ debug: true }"
-      >Volunteer regidter</a
-    >
-    <button matIconButton class="example-icon" aria-label="Example icon-button with share icon">
-      <mat-icon>share</mat-icon>
-    </button>
+  <nav class="header-right">
+    <a class="nav-link" [routerLink]="['/registration']" [queryParams]="{ role: 'volunteer' }">
+      შემოგვიერთდი როგორც მოხალისე
+    </a>
+
+    <span class="separator">|</span>
+
+    <a class="nav-link" [routerLink]="['/registration']" [queryParams]="{ role: 'organization' }">
+      შემოგვიერთდი როგორც ორგანიზაცია
+    </a>
   </nav>
-</mat-toolbar>
+</div>

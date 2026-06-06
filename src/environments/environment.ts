@@ -1,3 +1,3 @@
 export const environment = {
-  url: 'frodulentLink',
+  url: 'https://localhost:7155/api',
 };

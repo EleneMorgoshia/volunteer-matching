@@ -1,10 +1,20 @@
-<div class="main-container">
-  <div class="image-container">
-    <img src="" alt="placeholder" />
+@if (profileInfo) {
+  <div class="main-container">
+    <div class="image-container">
+      <img [src]="profileInfo.profilePhotoUrl" alt="profile photo" />
+    </div>
+
+    <div class="fields-container">
+      <p>{{ profileInfo.firstName }}</p>
+      <p>{{ profileInfo.lastName }}</p>
+      <p>{{ profileInfo.profession }}</p>
+      <p>{{ profileInfo.citizenship }}</p>
+      <p>{{ profileInfo.languages }}</p>
+      <p>{{ profileInfo.skills }}</p>
+
+      <button matFab (click)="onNavigateToEdit()">
+        <mat-icon fontIcon="edit">edit</mat-icon>
+      </button>
+    </div>
   </div>
-  <div class="fields-container">
-    <button matFab (click)="onNavigateToEdit()">
-      <mat-icon fontIcon="edit">edit</mat-icon>
-    </button>
-  </div>
-</div>
+}

@@ -47,14 +47,14 @@ export class Login {
     console.log('login');
     console.log(this.loginForm.email());
     console.log(this.loginForm.password());
-    this.authService.login(this.loginForm().value()).subscribe({
-      next: () =>{},
-        
-      error: (e) => console.error(e), // ვაჩვენოთ ერორი
-    });
+    this.authService
+      .login(this.loginForm().value())
+      .subscribe((res) => this.authService.navigateToCorrectProfile());
   }
 
   onRegiter() {
-    this.router.navigateByUrl('registration');
+    this.router.navigate(['/registration'], {
+      queryParams: { role: 'volunteer' },
+    });
   }
 }

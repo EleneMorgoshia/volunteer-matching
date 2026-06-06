@@ -1,82 +1,215 @@
-.event-card-conatiner{
-  width: 360px;
-  height: 448;
+$primary: #c13de6;
+
+.event-card-container {
+  width: 100%;
+  // max-width: 520px;
   display: flex;
   flex-direction: column;
+  gap: 16px;
+}
 
-  p{
-    margin:0;
+.image-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 0.85;
+  overflow: hidden;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+.event-image,
+.image-placeholder {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.image-placeholder {
+  background:
+    radial-gradient(circle at top right, rgba(255, 255, 255, 0.14), transparent 32%),
+    radial-gradient(circle at bottom left, rgba(255, 255, 255, 0.1), transparent 36%), grey;
+}
+
+.image-container::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: transparent;
+  transition: 0.3s ease;
+}
+
+.image-container:hover::after {
+  background: rgba(0, 0, 0, 0.18);
+}
+
+.heart-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  background-color: #F1F1F1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+  transition: 0.25s ease;
+}
+
+.heart-button:hover {
+  transform: scale(1.08);
+  box-shadow: 0 4px 12px rgba(21, 16, 22, 0.12);
+}
+
+.heart-button mat-icon {
+  color: $primary;
+}
+
+.see-more-button {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border: none;
+  border-radius: 999px;
+  padding: 14px 48px;
+  background: #ffffff;
+  color: #111;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+  z-index: 2;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s ease;
+}
+
+.image-container:hover .see-more-button {
+  opacity: 1;
+  visibility: visible;
+}
+
+.texts-container {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.event-title {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 600;
+  color: #111;
+}
+
+.organisation-name {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 400;
+  color: #555;
+}
+
+.description-container p {
+  margin: 8px 0 0;
+  font-size: 20px;
+  line-height: 1.5;
+  color: #333;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.detailed-info-container {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.info-item mat-icon {
+  color: $primary;
+}
+
+.info-item p {
+  margin: 0;
+  font-size: 18px;
+  color: #222;
+}
+
+.divider {
+  width: 1px;
+  height: 28px;
+  background: #d7d7d7;
+}
+
+@media (max-width: 768px) {
+  .event-card-container {
+    max-width: 100%;
   }
 
-  .image-container{
-    position: relative;
-    border:1px solid black;
-    height: 360px;
-
-    img{
-
-      border:1px solid black;
-      width: 100%;
-      height:100%;
-    }
-
-    .heart-icon{
-      position:absolute;
-      top:16px;
-      right:16px;
-    }
+  .image-container {
+    border-radius: 24px;
   }
 
-  .texts-container{
-    display: flex;
+  .heart-button {
+    width: 46px;
+    height: 46px;
+    top: 14px;
+    right: 14px;
+  }
+
+  .see-more-button {
+    padding: 10px 34px;
+    font-size: 15px;
+  }
+
+  .event-title {
+    font-size: 24px;
+  }
+
+  .organisation-name {
+    font-size: 17px;
+  }
+
+  .description-container p {
+    font-size: 15px;
+  }
+
+  .detailed-info-container {
+    gap: 10px;
+  }
+
+  .info-item p {
+    font-size: 14px;
+  }
+
+  .divider {
+    height: 22px;
+  }
+}
+
+@media (max-width: 480px) {
+  .image-container {
+    aspect-ratio: 1 / 0.9;
+  }
+
+  .detailed-info-container {
     flex-direction: column;
-    
-    .event-title{
-      margin-top: 8px;
-      font-size:16px; 
-    }
-    
-    .description-container{
-      margin-top:8px;
-      height: 44px;
-    }
+    align-items: flex-start;
   }
 
-  .detailed-info-container{
-    display: flex;
-    gap:8px;
-    margin-top:32px;
-    
-    .location-container, .date-container, .theme-container{
-      display:flex;
-      align-items: center;
-      gap:8px;
-      
-      hr{
-        height: 60%;
-      }
-    }
-    
-  }
-
-  .buttons-container{
-    display: flex;
-    gap:16px;
-    margin-top:16px;
-
-    button{
-      width: 168px;
-      padding:18px 40px;
-      background-color: rgb(242, 242, 242);
-      flex:1;
-      border: none;
-    }
-
-     
-    button:hover{
-      background-color: rgb(163, 163, 163);
-      cursor: pointer;
-      transition: 0.5s;
-    }
+  .divider {
+    display: none;
   }
 }

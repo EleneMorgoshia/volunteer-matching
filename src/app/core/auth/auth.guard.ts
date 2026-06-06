@@ -12,30 +12,45 @@ export const authGuard: CanActivateFn = (
   route: ActivatedRouteSnapshot,
   state: RouterStateSnapshot,
 ) => {
+  //ეს დავაკომენტარეთ დროებით იმიტორო გავსტილო ჰოუმი
   const authService = inject(AuthService);
   const router = inject(Router);
+
   if (!authService.isAuthenticated()) {
     return router.createUrlTree(['/login']);
   }
   // const currentProfileUrl = authService.isOrganization()
-  //   ? ['organization/profile']
-  //   : ['volunteer/profile'];
+  //   ? ['/organization/profile']
+  //   : ['/volunteer/profile'];
   // return router.createUrlTree(currentProfileUrl);
   return true;
 };
-
-export const volunteerGuard: CanActivateFn = (
-  route: ActivatedRouteSnapshot,
-  state: RouterStateSnapshot,
-) => {
+export const volunteerGuard: CanActivateFn = () => {
   const authService = inject(AuthService);
-  return authService.isAuthenticated() && authService.isVolunteer();
+  const router = inject(Router);
+
+  if (!authService.isAuthenticated()) {
+    return router.createUrlTree(['/login']);
+  }
+
+  if (!authService.isVolunteer()) {
+    return router.createUrlTree(['/organization/profile']);
+  }
+
+  return true;
 };
 
-export const organizationGuard: CanActivateFn = (
-  route: ActivatedRouteSnapshot,
-  state: RouterStateSnapshot,
-) => {
+export const organizationGuard: CanActivateFn = () => {
   const authService = inject(AuthService);
-  return authService.isAuthenticated() && authService.isOrganization();
+  const router = inject(Router);
+
+  if (!authService.isAuthenticated()) {
+    return router.createUrlTree(['/login']);
+  }
+
+  if (!authService.isOrganization()) {
+    return router.createUrlTree(['/volunteer/profile']);
+  }
+
+  return true;
 };

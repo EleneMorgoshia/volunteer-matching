@@ -25,10 +25,7 @@ export class AuthService {
   login(params: loginModelParams) {
     return this.http.post<loginModelResponse>(this.apiUrl + '/login', params).pipe(
       tap((resp) => {
-        this.saveToken(resp);
-        this.router.navigate(
-          this.isOrganization() ? ['organization/profile'] : ['volunteer/profile'],
-        );
+        this.setNewToken(resp);
       }),
     );
   }
@@ -41,7 +38,42 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
 
-  register() {}
+  setNewToken(resp: loginModelResponse) {
+    console.log('Seinaxe tokeni:', resp);
+
+    localStorage.setItem(this.accessToken, resp.accessToken);
+    localStorage.setItem(this.user, resp.userId);
+    localStorage.setItem(this.role, resp.role);
+
+    this.accessTknSignal.set(resp.accessToken);
+    this.userId.set(resp.userId);
+    this.userRole.set(resp.role);
+
+    console.log(
+      localStorage.getItem(this.accessToken),
+      localStorage.getItem(this.user),
+      localStorage.getItem(this.role),
+    );
+    // this.navigateToCorrectProfile();
+  }
+
+  navigateToCorrectProfile() {
+    const role = this.userRole();
+
+    console.log('role before navigation:', role);
+
+    if (role === ROLE.ORGANIZATION) {
+      this.router.navigate(['/organization/profile']);
+      return;
+    }
+
+    if (role === ROLE.VOLUNTEER) {
+      this.router.navigate(['/volunteer/profile']);
+      return;
+    }
+
+    console.log('Unknown role:', role);
+  }
 
   getUserId() {
     return this.userId();

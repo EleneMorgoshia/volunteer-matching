@@ -9,5 +9,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   styleUrl: './loader.scss',
 })
 export class Loader {
-  loader = inject(LoaderService);
+  public loaderService = inject(LoaderService);
+  loading = this.loaderService.loading;
 }
