@@ -5,12 +5,7 @@ export interface RegistrationVolunteerInfo {
   confirmPassword: string;
   firstName: string;
   lastName: string;
-  birthDate: {
-    year: number;
-    month: number;
-    day: number;
-    dayOfWeek: number;
-  };
+  birthDate: string;
   citizenship: string;
   profession: string;
   languages: string;

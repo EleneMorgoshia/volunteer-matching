@@ -79,16 +79,18 @@
   </div>
 
   <div class="input-div">
-    <label>თემატიკა</label>
-
-    <label class="checkbox-label">
-      <input
-        type="checkbox"
-        value="3fa85f64-5717-4562-b3fc-2c963f66afa6"
-        (change)="onTagChange($event)"
-      />
-      განათლება
-    </label>
+    <mat-form-field>
+      <mat-label>თემატიკა</mat-label>
+      <mat-select
+        multiple
+        [formField]="form.selectedTagIds"
+        (selectionChange)="onTagChange($event)"
+      >
+        @for (tag of tags$ | async; track tag) {
+          <mat-option [value]="tag.tagId">{{ tag.name }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
   </div>
 
   <div class="input-div">

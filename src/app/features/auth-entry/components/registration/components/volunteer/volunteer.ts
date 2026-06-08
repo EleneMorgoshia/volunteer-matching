@@ -1,16 +1,20 @@
 import { email, FieldTree, form, FormField, minLength, required } from '@angular/forms/signals';
 import { RegistrationVolunteerInfo } from '../../registration.model';
-import { Component, effect, inject, signal } from '@angular/core';
+import { Component, effect, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RegistrationService } from '../../registration.service';
+import { MatFormField, MatLabel, MatOption, MatError, MatSelect } from '@angular/material/select';
+import { Observable } from 'rxjs';
+import { SharedService } from '../../../../../../core/services/shared';
+import { AuthService } from '../../../../../../core/auth/auth.service';
 
 @Component({
   selector: 'app-volunteer',
-  imports: [CommonModule, FormField],
+  imports: [CommonModule, FormField, MatFormField, MatLabel, MatOption, MatError, MatSelect],
   templateUrl: './volunteer.html',
   styleUrl: './volunteer.scss',
 })
-export class Volunteer {
+export class Volunteer implements OnInit {
   birthDateString = signal('');
 
   registrationVolunteerModel = signal<RegistrationVolunteerInfo>({
@@ -19,12 +23,7 @@ export class Volunteer {
     confirmPassword: '',
     firstName: '',
     lastName: '',
-    birthDate: {
-      year: 0,
-      month: 0,
-      day: 0,
-      dayOfWeek: 0,
-    },
+    birthDate: '',
     citizenship: '',
     profession: '',
     languages: '',
@@ -54,34 +53,43 @@ export class Volunteer {
     required(schema.languages, { message: 'გთხოვთ შეავსოთ' });
     required(schema.skills, { message: 'გთხოვთ შეავსოთ' });
     required(schema.interests, { message: 'გთხოვთ შეავსოთ' });
+    required(schema.selectedTagIds, { message: 'გთხოვთ შეავსოთ' });
   });
 
   //თემარიკისთვის
-  onTagChange(event: Event) {
-    const input = event.target as HTMLInputElement;
-    const currentValue = this.registrationVolunteerModel().selectedTagIds;
+  onTagChange(event: any) {
+    console.log(event, this.form.selectedTagIds().value());
+    // const input = event.target as HTMLInputElement;
+    // const currentValue = this.registrationVolunteerModel().selectedTagIds;
 
-    if (input.checked) {
-      this.registrationVolunteerModel.update((model) => ({
-        ...model,
-        selectedTagIds: [...currentValue, input.value],
-      }));
-    } else {
-      this.registrationVolunteerModel.update((model) => ({
-        ...model,
-        selectedTagIds: currentValue.filter((id) => id !== input.value),
-      }));
-    }
+    // if (input.checked) {
+    //   this.registrationVolunteerModel.update((model) => ({
+    //     ...model,
+    //     selectedTagIds: [...currentValue, input.value],
+    //   }));
+    // } else {
+    //   this.registrationVolunteerModel.update((model) => ({
+    //     ...model,
+    //     selectedTagIds: currentValue.filter((id) => id !== input.value),
+    //   }));
+    // }
   }
 
   //შემოვაინჯექთე სერვიცი
   private registrationService = inject(RegistrationService);
+  private sharedService = inject(SharedService);
+  private authService = inject(AuthService);
   submitted = false;
+  tags$!: Observable<{ tagId: string; name: string }[]>;
 
   constructor() {
     effect(() => {
       // console.log(this.form().value());
     });
+  }
+
+  ngOnInit(): void {
+    this.tags$ = this.sharedService.getTags();
   }
 
   onSend() {
@@ -111,6 +119,8 @@ export class Volunteer {
     }
 
     const date = new Date(this.birthDateString());
+    const formattedDate = date.toISOString().split('T')[0];
+    console.log(formattedDate); // 2026-06-09
 
     const values: RegistrationVolunteerInfo = {
       email: this.form.email().value(),
@@ -121,33 +131,20 @@ export class Volunteer {
 
       //აი აქ აქვს პრობლმეა ანუ სტინგადაც გავუშვი და მაინც არ მუშაობს. არ ვიცი რა უნდა. პოსტზე არი ერორი
       //ვერ იგზავნება რექვესთი.....
-      birthDate: {
-        year: date.getFullYear(),
-        month: date.getMonth() + 1,
-        day: date.getDate(),
-        dayOfWeek: date.getDay(),
-      },
-
+      birthDate: date.toISOString().split('T')[0],
       citizenship: this.form.citizenship().value(),
       profession: this.form.profession().value(),
       languages: this.form.languages().value(),
       skills: this.form.skills().value(),
       interests: this.form.interests().value(),
-
-      selectedTagIds: this.registrationVolunteerModel().selectedTagIds,
+      selectedTagIds: this.form.selectedTagIds().value(),
     };
 
     console.log('გასაგზავნი მნიშვნელობები: ', values);
 
-    this.registrationService.registerVolunteer(values).subscribe({
-      next: (resp) => {
-        console.log('Volunteer registration success:', resp);
-      },
-      error: (err) => {
-        console.log('Volunteer registration error:', err);
-        console.log('Backend error body:', err.error);
-      },
-    });
+    this.registrationService
+      .registerVolunteer(values)
+      .subscribe((res) => this.authService.navigateToCorrectProfile());
   }
 
   isValid(formField: FieldTree<string, any>) {
