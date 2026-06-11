@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { EventCard } from '../../../shared/ui/cards/event-card/event-card';
 import { Pagination } from '../../../shared/ui/pagination/pagination';
+import { NotificationCard } from "../../../shared/ui/cards/notification-card/notification-card";
+import { FavouritesCard } from "../../../shared/ui/cards/favourites-card/favourites-card";
 
 @Component({
   selector: 'app-event-list',
-  imports: [EventCard, Pagination],
+  imports: [EventCard, Pagination, NotificationCard, FavouritesCard],
   templateUrl: './event-list.html',
   styleUrl: './event-list.scss',
 })

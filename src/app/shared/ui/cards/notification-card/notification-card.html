@@ -1,60 +1,90 @@
-<mat-card class="example-card" appearance="outlined">
-  <mat-card-header>
-    <div mat-card-avatar class="example-header-image"></div>
-    <mat-card-subtitle
-      >{{ eventDetails()?.organizationName }}-მა გამოგიგზავნათ მოთხოვნა</mat-card-subtitle
-    >
-    <mat-card-subtitle>{{ eventDetails()?.eventTitle }} - ივენთში მოხალისეობაზე</mat-card-subtitle>
-  </mat-card-header>
-  <mat-card-content>
-    <div class="main-content-container">
-      <p>{{ eventDetails()?.eventTitle }}</p>
-      <p>{{ eventDetails()?.organizationName }}</p>
-      <p>
-        The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from
-        Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was
-        originally bred for hunting.
+<mat-card class="notification-card" appearance="outlined">
+  <!-- მას შემდეგ რაც რამდვილი დატა წამოვა ბექენდიდან მერე ამ ტესტსნოთიფიკაციას წავშლი -->
+  <div class="notification-header">
+    <div class="avatar">
+      <mat-icon fontIcon="person"></mat-icon>
+    </div>
+
+    <div class="header-text">
+      <p class="notification-message">
+        {{ notification()?.message || testNotification.message }}
       </p>
-      <div class="detailed-info">
-        <!-- location div -->
-        <div>
-          <!-- icon -->
-          <p>{{ eventDetails()?.eventLocation }}</p>
-        </div>
 
-        <!-- date time -->
-        <div>
-          <!-- icon -->
-          <mat-icon
-            aria-hidden="false"
-            aria-label="Example home icon"
-            fontIcon="access_time"
-          ></mat-icon>
-          <mat-icon
-            aria-hidden="false"
-            aria-label="Example home icon"
-            fontIcon="location_on"
-          ></mat-icon>
-          <mat-icon
-            aria-hidden="false"
-            aria-label="Example home icon"
-            fontIcon="auto_awesome"
-          ></mat-icon>
-          <p>{{ eventDetails()?.eventLastingPeriod }}</p>
-        </div>
+      <p class="created-date">
+        {{ notification()?.createdAt || testNotification.createdAt }}
+      </p>
+    </div>
+  </div>
 
-        <div>
-          <!-- icon -->
-          <!-- აქ ჯერარ არის მოფიქრებული რამდენი თემატიკა შეიძლება გამოჩნდეს და ზოგადა დთმატიკა რა ფორმატში იქნება -->
-          <p>Theme</p>
-        </div>
+  <div class="event-info-box">
+    <p class="event-title">
+      {{ notification()?.event?.title || testNotification.event.title }}
+    </p>
+
+    <p class="organization-name">
+      {{
+        notification()?.event?.organizationName ||
+          testNotification.event.organizationName
+      }}
+    </p>
+
+    <p class="event-description">
+      {{
+        notification()?.event?.shortDescription ||
+          testNotification.event.shortDescription
+      }}
+    </p>
+
+    <div class="details-container">
+      <div class="detail-item">
+        <mat-icon fontIcon="location_on"></mat-icon>
+
+        <p>
+          {{
+            notification()?.event?.location ||
+              testNotification.event.location
+          }}
+        </p>
+      </div>
+
+      <div class="detail-item">
+        <mat-icon fontIcon="schedule"></mat-icon>
+
+        <p>
+          {{
+            notification()?.event?.startDate ||
+              testNotification.event.startDate
+          }}
+          -
+          {{
+            notification()?.event?.endDate ||
+              testNotification.event.endDate
+          }}
+        </p>
+      </div>
+
+      <div class="detail-item">
+        <mat-icon fontIcon="auto_awesome"></mat-icon>
+
+        <p>
+          {{
+            notification()?.event?.theme ||
+              testNotification.event.theme
+          }}
+        </p>
       </div>
     </div>
-  </mat-card-content>
-  @if (!eventDetails()?.status) {
-    <mat-card-actions class="action-button-placement">
-      <button matButton>LIKE</button>
-      <button matButton>SHARE</button>
+  </div>
+
+  @if ((notification()?.status || testNotification.status) === 3) {
+    <mat-card-actions class="actions">
+      <button matButton class="reject-button">
+        უარყოფა
+      </button>
+
+      <button matButton class="accept-button">
+        დადასტურება
+      </button>
     </mat-card-actions>
   }
 </mat-card>

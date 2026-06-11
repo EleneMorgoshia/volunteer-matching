@@ -2,7 +2,6 @@ $primary: #c13de6;
 
 .event-card-container {
   width: 100%;
-  // max-width: 520px;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -11,23 +10,17 @@ $primary: #c13de6;
 .image-container {
   position: relative;
   width: 100%;
-  aspect-ratio: 1 / 0.85;
+  aspect-ratio: 1 / 0.65;
   overflow: hidden;
   border-radius: 30px;
   cursor: pointer;
 }
 
-.event-image,
-.image-placeholder {
+.event-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-
-.image-placeholder {
-  background:
-    radial-gradient(circle at top right, rgba(255, 255, 255, 0.14), transparent 32%),
-    radial-gradient(circle at bottom left, rgba(255, 255, 255, 0.1), transparent 36%), grey;
+  display: block;
 }
 
 .image-container::after {
@@ -46,44 +39,59 @@ $primary: #c13de6;
   position: absolute;
   top: 20px;
   right: 20px;
+
   width: 40px;
   height: 40px;
+
   border: none;
   border-radius: 50%;
-  background-color: #F1F1F1;
+
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   cursor: pointer;
   z-index: 2;
+
   transition: 0.25s ease;
-}
 
-.heart-button:hover {
-  transform: scale(1.08);
-  box-shadow: 0 4px 12px rgba(21, 16, 22, 0.12);
-}
+  &:hover {
+    transform: scale(1.08);
+    box-shadow: 0 4px 12px rgba(21, 16, 22, 0.12);
+  }
 
-.heart-button mat-icon {
-  color: $primary;
+  mat-icon {
+    color: $primary;
+  }
 }
 
 .see-more-button {
   position: absolute;
   left: 50%;
   top: 50%;
+
   transform: translate(-50%, -50%);
+
   border: none;
   border-radius: 999px;
+
   padding: 14px 48px;
+
   background: #ffffff;
-  color: #111;
+  color: #111111;
+
   font-size: 18px;
   font-weight: 500;
+
   cursor: pointer;
   z-index: 2;
+
   opacity: 0;
   visibility: hidden;
+
   transition: 0.3s ease;
 }
 
@@ -100,51 +108,61 @@ $primary: #c13de6;
 
 .event-title {
   margin: 0;
-  font-size: 32px;
+
+  font-size: 28px;
   font-weight: 600;
-  color: #111;
+
+  color: #111111;
 }
 
 .organisation-name {
   margin: 0;
-  font-size: 22px;
+
+  font-size: 24px;
   font-weight: 400;
-  color: #555;
+
+  color: #555555;
 }
 
-.description-container p {
-  margin: 8px 0 0;
-  font-size: 20px;
-  line-height: 1.5;
-  color: #333;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+.description-container {
+  p {
+    margin: 8px 0 0;
+
+    font-size: 18px;
+    line-height: 1.5;
+
+    color: #333333;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+
+    overflow: hidden;
+  }
 }
 
 .detailed-info-container {
   display: flex;
   align-items: center;
-  gap: 16px;
-  flex-wrap: wrap;
+  gap: 12px;
+  flex-wrap:wrap;
 }
 
 .info-item {
   display: flex;
   align-items: center;
-  gap: 8px;
-}
+  gap: 6px;
 
-.info-item mat-icon {
-  color: $primary;
-}
+  mat-icon {
+    color: $primary;
+  }
 
-.info-item p {
-  margin: 0;
-  font-size: 18px;
-  color: #222;
+  p {
+    margin: 0;
+    font-size: 18px;
+    color: #222222;
+  }
 }
 
 .divider {
@@ -165,6 +183,7 @@ $primary: #c13de6;
   .heart-button {
     width: 46px;
     height: 46px;
+
     top: 14px;
     right: 14px;
   }

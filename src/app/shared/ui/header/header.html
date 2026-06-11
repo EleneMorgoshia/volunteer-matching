@@ -3,15 +3,40 @@
     <img class="LOGO" src="assets/LOGO.png" alt="logo" />
   </a>
 
-  <nav class="header-right">
-    <a class="nav-link" [routerLink]="['/registration']" [queryParams]="{ role: 'volunteer' }">
-      შემოგვიერთდი როგორც მოხალისე
-    </a>
+  @if (!isLoggedIn()) {
+    <nav class="header-right">
+      <a class="nav-link" [routerLink]="['/registration']" [queryParams]="{ role: 'volunteer' }">
+        შემოგვიერთდი როგორც მოხალისე
+      </a>
 
-    <span class="separator">|</span>
+      <span class="separator">|</span>
 
-    <a class="nav-link" [routerLink]="['/registration']" [queryParams]="{ role: 'organization' }">
-      შემოგვიერთდი როგორც ორგანიზაცია
-    </a>
-  </nav>
+      <a class="nav-link" [routerLink]="['/registration']" [queryParams]="{ role: 'organization' }">
+        შემოგვიერთდი როგორც ორგანიზაცია
+      </a>
+    </nav>
+  } @else {
+    <div class="logged-header">
+      <nav class="header-center">
+        <a class="nav-link" routerLink="/home">მთავარი გვერდი</a>
+        <a class="nav-link" routerLink="/about-us">ჩვენს შესახებ</a>
+        <!-- აქ თუ ორგანიზაციაა ორგანიზაციის პროფილზე, თუ არადა მოხალისის(ეგეც ts-ში გასაწეირა) -->
+        <a class="nav-link" routerLink="/volunteer/profile">ჩემი პროფილი</a>
+      </nav>
+
+      <div class="header-icons">
+        <button class="profile-button" type="button">
+          {{ firstLetter }}
+        </button>
+
+        <button class="icon-button" type="button">
+          <mat-icon fontIcon="favorite_border"></mat-icon>
+        </button>
+
+        <button class="icon-button" type="button">
+          <mat-icon fontIcon="notifications_none"></mat-icon>
+        </button>
+      </div>
+    </div>
+  }
 </div>

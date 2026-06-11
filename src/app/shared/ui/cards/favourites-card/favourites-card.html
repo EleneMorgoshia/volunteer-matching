@@ -1,55 +1,54 @@
 <div class="favourites-card-container">
-  <img src="" >
+  <img
+    class="event-image"
+    [src]="favoriteEvent()?.mainPhotoUrl || testEvent.mainPhotoUrl || 'assets/event-default-background.png'"
+    [alt]="favoriteEvent()?.title || testEvent.title"
+  />
 
   <div class="left-content-container">
-    <!-- title vs X icon -->
     <div class="first-info-container">
       <div class="title-container">
-        <p class="event-title">{{ eventDetails()?.eventTitle }}</p>
-        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="close"></mat-icon>
+        <p class="event-title">
+          {{ favoriteEvent()?.title || testEvent.title }}
+        </p>
+
+        <button class="remove-button" type="button">
+          <mat-icon fontIcon="close"></mat-icon>
+        </button>
       </div>
-     <p class="organisation-name">{{ eventDetails()?.organizationName }}</p>
-    </div>
 
-
-    <!-- description div -->
-    <div class="description-container">
-      <p>
-        {{eventDetails()?.eventDescription}}
+      <p class="organisation-name">
+        {{ favoriteEvent()?.organizationName || testEvent.organizationName }}
       </p>
     </div>
 
-    <!-- detailed info div -->
+    <div class="description-container">
+      <p>
+        {{ favoriteEvent()?.shortDescription || testEvent.shortDescription }}
+      </p>
+    </div>
+
     <div class="detailed-info-container">
-      <!-- date info -->
-      <div class="date-conatiner">
-        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="schedule" width="24px" height="24px"></mat-icon>
-        <p>Date info</p> 
-        <!-- აქ ვთხოვ რომ მთლიენი თარიღი დაწყებაც და დასრულებაც ერთ სტრინგად მომცეს არა? -->
+      <div class="date-container">
+        <mat-icon fontIcon="schedule"></mat-icon>
+        <p>
+          {{ favoriteEvent()?.startDate || testEvent.startDate }}
+          -
+          {{ favoriteEvent()?.endDate || testEvent.endDate }}
+        </p>
       </div>
 
       <div class="location-theme-down-container">
-        <!-- location info -->
         <div class="location-container">
-          <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="location_on" width="24px" height="24px"></mat-icon>
-          <p>{{ eventDetails()?.eventLocation }}</p>
+          <mat-icon fontIcon="location_on"></mat-icon>
+          <p>{{ favoriteEvent()?.location || testEvent.location }}</p>
         </div>
 
-        <!-- theme info -->
         <div class="theme-container">
-          <mat-icon
-            aria-hidden="false"
-            aria-label="Example home icon"
-            fontIcon="auto_awesome"
-            width="24px" height="24px"
-          ></mat-icon>
-          <p>Theme</p>
-          <!-- ჯერ არ არის მოფიქრებული როგორ მოგვაწვდიან -->
+          <mat-icon fontIcon="auto_awesome"></mat-icon>
+          <p>{{ favoriteEvent()?.theme || testEvent.theme }}</p>
         </div>
       </div>
-      
     </div>
-
-
   </div>
 </div>

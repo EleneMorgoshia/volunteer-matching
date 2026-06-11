@@ -1,17 +1,18 @@
 <div class="event-card-container">
-  <!-- IMAGE SECTION -->
+   <!-- IMAGE SECTION -->
   <div class="image-container">
-    @if (event().mainPhotoUrl) {
-      <img [src]="event().mainPhotoUrl" [alt]="event().title" class="event-image" />
-    } @else {
-      <div class="image-placeholder"></div>
-    }
+    <img
+      [src]="event().mainPhotoUrl || 'assets/event-default-background.png'"
+      [alt]="event().title"
+      class="event-image"
+    />
 
     <button class="heart-button" type="button">
       <mat-icon fontIcon="favorite_border"></mat-icon>
     </button>
 
-    <button class="see-more-button" type="button">See More</button>
+    <!-- აქ მოვაბამთ ფუნქციას რო გადაისროლოს ივენთს დეტალების გვერდზე -->
+    <button class="see-more-button" type="button">იხილეთ მეტი</button>
   </div>
 
   <!-- TEXT SECTION -->

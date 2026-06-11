@@ -3,10 +3,10 @@ import { OrganizationProfileService } from './organization-profile.service';
 import { OrganizationModel } from './organization-profile.model';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
-
+import { MatIconModule } from '@angular/material/icon';
 @Component({
   selector: 'app-organization-profile',
-  imports: [CommonModule],
+  imports: [CommonModule,MatIconModule],
   templateUrl: './organization-profile.html',
   styleUrl: './organization-profile.scss',
 })
@@ -20,5 +20,8 @@ export class OrganizationProfile implements OnInit {
 
   ngOnInit(): void {
     this.profileInfo$ = this.service.getProfileInfo();
+  }
+  onNavigateToEdit(){
+    return ;
   }
 }

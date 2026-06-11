@@ -5,9 +5,11 @@
 
 .card-container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 448px));
 
-  column-gap: 48px;
+  justify-content: center;
+
+  column-gap: 72px;
   row-gap: 64px;
 }
 

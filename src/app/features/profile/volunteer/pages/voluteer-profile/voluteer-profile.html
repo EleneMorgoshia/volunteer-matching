@@ -1,20 +1,110 @@
 @if (profileInfo) {
-  <div class="main-container">
-    <div class="image-container">
-      <img [src]="profileInfo.profilePhotoUrl" alt="profile photo" />
+  <section class="profile-card">
+    <div class="priority-container">
+      <div class="image-container">
+        <!-- //თუ არ ექნება დაყენებული ფოტო მაშინ კაცუნას აიქონს ვაჩვენებთ და პლუს ifები ანახე მარიამს ქვემოთ()-->
+        @if (profileInfo.profilePhotoUrl) {
+          <img [src]="profileInfo.profilePhotoUrl" alt="profile photo" />
+        } @else {
+          <div class="profile-placeholder">
+            <mat-icon>person</mat-icon>
+          </div>
+        }
+      </div>
+
+      <div class="priority-content">
+        <div class="profile-header">
+          <h1>{{ profileInfo.firstName }} {{ profileInfo.lastName }}</h1>
+
+          <button class="edit-button" matFab (click)="onNavigateToEdit()">
+            <mat-icon fontIcon="edit">edit</mat-icon>
+          </button>
+        </div>
+
+        <div class="main-info-grid">
+          <div class="info-row">
+            <span>იმეილი:</span>
+            <p>{{ profileInfo.email }}</p>
+          </div>
+
+          <div class="info-row">
+            <span>დაბადების თარიღი:</span>
+            <p>
+              {{ profileInfo.birthDate.day }}/{{ profileInfo.birthDate.month }}/{{
+                profileInfo.birthDate.year
+              }}
+            </p>
+          </div>
+
+          <div class="info-row">
+            <span>მოქალაქეობა:</span>
+            <p>{{ profileInfo.citizenship }}</p>
+          </div>
+
+          <div class="info-row">
+            <span>პროფესია:</span>
+            <p>{{ profileInfo.profession }}</p>
+          </div>
+
+          @if (profileInfo.linkedInUrl) {
+            <div class="info-row linkedin-row">
+              <span>LinkedIn:</span>
+              <a [href]="profileInfo.linkedInUrl" target="_blank"> პროფილის ნახვა </a>
+            </div>
+          }
+        </div>
+      </div>
     </div>
 
-    <div class="fields-container">
-      <p>{{ profileInfo.firstName }}</p>
-      <p>{{ profileInfo.lastName }}</p>
-      <p>{{ profileInfo.profession }}</p>
-      <p>{{ profileInfo.citizenship }}</p>
-      <p>{{ profileInfo.languages }}</p>
-      <p>{{ profileInfo.skills }}</p>
+    <div class="after-edit-container">
+      @if (profileInfo.description) {
+        <div class="section">
+          <h3>ჩემ შესახებ</h3>
+          <p>{{ profileInfo.description }}</p>
+        </div>
+      }
 
-      <button matFab (click)="onNavigateToEdit()">
-        <mat-icon fontIcon="edit">edit</mat-icon>
-      </button>
+      @if (profileInfo.experience) {
+        <div class="section">
+          <h3>სამუშაო გამოცდილება</h3>
+          <p>{{ profileInfo.experience }}</p>
+        </div>
+      }
+
+      @if (profileInfo.education) {
+        <div class="section">
+          <h3>განათლება</h3>
+          <p>{{ profileInfo.education }}</p>
+        </div>
+      }
+
+      @if (profileInfo.technologies) {
+        <div class="section">
+          <h3>ტექნოლოგიები</h3>
+          <p>{{ profileInfo.technologies }}</p>
+        </div>
+      }
+
+      @if (profileInfo.languages) {
+        <div class="section">
+          <h3>ენები</h3>
+          <p>{{ profileInfo.languages }}</p>
+        </div>
+      }
+
+      @if (profileInfo.skills) {
+        <div class="section">
+          <h3>უნარები</h3>
+          <p>{{ profileInfo.skills }}</p>
+        </div>
+      }
+
+      @if (profileInfo.interests) {
+        <div class="section">
+          <h3>ინტერესები</h3>
+          <p>{{ profileInfo.interests }}</p>
+        </div>
+      }
     </div>
-  </div>
+  </section>
 }
