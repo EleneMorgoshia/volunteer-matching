@@ -9,10 +9,11 @@ import { FavouritesCard } from './shared/ui/cards/favourites-card/favourites-car
 import { NotificationOverlay } from "./shared/ui/overlays/notification-overlay/notification-overlay";
 import { EventCard } from "./shared/ui/cards/event-card/event-card";
 import { SearchedUserCard } from "./shared/ui/cards/searched-user-card/searched-user-card";
+import { AboutUs } from "./features/about-us/about-us";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Header, Footer, Loader, NotificationCard, FavouritesCard, NotificationOverlay, EventCard, SearchedUserCard],
+  imports: [RouterOutlet, Header, Footer, Loader, NotificationCard, FavouritesCard, NotificationOverlay, EventCard, SearchedUserCard, AboutUs],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
