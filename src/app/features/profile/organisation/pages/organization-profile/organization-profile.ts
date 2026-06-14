@@ -25,4 +25,8 @@ export class OrganizationProfile implements OnInit {
   onNavigateToEdit() {
     this.router.navigateByUrl('organization/edit');
   }
+
+  onNavigateToEvent(eventId: string = 'kasjdkasjd') {
+    this.router.navigate(['organization/events'], { queryParams: { eventId } });
+  }
 }

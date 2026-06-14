@@ -16,4 +16,11 @@ export const ORGANIZATION_ROUTES: Routes = [
       import('./pages/organization-edit/organization-edit').then((m) => m.OrganizationEdit),
     canActivate: [authGuard, organizationGuard],
   },
+
+  {
+    path: 'organization/events',
+    loadComponent: () =>
+      import('./pages/organization-event/organization-event').then((m) => m.OrganizationEvent),
+    canActivate: [authGuard, organizationGuard],
+  },
 ];
