@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { loginModelParams, loginModelResponse, ROLE } from './auth.model';
-import { tap } from 'rxjs';
+import { BehaviorSubject, ReplaySubject, tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
@@ -21,6 +21,7 @@ export class AuthService {
 
   private readonly http = inject(HttpClient);
   private readonly router = inject(Router);
+  isLoggedInSubject$ = new BehaviorSubject<boolean>(false);
 
   login(params: loginModelParams) {
     return this.http.post<loginModelResponse>(this.apiUrl + '/login', params).pipe(
@@ -35,6 +36,7 @@ export class AuthService {
   // თუ ეს ერორი ტოკენის ბრალი არაა 401-სგან განსხვავებული ერორ კოდი რომ დაბრუნდეს
   logout() {
     [this.accessToken, this.user, this.role].forEach((el) => localStorage.removeItem(el));
+    this.isLoggedInSubject$.next(false);
     this.router.navigate(['/login']);
   }
 
@@ -55,6 +57,7 @@ export class AuthService {
       localStorage.getItem(this.role),
     );
     // this.navigateToCorrectProfile();
+    this.isLoggedInSubject$.next(true);
   }
 
   navigateToCorrectProfile() {

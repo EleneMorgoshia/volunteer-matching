@@ -1,4 +1,4 @@
-@if (profileInfo$ | async; as profileInfo) {
+@if (service.profileSignal(); as profileInfo) {
   <div class="profile-card">
     <div class="priority-container">
       <div class="image-container">
@@ -34,9 +34,7 @@
       <div class="events-header">
         <h3>ორგანიზაციის მიმდინარე ივენთები</h3>
 
-        <span class="add-event-text" routerLink="/organization/add-event">
-          ივენთის დამატება
-        </span>
+        <span class="add-event-text" routerLink="/organization/add-event"> ივენთის დამატება </span>
       </div>
 
       <div class="events-container">

@@ -10,7 +10,9 @@ import { tap } from 'rxjs';
 export class OrganizationProfileService {
   private readonly url = `${environment.url}`;
   private http = inject(HttpClient);
-  private profileFirstLetter: string = '';
+
+  readonly firstLetterSignal = signal<string>('');
+  readonly profileSignal = signal<OrganizationModel | null>(null);
 
   getProfileInfo() {
     return this.http
@@ -19,10 +21,7 @@ export class OrganizationProfileService {
   }
 
   private setProfileInfo(info: OrganizationModel) {
-    this.profileFirstLetter = info.organizationName.charAt(0).toUpperCase();
-  }
-
-  getprofileFirstLetter() {
-    return this.profileFirstLetter;
+    this.firstLetterSignal.set(info.organizationName.charAt(0).toUpperCase());
+    this.profileSignal.set(info);
   }
 }
