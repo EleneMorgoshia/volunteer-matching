@@ -1,14 +1,14 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { email, form, required, FormField } from '@angular/forms/signals';
 import { MatFormField, MatLabel, MatError } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
+import { OrganizationProfileService } from '../organization-profile/organization-profile.service';
 interface EditForm {
-  image: string;
-  name: string;
-  email: string;
-  linkedIn: string;
-  aboutMe: string;
+  organizationName: string;
+  description: string;
+  profilePhotoUrl: string;
+  linkedInUrl: string;
 }
 @Component({
   selector: 'app-organization-edit',
@@ -19,25 +19,44 @@ interface EditForm {
 export class OrganizationEdit {
   formSubmitted = false;
   readonly model = signal<EditForm>({
-    image: '',
-    name: '',
-    email: '',
-    linkedIn: '',
-    aboutMe: '',
+    organizationName: '',
+    description: '',
+    profilePhotoUrl: '',
+    linkedInUrl: '',
   });
 
   readonly editForm = form(this.model, (schemaPath) => {
-    required(schemaPath.name, { message: 'გთხოვთ, შეავსოთ' });
+    required(schemaPath.organizationName, { message: 'გთხოვთ, შეავსოთ' });
 
-    required(schemaPath.email, { message: 'გთხოვთ, შეავსოთ' });
-    email(schemaPath.email, { message: 'გთხოვთ, შეავსოთ სწორი ელ.ფოსტის ფორმატით' });
+    // required(schemaPath.email, { message: 'გთხოვთ, შეავსოთ' });
+    // email(schemaPath.email, { message: 'გთხოვთ, შეავსოთ სწორი ელ.ფოსტის ფორმატით' });
 
-    required(schemaPath.linkedIn, { message: 'გთხოვთ, შეავსოთ' });
+    required(schemaPath.linkedInUrl, { message: 'გთხოვთ, შეავსოთ' });
 
-    required(schemaPath.aboutMe, { message: 'გთხოვთ, შეავსოთ' });
+    required(schemaPath.description, { message: 'გთხოვთ, შეავსოთ' });
   });
 
   readonly isFormValid = computed(() => this.editForm().valid());
+
+  private service = inject(OrganizationProfileService);
+  selectedImage = signal<string>('');
+
+  onFileChosen(event: Event) {
+    const fileSelect = event.target as HTMLInputElement;
+
+    if (fileSelect.files?.length === 1) {
+      const img = fileSelect.files[0];
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        const content = reader.result as string;
+        this.selectedImage.set(content);
+        this.editForm.profilePhotoUrl().setControlValue(content);
+      };
+
+      reader.readAsDataURL(img);
+    }
+  }
 
   onSubmit($event: any) {
     $event.preventDefault();
@@ -45,7 +64,6 @@ export class OrganizationEdit {
     if (!this.isFormValid()) {
       return;
     }
-    console.log(this.editForm().value());
+    this.service.updateProfile(this.editForm().value()).subscribe();
   }
-
 }

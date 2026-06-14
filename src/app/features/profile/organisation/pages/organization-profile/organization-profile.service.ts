@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../../../../../environments/environment';
-import { OrganizationModel } from './organization-profile.model';
+import { OrganizationModel, OrganizationParams } from './organization-profile.model';
 import { tap } from 'rxjs';
 
 @Injectable({
@@ -18,6 +18,10 @@ export class OrganizationProfileService {
     return this.http
       .get<OrganizationModel>(this.url + '/organizations/me')
       .pipe(tap((res) => this.setProfileInfo(res)));
+  }
+
+  updateProfile(params: OrganizationParams) {
+    return this.http.put<OrganizationModel>(this.url + '/organizations/me', params);
   }
 
   private setProfileInfo(info: OrganizationModel) {
