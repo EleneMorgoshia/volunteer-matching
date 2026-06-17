@@ -1,0 +1,176 @@
+$primary: #c13de6;
+
+.faq-container {
+  width: 100%;
+  margin: 90px 0 140px;
+}
+
+.faq-title {
+  margin: 0 0 36px;
+
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: $primary;
+
+  text-align: left;
+}
+
+.faq-list {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.faq-item {
+  width: 100%;
+
+  background: #f8f8f8;
+  border: 1px solid #eeeeee;
+  border-radius: 24px;
+
+  overflow: hidden;
+
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+
+  summary {
+    position: relative;
+
+    padding: 24px 80px 24px 32px;
+
+    cursor: pointer;
+    list-style: none;
+
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.5;
+    color: #222;
+
+    transition: color 0.25s ease;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  summary::after {
+    content: '+';
+
+    position: absolute;
+    right: 24px;
+    top: 50%;
+
+    width: 32px;
+    height: 32px;
+
+    transform: translateY(-50%);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: rgba(193, 61, 230, 0.1);
+
+    color: $primary;
+    font-size: 22px;
+    font-weight: 500;
+
+    transition: all 0.25s ease;
+  }
+
+  p {
+    margin: 0;
+
+    padding: 0 32px 24px;
+
+    font-size: 15px;
+    line-height: 1.8;
+    color: #555;
+  }
+
+  p + p {
+    padding-top: 0;
+  }
+
+  &[open] {
+    background: #ffffff;
+
+    border-color: rgba(193, 61, 230, 0.35);
+
+    box-shadow: 0 14px 36px rgba(193, 61, 230, 0.08);
+  }
+
+  &[open] summary {
+    color: $primary;
+  }
+
+  &[open] summary::after {
+    content: '−';
+
+    background: rgba(193, 61, 230, 0.15);
+  }
+}
+
+@media (max-width: 900px) {
+  .faq-container {
+    margin: 72px 0;
+  }
+
+  .faq-title {
+    font-size: 28px;
+    margin-bottom: 28px;
+  }
+
+  .faq-item {
+    summary {
+      padding: 22px 70px 22px 24px;
+      font-size: 17px;
+    }
+
+    p {
+      padding: 0 24px 22px;
+      font-size: 14px;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .faq-container {
+    margin: 56px 0;
+  }
+
+  .faq-title {
+    font-size: 24px;
+    margin-bottom: 24px;
+  }
+
+  .faq-item {
+    border-radius: 18px;
+
+    summary {
+      padding: 18px 60px 18px 18px;
+      font-size: 15px;
+    }
+
+    summary::after {
+      width: 28px;
+      height: 28px;
+      right: 18px;
+
+      font-size: 18px;
+    }
+
+    p {
+      padding: 0 18px 18px;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+  }
+}

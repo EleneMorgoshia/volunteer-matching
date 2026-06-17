@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FeedbackCard } from "../feedback-card/feedback-card";
+import { FeedbackCard } from '../feedback-card/feedback-card';
 import { FeedbackCardModel } from '../feedback-card/feedback-card-model';
 
 @Component({
@@ -11,24 +11,32 @@ import { FeedbackCardModel } from '../feedback-card/feedback-card-model';
 export class Feedback {
   feedbackList: FeedbackCardModel[] = [
     {
-      userImg: 'user1.png',
-      userName: 'Nicolas Pompeus',
-      feedbackComment: 'This platform has completely transformed how our team manages community outreach. The interface is incredibly intuitive, and the support we received during setup was top-notch'
+      userImg: '/assets/user1.png',
+      userName: 'Niko Narimanidze',
+      role: 'მოხალისე',
+      feedbackComment:
+        'AI დამთხვევის დახმარებით სწრაფად ვიპოვე ღონისძიებები, რომლებიც ჩემს ინტერესებსა და უნარებს შეესაბამებოდა.',
     },
     {
-      userImg: 'user2.png',
-      userName: 'Sandro Margvelashvili',
-      feedbackComment: 'This platform has completely transformed how our team manages community outreach. The interface is incredibly intuitive, and the support we received during setup was top-notch'
+      userImg: '/assets/user2.png',
+      userName: 'Community Bridge',
+      role: 'ორგანიზაცია',
+      feedbackComment:
+        'პლატფორმამ გაგვიმარტივა შესაბამისი მოხალისეების პოვნა და ღონისძიებებისთვის საჭირო ადამიანების შერჩევა.',
     },
     {
-      userImg: 'user3.png',
+      userImg: '/assets/user3.png',
       userName: 'Mariam Nadibaidze',
-      feedbackComment: 'This platform has completely transformed how our team manages community outreach. The interface is incredibly intuitive, and the support we received during setup was top-notch'
+      role: 'მოხალისე',
+      feedbackComment:
+        'როგორც სტუდენტისთვის, პლატფორმა ძალიან სასარგებლოა — მარტივად ვიპოვე გამოცდილების მიღების შესაძლებლობები.',
     },
     {
-      userImg: 'user4.png',
-      userName: 'Elene Morgoshia',
-      feedbackComment: 'This platform has completely transformed how our team manages community outreach. The interface is incredibly intuitive, and the support we received during setup was top-notch'
-    }
+      userImg: '/assets/user4.png',
+      userName: 'Nino Shanidze',
+      role: 'მოხალისე',
+      feedbackComment:
+        'პლატფორმა მოხალისეებსა და ორგანიზაციებს მარტივად აკავშირებს და ორივე მხარეს ახალ შესაძლებლობებს აძლევს.',
+    },
   ];
 }

@@ -26,7 +26,12 @@ export class OrganizationProfile implements OnInit {
     this.router.navigateByUrl('organization/edit');
   }
 
-  onNavigateToEvent(eventId: string = 'kasjdkasjd') {
-    this.router.navigate(['organization/events'], { queryParams: { eventId } });
+  onNavigateToEvent() {
+    this.router.navigate(['organization/events']);
+  }
+
+  // ეს გასატანი იქნება ივენთის ქარდში
+  onNavigateToEventEdit() {
+    // this.router.navigate(['organization/event/edit'], { queryParams: { eventId } });
   }
 }

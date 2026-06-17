@@ -21,6 +21,7 @@ $primary: #c13de6;
   height: 100%;
   object-fit: cover;
   display: block;
+  filter: brightness(98%);
 }
 
 .image-container::after {

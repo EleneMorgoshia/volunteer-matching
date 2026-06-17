@@ -1,0 +1,126 @@
+<form class="event-edit-form">
+  <div class="form-header">
+    <button class="back-button" type="button">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+
+    <h1>ივენთის რედაქტირება</h1>
+  </div>
+
+  <div class="form-card">
+    <section class="images-section">
+      <div class="main-image image-box">
+        @if (selectedImage() || editForm.mainPhotoUrl().value()) {
+          <img [src]="selectedImage() || editForm.mainPhotoUrl().value()" alt="event image" />
+        } @else {
+          <mat-icon>add_photo_alternate</mat-icon>
+          <p>მთავარი ფოტო</p>
+        }
+
+        <input matInput [formField]="editForm.mainPhotoUrl" placeholder="ფოტოს ბმული" />
+        <input type="file" accept=".png,.jpg,.jpeg" (change)="onFileChosen($event)" />
+      </div>
+
+      <div class="small-images">
+        <div class="small-image image-box">
+          <mat-icon>photo</mat-icon>
+          <p>ფოტო 2</p>
+          <input matInput [formField]="editForm.photo2Url" />
+        </div>
+
+        <div class="small-image image-box">
+          <mat-icon>photo</mat-icon>
+          <p>ფოტო 3</p>
+          <input matInput [formField]="editForm.photo3Url" />
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <mat-form-field>
+        <mat-label>ივენთის სახელი</mat-label>
+        <input matInput [formField]="editForm.title" />
+
+        @if (formSubmitted && editForm.title().invalid()) {
+          @for (error of editForm.title().errors(); track error) {
+            <mat-error>{{ error.message }}</mat-error>
+          }
+        }
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>მოკლე აღწერა</mat-label>
+        <textarea matInput [formField]="editForm.shortDescription"></textarea>
+
+        @if (formSubmitted && editForm.shortDescription().invalid()) {
+          @for (error of editForm.shortDescription().errors(); track error) {
+            <mat-error>{{ error.message }}</mat-error>
+          }
+        }
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>სრული აღწერა</mat-label>
+        <textarea matInput [formField]="editForm.description"></textarea>
+
+        @if (formSubmitted && editForm.description().invalid()) {
+          @for (error of editForm.description().errors(); track error) {
+            <mat-error>{{ error.message }}</mat-error>
+          }
+        }
+      </mat-form-field>
+
+      <div class="two-columns">
+        <mat-form-field>
+          <mat-label>ლოკაცია</mat-label>
+          <input matInput [formField]="editForm.location" />
+
+          @if (formSubmitted && editForm.location().invalid()) {
+            @for (error of editForm.location().errors(); track error) {
+              <mat-error>{{ error.message }}</mat-error>
+            }
+          }
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>თემა</mat-label>
+          <input matInput [formField]="editForm.theme" />
+
+          @if (formSubmitted && editForm.theme().invalid()) {
+            @for (error of editForm.theme().errors(); track error) {
+              <mat-error>{{ error.message }}</mat-error>
+            }
+          }
+        </mat-form-field>
+      </div>
+
+      <div class="two-columns">
+        <mat-form-field>
+          <mat-label>დაწყების თარიღი</mat-label>
+          <input matInput [formField]="editForm.startDate" />
+
+          @if (formSubmitted && editForm.startDate().invalid()) {
+            @for (error of editForm.startDate().errors(); track error) {
+              <mat-error>{{ error.message }}</mat-error>
+            }
+          }
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>დასრულების თარიღი</mat-label>
+          <input matInput [formField]="editForm.endDate" />
+
+          @if (formSubmitted && editForm.endDate().invalid()) {
+            @for (error of editForm.endDate().errors(); track error) {
+              <mat-error>{{ error.message }}</mat-error>
+            }
+          }
+        </mat-form-field>
+      </div>
+
+      <button class="save-button" mat-raised-button type="submit" (click)="onSubmit($event)">
+        შენახვა
+      </button>
+    </section>
+  </div>
+</form>

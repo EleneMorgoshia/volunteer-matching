@@ -21,4 +21,8 @@ export class EventCard {
     theme: 'Theme',
     mainPhotoUrl: '',
   });
+
+  onToggleFavorite() {
+    // todo: call favorite api
+  }
 }

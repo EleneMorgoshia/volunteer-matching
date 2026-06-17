@@ -19,6 +19,7 @@ export const authGuard: CanActivateFn = (
   if (!authService.isAuthenticated()) {
     return router.createUrlTree(['/login']);
   }
+
   // const currentProfileUrl = authService.isOrganization()
   //   ? ['/organization/profile']
   //   : ['/volunteer/profile'];
@@ -26,6 +27,7 @@ export const authGuard: CanActivateFn = (
   return true;
 };
 export const volunteerGuard: CanActivateFn = () => {
+  //სულ ორი წამი ვაკომენტარებ გასასტილად
   const authService = inject(AuthService);
   const router = inject(Router);
 

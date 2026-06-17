@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { SharedService } from '../../../../../core/services/shared';
 import { CommonModule } from '@angular/common';
 import { VolunteerProfileService } from '../voluteer-profile/volunteer-profile.service';
+import { Router } from '@angular/router';
 
 interface EditForm {
   firstName: string;
@@ -43,6 +44,8 @@ interface EditForm {
   styleUrl: './volunteer-edit.scss',
 })
 export class VolunteerEdit implements OnInit {
+  //ეს 48 ლაინი დავამატე იმიტორო რო გადაიყვანოს პროფილის გვერდზე თუ აღარ მოუნდა ედიტი
+  private router = inject(Router);
   formSubmitted = false;
   tags$!: Observable<{ tagId: string; name: string }[]>;
   readonly isFormValid = computed(() => this.editForm().valid());
@@ -126,5 +129,9 @@ export class VolunteerEdit implements OnInit {
     }
     console.log(this.editForm().value());
     this.volunteerProfileService.updateProfile(this.editForm().value()).subscribe();
+  }
+
+  goToProfile(): void {
+    this.router.navigateByUrl('./pages/voluteer-profile/voluteer-profile').then();
   }
 }

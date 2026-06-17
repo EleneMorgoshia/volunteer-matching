@@ -1,11 +1,11 @@
-<div class="feedback-card-container">
-  <div class="img-div">
-    <img class="user-image" [src]="data.userImg" [alt]="data.userName" >
+<div class="feedback-card">
+  <div class="image-frame">
+    <img [src]="data.userImg" [alt]="data.userName" />
   </div>
 
-  <div class="feedback-user-info">
-    <p class="user-name">{{data.userName}}</p>
-    <p class="comment">{{data.feedbackComment}}</p>
-  </div>
+  <h3>{{ data.userName }}</h3>
 
+  <span class="role-pill">{{ data.role }}</span>
+
+  <p>{{ data.feedbackComment }}</p>
 </div>

@@ -5,15 +5,9 @@ export interface EventParams {
   location: string;
   startDate: string;
   endDate: string;
-  dailyStartTime: {
-    hour: 0;
-    minute: 0;
-  };
-  dailyEndTime: {
-    hour: 0;
-    minute: 0;
-  };
-  volunteersAmount: 2147483647;
+  dailyStartTime: string; //hh:mm:ss
+  dailyEndTime: string; //hh:mm:ss
+  volunteersAmount: number;
   benefits: string;
   mainPhotoUrl: string;
   photo2Url: string;

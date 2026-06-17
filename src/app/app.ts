@@ -9,6 +9,7 @@ import { FavouritesCard } from './shared/ui/cards/favourites-card/favourites-car
 import { NotificationOverlay } from './shared/ui/overlays/notification-overlay/notification-overlay';
 import { EventCard } from './shared/ui/cards/event-card/event-card';
 import { AboutUs } from './features/about-us/about-us';
+import { EventDetails } from './shared/ui/details/event-details/event-details';
 
 @Component({
   selector: 'app-root',
@@ -22,6 +23,7 @@ import { AboutUs } from './features/about-us/about-us';
     NotificationOverlay,
     EventCard,
     AboutUs,
+    EventDetails
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss',

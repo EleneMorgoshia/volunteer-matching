@@ -1,1 +1,117 @@
-<p>organization-event works!</p>
+<form class="event-form">
+  <section class="images-section">
+    <div class="main-image image-box">
+      <mat-icon>add_photo_alternate</mat-icon>
+      <p>მთავარი ფოტო</p>
+
+      <input type="file" accept=".png,.jpg,.jpeg" />
+    </div>
+
+    <div class="small-images">
+      <div class="small-image image-box">
+        <mat-icon>photo</mat-icon>
+        <p>ფოტო 2</p>
+
+        <input type="file" accept=".png,.jpg,.jpeg" />
+      </div>
+
+      <div class="small-image image-box">
+        <mat-icon>photo</mat-icon>
+        <p>ფოტო 3</p>
+
+        <input type="file" accept=".png,.jpg,.jpeg" />
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <h1>
+      @if (editMode) {
+        ივენთის რედაქტირება
+      } @else {
+        ივენთის დამატება
+      }
+    </h1>
+
+    <mat-form-field>
+      <mat-label>სათაური</mat-label>
+      <input matInput placeholder="შეიყვანეთ ივენთის სათაური" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>აღწერა</mat-label>
+      <textarea matInput placeholder="აღწერეთ ივენთი"></textarea>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>მოთხოვნები მოხალისეებისთვის</mat-label>
+      <textarea matInput placeholder="ჩაწერეთ მოთხოვნები"></textarea>
+    </mat-form-field>
+
+    <div class="two-fields">
+      <mat-form-field>
+        <mat-label>ლოკაცია</mat-label>
+        <input matInput placeholder="მაგ: თბილისი" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>მოხალისეების რაოდენობა</mat-label>
+        <input matInput type="number" placeholder="მაგ: 20" />
+      </mat-form-field>
+    </div>
+
+    <div class="two-fields">
+      <mat-form-field>
+        <mat-label>დაწყების თარიღი</mat-label>
+        <input matInput type="date" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>დასრულების თარიღი</mat-label>
+        <input matInput type="date" />
+      </mat-form-field>
+    </div>
+
+    <div class="two-fields">
+      <!-- ესენი რახან მოდელში გვქონდა აღწერილი მაგიტო დავამტატე თორეეს ვაფშე რა საჭიროა? -->
+      <mat-form-field>
+        <mat-label>დაწყების დრო(საათობრივი)</mat-label>
+        <input matInput type="time" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>დასრულების დრო(საათობრივი)</mat-label>
+        <input matInput type="time" />
+      </mat-form-field>
+    </div>
+
+    <mat-form-field>
+      <mat-label>ბენეფიტები</mat-label>
+      <textarea matInput placeholder="რა ბენეფიტებს მიიღებენ მოხალისეები?"></textarea>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>თემები</mat-label>
+      <mat-select multiple>
+        <!--  -->
+        <mat-option value="tech">ტექნოლოგიები</mat-option>
+        <mat-option value="business">ბიზნესი</mat-option>
+        <mat-option value="education">განათლება</mat-option>
+        <mat-option value="marketing">მარკეტინგი</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>დამატებითი ინფორმაცია</mat-label>
+      <textarea matInput placeholder="დამატებითი ინფორმაცია ივენთის შესახებ"></textarea>
+    </mat-form-field>
+
+    <button class="submit-button" type="submit" mat-raised-button>
+      @if (editMode) {
+        ცვლილებების შენახვა
+      } @else {
+        ივენთის დამატება
+      }
+    </button>
+  </section>
+</form>

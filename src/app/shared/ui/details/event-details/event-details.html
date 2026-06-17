@@ -1,0 +1,116 @@
+<div class="event-details-page">
+  <section class="images-section">
+    <div class="main-image image-box">
+      @if (event.mainPhotoUrl) {
+        <img [src]="event.mainPhotoUrl" [alt]="event.title" />
+      } @else {
+        <div class="image-placeholder">
+          <mat-icon>image</mat-icon>
+          <p>ივენთის ფოტო</p>
+        </div>
+      }
+    </div>
+
+    <div class="small-images">
+      <div class="small-image image-box">
+        @if (event.galleryPhotoUrls?.[0]) {
+          <img [src]="event.galleryPhotoUrls?.[0]" [alt]="event.title" />
+        } @else {
+          <div class="image-placeholder small-placeholder">
+            <mat-icon>photo</mat-icon>
+          </div>
+        }
+      </div>
+
+      <div class="small-image image-box">
+        @if (event.galleryPhotoUrls?.[1]) {
+          <img [src]="event.galleryPhotoUrls?.[1]" [alt]="event.title" />
+        } @else {
+          <div class="image-placeholder small-placeholder">
+            <mat-icon>photo</mat-icon>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="title-row">
+      <h1>{{ event.title }}</h1>
+
+      <button class="close-button" type="button" (click)="goToHomeEvents()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    <div class="organization-row">
+      <p class="organization-name">{{ event.organizationName }}</p>
+      <p class="organization-email">{{ event.organizationEmail }}</p>
+    </div>
+
+    <p class="description">{{ event.description }}</p>
+
+    <div class="section-block">
+      <h2>მოთხოვნები მოხალისეებისთვის</h2>
+      <ol>
+        @for (requirement of event.requirements; track requirement) {
+          <li>{{ requirement }}</li>
+        }
+      </ol>
+    </div>
+
+    <div class="section-block">
+      <h2>სპიკერები</h2>
+
+      <div class="speakers-list">
+        @for (speaker of event.speakers; track speaker.fullName) {
+          <div class="speaker-card">
+            <div class="speaker-image">
+              @if (speaker.imageUrl) {
+                <img [src]="speaker.imageUrl" [alt]="speaker.fullName" />
+              } @else {
+                <mat-icon>person</mat-icon>
+              }
+            </div>
+
+            <p>{{ speaker.fullName }}</p>
+            <span>{{ speaker.profession }}</span>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="section-block">
+      <h2>ბენეფიტები</h2>
+      <ol>
+        @for (benefit of event.benefits; track benefit) {
+          <li>{{ benefit }}</li>
+        }
+      </ol>
+    </div>
+
+    <div class="details-list">
+      <h2>დეტალები:</h2>
+
+      <div class="detail-item">
+        <mat-icon>location_on</mat-icon>
+        <span>{{ event.location }}</span>
+      </div>
+
+      <div class="detail-item">
+        <mat-icon>schedule</mat-icon>
+        <span>{{ event.startDate }} - {{ event.endDate }}</span>
+      </div>
+
+      <div class="detail-item">
+        <mat-icon>auto_awesome</mat-icon>
+        <span>{{ event.theme }}</span>
+      </div>
+    </div>
+
+    <div class="section-block">
+      <h2>დამატებითი ინფორმაცია</h2>
+      <p>{{ event.additionalInfo }}</p>
+    </div>
+  </section>
+</div>

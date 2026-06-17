@@ -1,9 +1,9 @@
-<div class="feedback-container">
-  <p class="title">What our users say</p>
-  
+<section class="feedback-container">
+  <p class="title">რას ამბობენ ჩვენი მომხმარებლები</p>
+
   <div class="cards-container">
     @for (card of feedbackList; track card.userName) {
       <app-feedback-card [data]="card"></app-feedback-card>
     }
   </div>
-</div>
+</section>

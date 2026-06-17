@@ -1,21 +1,29 @@
+$primary: #c13de6;
+$primary-shadow: rgba(193, 61, 230, 0.14);
+$text: #111;
+
 :host {
   display: block;
   width: 100%;
+  box-sizing: border-box;
 }
 
 .edit-form {
   width: 100%;
-  box-sizing: border-box;
-
   margin: 40px 0;
-  padding: 56px 136px;
+  padding: 46px;
+  box-sizing: border-box;
 
   display: flex;
   flex-direction: column;
   gap: 36px;
 
-  background-color: #fafafa;
-  border-radius: 8px;
+  border-radius: 36px;
+  background:
+    radial-gradient(circle at top right, rgba(193, 61, 230, 0.09), transparent 36%),
+    #fff;
+
+  box-shadow: 0 25px 65px rgba(193, 61, 230, 0.08);
 }
 
 .form-header {
@@ -25,31 +33,51 @@
 
   h1 {
     margin: 0;
-    font-size: 34px;
-    font-weight: 700;
-    color: #111111;
+    font-size: 38px;
+    font-weight: 600;
+    line-height: 1.15;
+    color: $text;
+
+    display: inline-block;
+
+    &::after {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 4px;
+      margin-top: 14px;
+      border-radius: 999px;
+      background: $primary;
+    }
   }
 }
 
 .back-button {
-  width: 46px;
-  height: 46px;
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+
+  border: none;
+  border-radius: 50%;
+  background: #f7effb;
+  color: $text;
+  cursor: pointer;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  border: 2px solid #c13de6;
-  border-radius: 50%;
-  background-color: #ffffff;
-  color: #111111;
-
-  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(193, 61, 230, 0.12);
   transition: 0.2s ease;
 
+  mat-icon {
+    font-size: 22px;
+  }
+
   &:hover {
-    background-color: #c13de6;
-    color: #ffffff;
+    background: $primary;
+    color: #fff;
+    transform: translateY(-2px);
   }
 }
 
@@ -61,8 +89,8 @@
 
 .personal-info-div {
   display: grid;
-  grid-template-columns: 260px 1fr;
-  gap: 64px;
+  grid-template-columns: 260px minmax(0, 1fr);
+  gap: 60px;
   align-items: flex-start;
 }
 
@@ -74,7 +102,6 @@
 .image-circle {
   width: 220px;
   height: 220px;
-
   position: relative;
 
   display: flex;
@@ -82,29 +109,44 @@
   justify-content: center;
 
   border-radius: 50%;
-  background-color: #ffffff;
-  border: 3px solid #c13de6;
+  overflow: visible;
+
+  background:
+    radial-gradient(circle at 30% 25%, rgba(255, 255, 255, 0.9), transparent 34%),
+    linear-gradient(135deg, rgba(193, 61, 230, 0.3), #dcdcdc);
+
+  border: 4px solid #fff;
+  box-shadow: 0 18px 40px $primary-shadow;
 
   > mat-icon {
     font-size: 86px;
     width: 86px;
     height: 86px;
-    color: #c13de6;
+    color: $primary;
+    opacity: 0.75;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
   }
 }
 
 .image-pill {
   position: absolute;
   left: 50%;
-  bottom: -64px;
+  bottom: -66px;
   transform: translateX(-50%);
-
   width: 220px;
 }
 
 .personal-information {
+  min-width: 0;
+
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 24px 28px;
 }
 
@@ -122,8 +164,8 @@ textarea[matInput] {
 }
 
 ::ng-deep .mat-mdc-text-field-wrapper {
-  background-color: #f3f3f3 !important;
-  border-radius: 16px !important;
+  background-color: #f8f3fb !important;
+  border-radius: 18px !important;
 }
 
 ::ng-deep .mat-mdc-form-field-focus-overlay {
@@ -131,16 +173,16 @@ textarea[matInput] {
 }
 
 ::ng-deep .mdc-line-ripple::before {
-  border-bottom-color: #d8d8d8 !important;
+  border-bottom-color: rgba(193, 61, 230, 0.18) !important;
 }
 
 ::ng-deep .mdc-line-ripple::after {
-  border-bottom-color: #c13de6 !important;
+  border-bottom-color: $primary !important;
 }
 
 ::ng-deep .mat-mdc-form-field-label,
 ::ng-deep .mat-mdc-input-element::placeholder {
-  color: #777777 !important;
+  color: #777 !important;
 }
 
 .actions {
@@ -155,30 +197,37 @@ textarea[matInput] {
   min-width: 180px;
   height: 48px;
 
-  border-radius: 30px;
+  border-radius: 30px !important;
   font-size: 16px;
-  box-shadow: none;
+  box-shadow: none !important;
+  transition: 0.2s ease;
 }
 
 .password-button {
-  background-color: #ffffff !important;
-  color: #c13de6 !important;
-  border: 2px solid #c13de6;
+  background-color: #fff !important;
+  color: $primary !important;
+  border: 2px solid $primary;
 }
 
 .save-button {
-  background-color: #c13de6 !important;
-  color: #ffffff !important;
+  background-color: $primary !important;
+  color: #fff !important;
+}
+
+.password-button:hover,
+.save-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(193, 61, 230, 0.16) !important;
 }
 
 @media (max-width: 1200px) {
   .edit-form {
-    padding: 56px 80px;
+    padding: 36px;
   }
 
   .personal-info-div {
-    grid-template-columns: 220px 1fr;
-    gap: 48px;
+    grid-template-columns: 220px minmax(0, 1fr);
+    gap: 40px;
   }
 
   .image-circle {
@@ -189,7 +238,7 @@ textarea[matInput] {
 
 @media (max-width: 900px) {
   .edit-form {
-    padding: 40px 32px;
+    padding: 32px;
   }
 
   .personal-info-div {
@@ -213,12 +262,13 @@ textarea[matInput] {
 
 @media (max-width: 480px) {
   .edit-form {
-    padding: 32px 18px;
     margin: 24px 0;
+    padding: 20px;
+    border-radius: 28px;
   }
 
   .form-header h1 {
-    font-size: 26px;
+    font-size: 24px;
   }
 
   .image-circle {
