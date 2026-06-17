@@ -33,14 +33,8 @@ export class OrganizationEvent implements OnInit {
     location: '',
     startDate: '',
     endDate: '',
-    dailyStartTime: {
-      hour: 0,
-      minute: 0,
-    },
-    dailyEndTime: {
-      hour: 0,
-      minute: 0,
-    },
+    dailyStartTime: '',
+    dailyEndTime: '',
     volunteersAmount: 0,
     benefits: '',
     mainPhotoUrl: '',
