@@ -27,8 +27,8 @@ export class Volunteer implements OnInit {
     citizenship: '',
     profession: '',
     languages: '',
-    skills: '',
-    interests: '',
+    skills: [],
+    interests: [],
     selectedTagIds: [],
   });
 
@@ -59,20 +59,6 @@ export class Volunteer implements OnInit {
   //თემარიკისთვის
   onTagChange(event: any) {
     console.log(event, this.form.selectedTagIds().value());
-    // const input = event.target as HTMLInputElement;
-    // const currentValue = this.registrationVolunteerModel().selectedTagIds;
-
-    // if (input.checked) {
-    //   this.registrationVolunteerModel.update((model) => ({
-    //     ...model,
-    //     selectedTagIds: [...currentValue, input.value],
-    //   }));
-    // } else {
-    //   this.registrationVolunteerModel.update((model) => ({
-    //     ...model,
-    //     selectedTagIds: currentValue.filter((id) => id !== input.value),
-    //   }));
-    // }
   }
 
   //შემოვაინჯექთე სერვიცი
@@ -81,6 +67,10 @@ export class Volunteer implements OnInit {
   private authService = inject(AuthService);
   submitted = false;
   tags$!: Observable<{ tagId: string; name: string }[]>;
+  profileOptions$!: Observable<{
+    skills: { id: string; name: string }[];
+    interests: { id: string; name: string }[];
+  }>;
 
   constructor() {
     effect(() => {
@@ -90,6 +80,7 @@ export class Volunteer implements OnInit {
 
   ngOnInit(): void {
     this.tags$ = this.sharedService.getTags();
+    this.profileOptions$ = this.sharedService.getProfileOptions();
   }
 
   onSend() {

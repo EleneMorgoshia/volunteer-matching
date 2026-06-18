@@ -56,27 +56,29 @@
     />
   </div>
 
-  <div class="input-div">
-    <label for="skills">უნარები</label>
-    <span class="example-label">მაგ: კომუნიკაცია, სწავლება, გრაფიკული დიზაინი...</span>
-    <textarea
-      id="skills"
-      class="big-input"
-      placeholder="ჩაწერეთ თქვენი უნარები"
-      [formField]="form.skills"
-    ></textarea>
-  </div>
+  @if (profileOptions$ | async; as profileOptions) {
+    <div class="input-div">
+      <mat-form-field>
+        <mat-label>უნარები</mat-label>
+        <mat-select multiple [formField]="form.skills">
+          @for (skill of profileOptions.skills; track skill.id) {
+            <mat-option [value]="skill.id">{{ skill.name }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </div>
 
-  <div class="input-div">
-    <label for="interests">ინტერესები</label>
-    <span class="example-label">მაგ: კითხვა, ცეკვა, იოგა, მედიტაცია...</span>
-    <textarea
-      id="interests"
-      class="big-input"
-      placeholder="ჩაწერეთ თქვენი ინტერესები"
-      [formField]="form.interests"
-    ></textarea>
-  </div>
+    <div class="input-div">
+      <mat-form-field>
+        <mat-label>ინტერესები</mat-label>
+        <mat-select multiple [formField]="form.interests">
+          @for (interest of profileOptions.interests; track interest.id) {
+            <mat-option [value]="interest.id">{{ interest.name }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </div>
+  }
 
   <div class="input-div">
     <mat-form-field>

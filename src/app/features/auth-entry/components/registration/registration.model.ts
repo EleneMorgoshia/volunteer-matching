@@ -9,8 +9,8 @@ export interface RegistrationVolunteerInfo {
   citizenship: string;
   profession: string;
   languages: string;
-  skills: string;
-  interests: string;
+  skills: string[];
+  interests: string[];
   selectedTagIds: string[];
 }
 

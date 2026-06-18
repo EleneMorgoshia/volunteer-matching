@@ -12,4 +12,11 @@ export class SharedService {
   getTags() {
     return this.http.get<{ tagId: string; name: string }[]>(this.apiUrl + '/tags');
   }
+
+  getProfileOptions() {
+    return this.http.get<{
+      skills: { id: string; name: string }[];
+      interests: { id: string; name: string }[];
+    }>(this.apiUrl + '/volunteers/profile-options');
+  }
 }
