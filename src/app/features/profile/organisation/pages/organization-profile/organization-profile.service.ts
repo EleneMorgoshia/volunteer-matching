@@ -21,7 +21,9 @@ export class OrganizationProfileService {
   }
 
   updateProfile(params: OrganizationParams) {
-    return this.http.put<OrganizationModel>(this.url + '/organizations/me', params);
+    return this.http.put(this.url + '/organizations/me', params, {
+      responseType: 'text',
+    });
   }
 
   private setProfileInfo(info: OrganizationModel) {

@@ -1,6 +1,6 @@
 <form class="edit-form">
   <div class="form-header">
-    <button class="back-button" type="button"  (click)="goToProfile()">
+    <button class="back-button" type="button" (click)="goToProfile()">
       <mat-icon>arrow_back</mat-icon>
     </button>
 
@@ -11,11 +11,8 @@
     <div class="personal-info-div">
       <div class="img-div">
         <div class="image-circle">
-          @if (selectedImage() || editForm.profilePhotoUrl().value()) {
-            <img
-              [src]="selectedImage() || editForm.profilePhotoUrl().value()"
-              alt="profile image"
-            />
+          @if (selectedImage() || model().profilePhotoUrl) {
+            <img [src]="selectedImage() || model().profilePhotoUrl" alt="profile image" />
           } @else {
             <mat-icon>person</mat-icon>
           }
@@ -175,31 +172,39 @@
       }
     </mat-form-field>
 
-    <mat-form-field class="full-field">
-      <mat-label>უნარები</mat-label>
-      <input
-        matInput
-        placeholder="მაგ: კომუნიკაცია, გუნდური მუშაობა"
-        [formField]="editForm.skills"
-      />
+    @if (profileOptions$ | async; as profileOptions) {
+      <div class="input-div">
+        <mat-form-field>
+          <mat-label>უნარები</mat-label>
+          <mat-select multiple [formField]="editForm.selectedSkillIds">
+            @for (skill of profileOptions.skills; track skill.id) {
+              <mat-option [value]="skill.id">{{ skill.name }}</mat-option>
+            }
+          </mat-select>
+          @if (formSubmitted && editForm.selectedInterestIds().invalid()) {
+            @for (error of editForm.selectedInterestIds().errors(); track error) {
+              <mat-error>{{ error.message }}</mat-error>
+            }
+          }
+        </mat-form-field>
+      </div>
 
-      @if (formSubmitted && editForm.skills().invalid()) {
-        @for (error of editForm.skills().errors(); track error) {
-          <mat-error>{{ error.message }}</mat-error>
-        }
-      }
-    </mat-form-field>
-
-    <mat-form-field class="full-field">
-      <mat-label>ინტერესები</mat-label>
-      <input matInput placeholder="მაგ: ტექნოლოგიები, განათლება" [formField]="editForm.interests" />
-
-      @if (formSubmitted && editForm.interests().invalid()) {
-        @for (error of editForm.interests().errors(); track error) {
-          <mat-error>{{ error.message }}</mat-error>
-        }
-      }
-    </mat-form-field>
+      <div class="input-div">
+        <mat-form-field>
+          <mat-label>ინტერესები</mat-label>
+          <mat-select multiple [formField]="editForm.selectedInterestIds">
+            @for (interest of profileOptions.interests; track interest.id) {
+              <mat-option [value]="interest.id">{{ interest.name }}</mat-option>
+            }
+          </mat-select>
+          @if (formSubmitted && editForm.selectedInterestIds().invalid()) {
+            @for (error of editForm.selectedInterestIds().errors(); track error) {
+              <mat-error>{{ error.message }}</mat-error>
+            }
+          }
+        </mat-form-field>
+      </div>
+    }
 
     <mat-form-field class="full-field">
       <mat-label>თემები</mat-label>
@@ -208,11 +213,6 @@
           <mat-option [value]="tag.tagId">{{ tag.name }}</mat-option>
         }
       </mat-select>
-      @if (formSubmitted && editForm.selectedTagIds().invalid()) {
-        @for (error of editForm.selectedTagIds().errors(); track error) {
-          <mat-error>{{ error.message }}</mat-error>
-        }
-      }
     </mat-form-field>
   </div>
 

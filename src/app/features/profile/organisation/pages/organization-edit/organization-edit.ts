@@ -1,9 +1,11 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, effect, inject, signal } from '@angular/core';
 import { email, form, required, FormField } from '@angular/forms/signals';
 import { MatFormField, MatLabel, MatError } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { OrganizationProfileService } from '../organization-profile/organization-profile.service';
+import { HeaderService } from '../../../../../shared/ui/header/header-service';
+import { switchMap } from 'rxjs';
 interface EditForm {
   organizationName: string;
   description: string;
@@ -39,7 +41,20 @@ export class OrganizationEdit {
   readonly isFormValid = computed(() => this.editForm().valid());
 
   private service = inject(OrganizationProfileService);
+
   selectedImage = signal<string>('');
+
+  constructor() {
+    effect(() => {
+      const currValue = this.service.profileSignal() ?? {
+        organizationName: '',
+        description: '',
+        profilePhotoUrl: '',
+        linkedInUrl: '',
+      };
+      this.editForm().value.set({ ...currValue });
+    });
+  }
 
   onFileChosen(event: Event) {
     const fileSelect = event.target as HTMLInputElement;
@@ -64,6 +79,9 @@ export class OrganizationEdit {
     if (!this.isFormValid()) {
       return;
     }
-    this.service.updateProfile(this.editForm().value()).subscribe();
+    this.service
+      .updateProfile(this.editForm().value())
+      .pipe(switchMap((res) => this.service.getProfileInfo()))
+      .subscribe();
   }
 }

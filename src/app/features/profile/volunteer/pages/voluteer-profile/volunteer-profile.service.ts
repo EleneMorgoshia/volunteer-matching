@@ -23,6 +23,8 @@ export class VolunteerProfileService {
   }
 
   updateProfile(params: UpdateProfileParams) {
-    return this.http.put(this.url + '/volunteers/me', params);
+    return this.http.put(this.url + '/volunteers/me', params, {
+      responseType: 'text',
+    });
   }
 }

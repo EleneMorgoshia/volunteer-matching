@@ -3,7 +3,11 @@
     <div class="priority-container">
       <div class="image-container">
         <div class="profile-placeholder">
-          <mat-icon fontIcon="business">business</mat-icon>
+          @if (!profileInfo.profilePhotoUrl) {
+            <mat-icon fontIcon="business">business</mat-icon>
+          } @else {
+            <img [src]="profileInfo.profilePhotoUrl" alt="profile image" />
+          }
         </div>
       </div>
 
@@ -38,7 +42,12 @@
       </div>
 
       <div class="events-container">
-        <button class="add-event-button" matFab routerLink="/organization/add-event" (click)="onNavigateToEvent()">
+        <button
+          class="add-event-button"
+          matFab
+          routerLink="/organization/add-event"
+          (click)="onNavigateToEvent()"
+        >
           <span>+</span>
         </button>
       </div>

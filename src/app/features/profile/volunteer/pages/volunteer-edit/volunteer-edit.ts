@@ -1,9 +1,9 @@
-import { Component, computed, inject, input, OnInit, signal } from '@angular/core';
+import { Component, computed, effect, inject, input, OnInit, signal } from '@angular/core';
 import { email, form, minLength, required, FormField } from '@angular/forms/signals';
 import { MatFormField, MatLabel, MatError, MatOption, MatSelect } from '@angular/material/select';
 import { MatInput } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
-import { Observable } from 'rxjs';
+import { Observable, switchMap, tap } from 'rxjs';
 import { SharedService } from '../../../../../core/services/shared';
 import { CommonModule } from '@angular/common';
 import { VolunteerProfileService } from '../voluteer-profile/volunteer-profile.service';
@@ -16,8 +16,8 @@ interface EditForm {
   citizenship: string;
   profession: string;
   languages: string;
-  skills: string;
-  interests: string;
+  selectedSkillIds: string[];
+  selectedInterestIds: string[];
   education: string;
   profilePhotoUrl: string;
   linkedInUrl: string;
@@ -48,6 +48,10 @@ export class VolunteerEdit implements OnInit {
   private router = inject(Router);
   formSubmitted = false;
   tags$!: Observable<{ tagId: string; name: string }[]>;
+  profileOptions$!: Observable<{
+    skills: { id: string; name: string }[];
+    interests: { id: string; name: string }[];
+  }>;
   readonly isFormValid = computed(() => this.editForm().valid());
   private sharedService = inject(SharedService);
   private volunteerProfileService = inject(VolunteerProfileService);
@@ -61,8 +65,6 @@ export class VolunteerEdit implements OnInit {
     citizenship: '',
     profession: '',
     languages: '',
-    skills: '',
-    interests: '',
     education: '',
     profilePhotoUrl: '',
     linkedInUrl: '',
@@ -70,6 +72,8 @@ export class VolunteerEdit implements OnInit {
     experience: '',
     description: '',
     selectedTagIds: [],
+    selectedSkillIds: [],
+    selectedInterestIds: [],
   });
 
   readonly editForm = form(this.model, (schemaPath) => {
@@ -86,18 +90,26 @@ export class VolunteerEdit implements OnInit {
 
     required(schemaPath.experience, { message: 'გთხოვთ, შეავსოთ' });
 
-    required(schemaPath.skills, { message: 'გთხოვთ, შეავსოთ' });
-    minLength(schemaPath.skills, 1, { message: 'გთხოვთ, აირჩიოთ მინიმუმ 1 მნიშვნელობა' });
-
-    required(schemaPath.interests, { message: 'გთხოვთ, შეავსოთ' });
-    minLength(schemaPath.interests, 1, { message: 'გთხოვთ, აირჩიოთ მინიმუმ 1 მნიშვნელობა' });
-
     //   required(schemaPath.themes, { message: 'გთხოვთ, შეავსოთ' });
     //   minLength(schemaPath.themes, 1, { message: 'გთხოვთ, აირჩიოთ მინიმუმ 1 მნიშვნელობა' });
   });
 
   ngOnInit(): void {
     this.tags$ = this.sharedService.getTags();
+    this.profileOptions$ = this.sharedService.getProfileOptions();
+  }
+  constructor() {
+    effect(() => {
+      const currValue = this.volunteerProfileService.profileSignal();
+      if (currValue) {
+        // ეს გასასწორებელია
+        currValue.selectedInterestIds = [];
+        currValue.selectedSkillIds = [];
+        currValue.selectedTagIds = [];
+
+        this.editForm().value.set({ ...currValue });
+      }
+    });
   }
 
   onFileChosen(event: Event) {
@@ -128,7 +140,28 @@ export class VolunteerEdit implements OnInit {
       return;
     }
     console.log(this.editForm().value());
-    this.volunteerProfileService.updateProfile(this.editForm().value()).subscribe();
+    // this.volunteerProfileService
+    //   .updateProfile(this.editForm().value())
+    //   .pipe(switchMap(() => this.volunteerProfileService.getProfileInfo()))
+    //   .subscribe();
+
+    this.volunteerProfileService
+      .updateProfile(this.editForm().value())
+      .pipe(
+        tap(() => console.log('update finished')),
+        switchMap(() => {
+          console.log('starting get profile');
+          return this.volunteerProfileService.getProfileInfo();
+        }),
+      )
+      .subscribe({
+        next: (profile) => {
+          console.log('profile refreshed', profile);
+        },
+        error: (err) => {
+          console.log('ERROR:', err);
+        },
+      });
   }
 
   goToProfile(): void {

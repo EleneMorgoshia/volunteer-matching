@@ -4,16 +4,13 @@ export interface VolunteerModel {
 
   //აქ ჩავამატე იმელი
   email: string;
-  birthDate: {
-    year: number;
-    month: number;
-    day: number;
-    dayOfWeek: number;
-  };
+  birthDate: string;
 
   citizenship: string;
   profession: string;
   languages: string;
+  selectedSkillIds: string[];
+  selectedInterestIds: string[];
   skills: string;
   interests: string;
 
@@ -34,8 +31,8 @@ export interface UpdateProfileParams {
   citizenship: string;
   profession: string;
   languages: string;
-  skills: string;
-  interests: string;
+  selectedSkillIds: string[];
+  selectedInterestIds: string[];
   education: string;
   profilePhotoUrl: string;
   linkedInUrl: string;
