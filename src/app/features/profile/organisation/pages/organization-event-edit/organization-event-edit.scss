@@ -22,8 +22,8 @@ $primary: #c13de6;
   grid-template-columns: 520px 1fr;
   gap: 68px;
 
-  background: radial-gradient(circle at top left, rgba(193, 61, 230, 0.14), transparent 36%),
-    #ffffff;
+  background:
+    radial-gradient(circle at top left, rgba(193, 61, 230, 0.14), transparent 36%), #ffffff;
   border-radius: 36px;
 }
 
@@ -104,7 +104,7 @@ $primary: #c13de6;
   gap: 28px;
 
   &::before {
-    content: 'ივენთის დამატება';
+    content: 'ივენთის რედაქტირება';
     display: block;
 
     margin-bottom: -8px;

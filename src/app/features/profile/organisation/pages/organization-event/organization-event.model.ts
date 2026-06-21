@@ -15,3 +15,15 @@ export interface EventParams {
   additionalInfo: string;
   selectedTagIds: string[];
 }
+export interface EventModel {
+  title: string;
+  location: string;
+  startDate: string;
+  endDate: string;
+  eventId: string;
+  isActive: boolean;
+  organizationName: string;
+  shortDescription: string;
+  theme: string;
+  mainPhotoUrl: string;
+}

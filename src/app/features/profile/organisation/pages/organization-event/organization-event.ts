@@ -1,12 +1,17 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal, ViewChild } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { EventParams } from './organization-event.model';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatSelect, MatOption } from '@angular/material/select';
 import { MatInput } from '@angular/material/input';
 import { EventService } from './organization-event.service';
-import { form } from '@angular/forms/signals';
+import { form, FormField } from '@angular/forms/signals';
+import { Observable } from 'rxjs';
+import { SharedService } from '../../../../../core/services/shared';
+import { CommonModule } from '@angular/common';
+import { MatSnackBar, MatSnackBarLabel } from '@angular/material/snack-bar';
+import { ComponentType } from '@angular/cdk/overlay';
 @Component({
   selector: 'app-organization-event',
   imports: [
@@ -20,14 +25,25 @@ import { form } from '@angular/forms/signals';
     MatSelect,
     MatOption,
     MatInput,
+    FormField,
+    CommonModule,
+    MatSnackBarLabel,
   ],
   templateUrl: './organization-event.html',
   styleUrl: './organization-event.scss',
 })
 export class OrganizationEvent implements OnInit {
   private route = inject(ActivatedRoute);
+  private router = inject(Router);
   private eventService = inject(EventService);
   editMode = false;
+
+  readonly messageText = signal<string>('');
+
+  //ფოტოებისთვის დავამატე ეს სიგნალები
+  selectedMainImage = signal<string>('');
+  selectedPhoto2Image = signal<string>('');
+  selectedPhoto3Image = signal<string>('');
 
   eventModel = signal<EventParams>({
     title: '',
@@ -52,7 +68,11 @@ export class OrganizationEvent implements OnInit {
     // required(schema.selectedTagIds, { message: 'გთხოვთ შეავსოთ' });
   });
 
+
+  tags$!: Observable<{ tagId: string; name: string }[]>;
   submitted = false;
+  private sharedService = inject(SharedService);
+
 
   onSend() {
     console.log('VOLUNTEER SEND CLICKED');
@@ -64,7 +84,14 @@ export class OrganizationEvent implements OnInit {
       return;
     }
 
-    this.eventService.createEvent(this.form().value());
+    const startDate = new Date(this.form().value().startDate).toISOString();
+    const endDate = new Date(this.form().value().endDate).toISOString();
+
+    this.eventService
+      .createEvent({ ...this.form().value(), startDate, endDate })
+      .subscribe((res) => {
+        this.messageText.set(res?.messageContent);
+      });
   }
 
   ngOnInit() {
@@ -73,5 +100,40 @@ export class OrganizationEvent implements OnInit {
     this.route.queryParamMap.subscribe((params) => {
       this.editMode = !!params.get('eventId');
     });
+    this.tags$ = this.sharedService.getTags();
+  }
+
+  onPhotoChosen(event: Event, fieldName: 'mainPhotoUrl' | 'photo2Url' | 'photo3Url') {
+    const fileSelect = event.target as HTMLInputElement;
+
+    if (fileSelect.files?.length === 1) {
+      const img = fileSelect.files[0];
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        const content = reader.result as string;
+
+        if (fieldName === 'mainPhotoUrl') {
+          this.selectedMainImage.set(content);
+          this.form.mainPhotoUrl().setControlValue(content);
+        }
+
+        if (fieldName === 'photo2Url') {
+          this.selectedPhoto2Image.set(content);
+          this.form.photo2Url().setControlValue(content);
+        }
+
+        if (fieldName === 'photo3Url') {
+          this.selectedPhoto3Image.set(content);
+          this.form.photo3Url().setControlValue(content);
+        }
+      };
+
+      reader.readAsDataURL(img);
+    }
+  }
+
+  goToProfile(): void {
+    this.router.navigateByUrl('/organization/profile').then();
   }
 }

@@ -1,10 +1,15 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { FormField, form, required } from '@angular/forms/signals';
 import { EventEditModel } from './organization-event-edit-model';
 import { MatFormField, MatLabel, MatError } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { Observable } from 'rxjs';
+import { SharedService } from '../../../../../core/services/shared';
+import { ActivatedRoute, Router } from '@angular/router';
+import { EventService } from '../organization-event/organization-event.service';
+import { EventModel } from '../organization-event/organization-event.model';
 
 @Component({
   selector: 'app-organization-event-edit',
@@ -12,7 +17,7 @@ import { MatButtonModule } from '@angular/material/button';
   templateUrl: './organization-event-edit.html',
   styleUrl: './organization-event-edit.scss',
 })
-export class OrganizationEventEdit {
+export class OrganizationEventEdit implements OnInit {
   formSubmitted = false;
 
   readonly model = signal<EventEditModel>({
@@ -36,6 +41,15 @@ export class OrganizationEventEdit {
     ],
   });
 
+  tags$!: Observable<{ tagId: string; name: string }[]>;
+  submitted = false;
+  eventDetails$!: Observable<EventModel>;
+  private eventId = '';
+  private sharedService = inject(SharedService);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private eventService = inject(EventService);
+
   readonly editForm = form(this.model, (schemaPath) => {
     required(schemaPath.title, { message: 'გთხოვთ, შეავსოთ' });
     required(schemaPath.shortDescription, { message: 'გთხოვთ, შეავსოთ' });
@@ -54,5 +68,15 @@ export class OrganizationEventEdit {
 
   onFileChosen(event: Event) {
     // file logic
+  }
+
+  ngOnInit() {
+    // queryParamMap returns an observable map of parameters
+    // ეს ედითში გადავაგდოთ
+    this.route.queryParamMap.subscribe((params) => {
+      this.eventId = params.get('eventId') || '';
+      this.eventDetails$ = this.eventService.getOrganizationEventDetails(this.eventId);
+    });
+    this.tags$ = this.sharedService.getTags();
   }
 }

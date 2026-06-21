@@ -1,112 +1,143 @@
-<form class="event-form">
+<form class="event-form" (submit)="$event.preventDefault()">
   <section class="images-section">
     <div class="main-image image-box">
-      <mat-icon>add_photo_alternate</mat-icon>
-      <p>მთავარი ფოტო</p>
+      @if (selectedMainImage() || form.mainPhotoUrl().value()) {
+        <img [src]="selectedMainImage() || form.mainPhotoUrl().value()" alt="მთავარი ფოტო" />
+      } @else {
+        <mat-icon>add_photo_alternate</mat-icon>
+        <p>მთავარი ფოტო</p>
+      }
 
-      <input type="file" accept=".png,.jpg,.jpeg" />
+      <input
+        type="file"
+        accept=".png,.jpg,.jpeg"
+        (change)="onPhotoChosen($event, 'mainPhotoUrl')"
+      />
     </div>
 
     <div class="small-images">
       <div class="small-image image-box">
-        <mat-icon>photo</mat-icon>
-        <p>ფოტო 2</p>
+        @if (selectedPhoto2Image() || form.photo2Url().value()) {
+          <img [src]="selectedPhoto2Image() || form.photo2Url().value()" alt="ფოტო 2" />
+        } @else {
+          <mat-icon>photo</mat-icon>
+          <p>ფოტო 2</p>
+        }
 
-        <input type="file" accept=".png,.jpg,.jpeg" />
+        <input type="file" accept=".png,.jpg,.jpeg" (change)="onPhotoChosen($event, 'photo2Url')" />
       </div>
 
       <div class="small-image image-box">
-        <mat-icon>photo</mat-icon>
-        <p>ფოტო 3</p>
+        @if (selectedPhoto3Image() || form.photo3Url().value()) {
+          <img [src]="selectedPhoto3Image() || form.photo3Url().value()" alt="ფოტო 3" />
+        } @else {
+          <mat-icon>photo</mat-icon>
+          <p>ფოტო 3</p>
+        }
 
-        <input type="file" accept=".png,.jpg,.jpeg" />
+        <input type="file" accept=".png,.jpg,.jpeg" (change)="onPhotoChosen($event, 'photo3Url')" />
       </div>
     </div>
   </section>
 
   <section class="content-section">
-    <h1>
-      @if (editMode) {
-        ივენთის რედაქტირება
-      } @else {
-        ივენთის დამატება
-      }
-    </h1>
+    <div class="form-header">
+      <button class="back-button" type="button" (click)="goToProfile()">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+
+      <h1>
+        @if (editMode) {
+          ივენთის რედაქტირება dsfsdfsdfsdf
+        } @else {
+          ივენთის დამატება fgdgdfg
+        }
+      </h1>
+    </div>
 
     <mat-form-field>
       <mat-label>სათაური</mat-label>
-      <input matInput placeholder="შეიყვანეთ ივენთის სათაური" />
+      <input [formField]="form.title" matInput placeholder="შეიყვანეთ ივენთის სათაური" />
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>აღწერა</mat-label>
-      <textarea matInput placeholder="აღწერეთ ივენთი"></textarea>
+      <textarea [formField]="form.description" matInput placeholder="აღწერეთ ივენთი"></textarea>
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>მოთხოვნები მოხალისეებისთვის</mat-label>
-      <textarea matInput placeholder="ჩაწერეთ მოთხოვნები"></textarea>
+      <textarea
+        [formField]="form.requirements"
+        matInput
+        placeholder="ჩაწერეთ მოთხოვნები"
+      ></textarea>
     </mat-form-field>
 
     <div class="two-fields">
       <mat-form-field>
         <mat-label>ლოკაცია</mat-label>
-        <input matInput placeholder="მაგ: თბილისი" />
+        <input [formField]="form.location" matInput placeholder="მაგ: თბილისი" />
       </mat-form-field>
 
       <mat-form-field>
         <mat-label>მოხალისეების რაოდენობა</mat-label>
-        <input matInput type="number" placeholder="მაგ: 20" />
+        <input [formField]="form.volunteersAmount" matInput type="number" placeholder="მაგ: 20" />
       </mat-form-field>
     </div>
 
     <div class="two-fields">
       <mat-form-field>
         <mat-label>დაწყების თარიღი</mat-label>
-        <input matInput type="date" />
+        <input [formField]="form.startDate" matInput type="date" />
       </mat-form-field>
 
       <mat-form-field>
         <mat-label>დასრულების თარიღი</mat-label>
-        <input matInput type="date" />
+        <input [formField]="form.endDate" matInput type="date" />
       </mat-form-field>
     </div>
 
     <div class="two-fields">
-      <!-- ესენი რახან მოდელში გვქონდა აღწერილი მაგიტო დავამტატე თორეეს ვაფშე რა საჭიროა? -->
       <mat-form-field>
         <mat-label>დაწყების დრო(საათობრივი)</mat-label>
-        <input matInput type="time" />
+        <input [formField]="form.dailyStartTime" matInput type="time" step="1" />
       </mat-form-field>
 
       <mat-form-field>
         <mat-label>დასრულების დრო(საათობრივი)</mat-label>
-        <input matInput type="time" />
+        <input [formField]="form.dailyEndTime" matInput type="time" step="1" />
       </mat-form-field>
     </div>
 
     <mat-form-field>
       <mat-label>ბენეფიტები</mat-label>
-      <textarea matInput placeholder="რა ბენეფიტებს მიიღებენ მოხალისეები?"></textarea>
+      <textarea
+        [formField]="form.benefits"
+        matInput
+        placeholder="რა ბენეფიტებს მიიღებენ მოხალისეები?"
+      ></textarea>
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field class="full-field">
       <mat-label>თემები</mat-label>
-      <mat-select multiple>
-        <!--  -->
-        <mat-option value="tech">ტექნოლოგიები</mat-option>
-        <mat-option value="business">ბიზნესი</mat-option>
-        <mat-option value="education">განათლება</mat-option>
-        <mat-option value="marketing">მარკეტინგი</mat-option>
+      <mat-select multiple [formField]="form.selectedTagIds">
+        @for (tag of tags$ | async; track tag) {
+          <mat-option [value]="tag.tagId">{{ tag.name }}</mat-option>
+        }
       </mat-select>
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>დამატებითი ინფორმაცია</mat-label>
-      <textarea matInput placeholder="დამატებითი ინფორმაცია ივენთის შესახებ"></textarea>
+      <textarea
+        [formField]="form.additionalInfo"
+        matInput
+        placeholder="დამატებითი ინფორმაცია ივენთის შესახებ"
+      ></textarea>
     </mat-form-field>
 
-    <button class="submit-button" type="submit" mat-raised-button>
+    <button class="submit-button" type="button" mat-raised-button (click)="onSend()">
       @if (editMode) {
         ცვლილებების შენახვა
       } @else {
@@ -115,3 +146,4 @@
     </button>
   </section>
 </form>
+

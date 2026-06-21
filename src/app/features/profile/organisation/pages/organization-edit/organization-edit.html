@@ -1,7 +1,15 @@
 <form class="edit-form">
-  <h1>ორგანიზაციის რედაქტირება</h1>
+  aslkdjjkasdhj
+
+  <div class="form-header">
+    <button class="back-button" type="button" (click)="goToProfile()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+
+    <h1>ორგანიზაციის sdlkasdkjasdkk რედაქტირება</h1>
+  </div>
+
   <div class="form-grid">
-    <!-- Image + organization info -->
     <div class="organization-info-div">
       <div class="img-div">
         <mat-form-field class="image-pill">
@@ -16,20 +24,8 @@
             <mat-icon>person</mat-icon>
           }
 
-          <input
-            style="showin: none"
-            matInput
-            placeholder="სურათის ბმული"
-            [formField]="editForm.profilePhotoUrl"
-          />
-
+          <input matInput placeholder="სურათის ბმული" [formField]="editForm.profilePhotoUrl" />
           <input type="file" accept=".png,.jpg,.jpeg" (change)="onFileChosen($event)" />
-
-          @if (formSubmitted && editForm.profilePhotoUrl().invalid()) {
-            @for (error of editForm.profilePhotoUrl().errors(); track error) {
-              <mat-error>{{ error.message }}</mat-error>
-            }
-          }
         </mat-form-field>
       </div>
 
@@ -37,31 +33,11 @@
         <mat-form-field>
           <mat-label>ორგანიზაციის სახელი</mat-label>
           <input matInput [formField]="editForm.organizationName" />
-          @if (formSubmitted && editForm.organizationName().invalid()) {
-            @for (error of editForm.organizationName().errors(); track error) {
-              <mat-error>{{ error.message }}</mat-error>
-            }
-          }
         </mat-form-field>
-
-        <!-- <mat-form-field>
-          <mat-label>იმეილი</mat-label>
-          <input matInput [formField]="editForm.email" />
-          @if (formSubmitted && editForm.email().invalid()) {
-            @for (error of editForm.email().errors(); track error) {
-              <mat-error>{{ error.message }}</mat-error>
-            }
-          }
-        </mat-form-field> -->
 
         <mat-form-field>
           <mat-label>LinkedIn</mat-label>
           <input matInput [formField]="editForm.linkedInUrl" />
-          @if (formSubmitted && editForm.linkedInUrl().invalid()) {
-            @for (error of editForm.linkedInUrl().errors(); track error) {
-              <mat-error>{{ error.message }}</mat-error>
-            }
-          }
         </mat-form-field>
       </div>
     </div>
@@ -69,20 +45,13 @@
     <mat-form-field>
       <mat-label>ჩემს შესახებ</mat-label>
       <textarea matInput [formField]="editForm.description"></textarea>
-      @if (formSubmitted && editForm.description().invalid()) {
-        @for (error of editForm.description().errors(); track error) {
-          <mat-error>{{ error.message }}</mat-error>
-        }
-      }
     </mat-form-field>
   </div>
 
-  <!-- Current Events Section -->
   <div class="current-events">
     <h2>მიმდინარე ივენთები</h2>
+
     <div class="events-grid">
-      <!-- Later you will loop through events from events.ts -->
-      <!-- Example placeholder layout: 4 per row -->
       @for (
         event of [
           { title: 'Event 1' },
@@ -94,7 +63,6 @@
         track event
       ) {
         <div class="event-card">
-          <!-- Replace with real event data -->
           <h3>{{ event.title }}</h3>
           <p>Event details here...</p>
         </div>
@@ -102,5 +70,5 @@
     </div>
   </div>
 
-  <button mat-raised-button (click)="onSubmit($event)">შენახვა</button>
+  <button mat-raised-button type="button" (click)="onSubmit($event)">შენახვა</button>
 </form>

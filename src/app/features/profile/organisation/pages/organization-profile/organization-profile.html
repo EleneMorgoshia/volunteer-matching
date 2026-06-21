@@ -27,6 +27,8 @@
           </div>
         </div>
 
+        <!-- აქ მერე არ დაგავიწყდეს ჩაამატო ის ლოგკა რომ თუ ლინკდინი შემოტანა გამოაჩნინოს ლინკდინი, თუ არადა არა -->
+
         <div class="section">
           <h3>ორგანიზაციის შესახებ</h3>
           <p>{{ profileInfo.description }}</p>
@@ -38,10 +40,19 @@
       <div class="events-header">
         <h3>ორგანიზაციის მიმდინარე ივენთები</h3>
 
-        <span class="add-event-text" routerLink="/organization/add-event"> ივენთის დამატება </span>
+        <span
+          class="add-event-text"
+          routerLink="/organization/add-event"
+          (click)="onNavigateToEvent()"
+        >
+          ივენთის დამატება
+        </span>
       </div>
 
       <div class="events-container">
+        @if (myEvents$ | async; as currentEvents) {
+          <app-event-list [events]="currentEvents" [canEdit]="true"></app-event-list>
+        }
         <button
           class="add-event-button"
           matFab

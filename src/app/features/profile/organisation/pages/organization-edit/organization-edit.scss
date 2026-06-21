@@ -18,19 +18,62 @@ $primary: #c13de6;
   flex-direction: column;
   gap: 34px;
   background:
-    radial-gradient(circle at top left, rgba(193, 61, 230, 0.14), transparent 36%), #ffffff;
+    radial-gradient(circle at top left, rgba(193, 61, 230, 0.14), transparent 36%),
+    #ffffff;
   border-radius: 36px;
   border: 1px solid rgba(193, 61, 230, 0.1);
   box-shadow: 0 20px 60px rgba(193, 61, 230, 0.08);
 }
 
-.edit-form h1 {
-  margin: 0;
-  padding-bottom: 14px;
-  font-size: 38px;
-  font-weight: 900;
-  color: #111;
-  border-bottom: 4px solid $primary;
+.form-header {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+
+  h1 {
+    flex: 1;
+    margin: 0;
+    padding-bottom: 14px;
+    font-size: 38px;
+    font-weight: 900;
+    color: #111;
+    border-bottom: 4px solid $primary;
+  }
+}
+
+.back-button {
+  width: 50px;
+  height: 50px;
+  min-width: 50px;
+
+  border: none;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #f7eefb;
+  color: $primary;
+
+  cursor: pointer;
+  transition: all 0.25s ease;
+
+  box-shadow: 0 10px 24px rgba(193, 61, 230, 0.12);
+
+  mat-icon {
+    margin: 0;
+    font-size: 26px;
+    width: 26px;
+    height: 26px;
+  }
+
+  &:hover {
+    background: $primary;
+    color: white;
+    transform: translateX(-3px);
+    box-shadow: 0 14px 30px rgba(193, 61, 230, 0.22);
+  }
 }
 
 .form-grid {
@@ -220,7 +263,11 @@ button[mat-raised-button] {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, rgba(193, 61, 230, 0.16), #eeeeee 55%) !important;
+    background: linear-gradient(
+      135deg,
+      rgba(193, 61, 230, 0.16),
+      #eeeeee 55%
+    ) !important;
     border-radius: 28px !important;
     box-shadow: 0 18px 42px rgba(193, 61, 230, 0.16);
   }
@@ -278,7 +325,7 @@ button[mat-raised-button] {
     border-radius: 28px;
   }
 
-  .edit-form h1 {
+  .form-header h1 {
     font-size: 30px;
   }
 
@@ -302,9 +349,15 @@ button[mat-raised-button] {
     border-radius: 24px;
   }
 
-  .edit-form h1 {
+  .form-header h1 {
     font-size: 24px;
     padding-bottom: 10px;
+  }
+
+  .back-button {
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
   }
 
   .image-pill,

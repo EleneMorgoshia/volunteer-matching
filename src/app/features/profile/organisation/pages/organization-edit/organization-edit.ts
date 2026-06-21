@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { OrganizationProfileService } from '../organization-profile/organization-profile.service';
 import { HeaderService } from '../../../../../shared/ui/header/header-service';
 import { switchMap } from 'rxjs';
+import { Router } from '@angular/router';
 interface EditForm {
   organizationName: string;
   description: string;
@@ -26,6 +27,9 @@ export class OrganizationEdit {
     profilePhotoUrl: '',
     linkedInUrl: '',
   });
+
+  //ეს იმიტორო პროფაილზე დაბრუნება შეძლოს
+  private router = inject(Router);
 
   readonly editForm = form(this.model, (schemaPath) => {
     required(schemaPath.organizationName, { message: 'გთხოვთ, შეავსოთ' });
@@ -83,5 +87,11 @@ export class OrganizationEdit {
       .updateProfile(this.editForm().value())
       .pipe(switchMap((res) => this.service.getProfileInfo()))
       .subscribe();
+  }
+
+
+
+  goToProfile(): void {
+    this.router.navigateByUrl('/organization/profile').then();
   }
 }

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { EventParams } from './organization-event.model';
+import { EventModel, EventParams } from './organization-event.model';
 import { environment } from '../../../../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
@@ -21,10 +21,10 @@ export class EventService {
   }
 
   getOrganizationEvents() {
-    return this.http.get<any>(this.url + '/organizations/me/events');
+    return this.http.get<EventModel[]>(this.url + '/organizations/me/events');
   }
 
   getOrganizationEventDetails(id: string) {
-    return this.http.get<any>(this.url + '/organizations/me/events/' + id);
+    return this.http.get<EventModel>(this.url + '/organizations/me/events/' + id);
   }
 }

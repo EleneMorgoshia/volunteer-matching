@@ -1,6 +1,7 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, input, signal } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { EventCardModel } from './event-card.model';
+import { EventModel } from '../../../../features/profile/organisation/pages/organization-event/organization-event.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-event-card',
@@ -9,20 +10,22 @@ import { EventCardModel } from './event-card.model';
   styleUrl: './event-card.scss',
 })
 export class EventCard {
-  event = signal<EventCardModel>({
-    eventId: '1',
-    title: 'Random Event Name',
-    organizationName: 'Organisation Name',
-    shortDescription:
-      'A community networking event where participants come together to share ideas, build connections, and explore some collaboration...',
-    location: 'Location',
-    startDate: '2026-02-12',
-    endDate: '2026-02-14',
-    theme: 'Theme',
-    mainPhotoUrl: '',
-  });
-
+  eventItem = input<EventModel>();
+  canEdit = input<boolean>(false);
+  private router = inject(Router);
   onToggleFavorite() {
     // todo: call favorite api
+  }
+
+  onNavigateToEventDetails() {
+    if (this.canEdit() && this.eventItem()) {
+      this.router.navigate(['organization/event/edit'], {
+        queryParams: {
+          eventId: this.eventItem()?.eventId,
+        },
+      });
+    } else if (!this.canEdit()) {
+      this.router.navigateByUrl('event/' + this.eventItem()?.eventId);
+    }
   }
 }
