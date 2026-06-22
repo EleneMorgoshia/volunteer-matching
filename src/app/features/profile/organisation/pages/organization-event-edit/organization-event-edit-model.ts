@@ -1,26 +1,22 @@
 export interface EventEditModel {
   title: string;
-  shortDescription: string;
   description: string;
-
+  requirements: string;
   location: string;
-
   startDate: string;
   endDate: string;
-
-  theme: string;
-
+  dailyStartTime: string; //hh:mm:ss
+  dailyEndTime: string; //hh:mm:ss
+  volunteersAmount: number;
+  benefits: string;
   mainPhotoUrl: string;
-
   photo2Url: string;
   photo3Url: string;
-
-  requirements: string[];
-
-  speakers: SpeakerModel[];
+  additionalInfo: string;
+  selectedTagIds: string[];
 }
 
-//თუ ეს მოასწრო ანამ ხო კაი თუ არადა წავშალოთ 
+//თუ ეს მოასწრო ანამ ხო კაი თუ არადა წავშალოთ
 export interface SpeakerModel {
   name: string;
   profession: string;

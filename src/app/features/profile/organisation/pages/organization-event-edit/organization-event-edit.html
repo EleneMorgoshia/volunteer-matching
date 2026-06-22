@@ -10,28 +10,52 @@
   <div class="form-card">
     <section class="images-section">
       <div class="main-image image-box">
-        @if (selectedImage() || editForm.mainPhotoUrl().value()) {
-          <img [src]="selectedImage() || editForm.mainPhotoUrl().value()" alt="event image" />
+        @if (selectedMainImage() || editForm.mainPhotoUrl().value()) {
+          <img [src]="selectedMainImage() || editForm.mainPhotoUrl().value()" alt="event image" />
         } @else {
           <mat-icon>add_photo_alternate</mat-icon>
           <p>მთავარი ფოტო</p>
         }
 
         <input matInput [formField]="editForm.mainPhotoUrl" placeholder="ფოტოს ბმული" />
-        <input type="file" accept=".png,.jpg,.jpeg" (change)="onFileChosen($event)" />
+        <input
+          type="file"
+          accept=".png,.jpg,.jpeg"
+          (change)="onPhotoChosen($event, 'mainPhotoUrl')"
+        />
       </div>
 
       <div class="small-images">
         <div class="small-image image-box">
-          <mat-icon>photo</mat-icon>
-          <p>ფოტო 2</p>
+          @if (selectedPhoto2Image() || editForm.photo2Url().value()) {
+            <img [src]="selectedPhoto2Image() || editForm.photo2Url().value()" alt="ფოტო 2" />
+          } @else {
+            <mat-icon>photo</mat-icon>
+            <p>ფოტო 2</p>
+          }
+
           <input matInput [formField]="editForm.photo2Url" />
+          <input
+            type="file"
+            accept=".png,.jpg,.jpeg"
+            (change)="onPhotoChosen($event, 'photo2Url')"
+          />
         </div>
 
         <div class="small-image image-box">
-          <mat-icon>photo</mat-icon>
-          <p>ფოტო 3</p>
+          @if (selectedPhoto3Image() || editForm.photo3Url().value()) {
+            <img [src]="selectedPhoto3Image() || editForm.photo3Url().value()" alt="ფოტო 3" />
+          } @else {
+            <mat-icon>photo</mat-icon>
+            <p>ფოტო 3</p>
+          }
+
           <input matInput [formField]="editForm.photo3Url" />
+          <input
+            type="file"
+            accept=".png,.jpg,.jpeg"
+            (change)="onPhotoChosen($event, 'photo3Url')"
+          />
         </div>
       </div>
     </section>
@@ -82,12 +106,26 @@
           }
         </mat-form-field>
 
-        <mat-form-field>
-          <mat-label>თემა</mat-label>
-          <input matInput [formField]="editForm.theme" />
+        <mat-form-field class="full-field">
+          <mat-label>თემები</mat-label>
 
-          @if (formSubmitted && editForm.theme().invalid()) {
-            @for (error of editForm.theme().errors(); track error) {
+          <mat-select
+            multiple
+            [value]="selectedTagIds()"
+            (selectionChange)="
+              selectedTagIds.set($event.value);
+              editForm.selectedTagIds().setControlValue($event.value)
+            "
+          >
+            @for (tag of tags$ | async; track tag.tagId) {
+              <mat-option [value]="tag.tagId">
+                {{ tag.name }}
+              </mat-option>
+            }
+          </mat-select>
+
+          @if (formSubmitted && editForm.selectedTagIds().invalid()) {
+            @for (error of editForm.selectedTagIds().errors(); track error) {
               <mat-error>{{ error.message }}</mat-error>
             }
           }

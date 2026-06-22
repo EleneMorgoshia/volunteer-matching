@@ -9,7 +9,11 @@
       />
 
       <button class="heart-button" type="button" (click)="onToggleFavorite()">
-        <mat-icon fontIcon="favorite_border"></mat-icon>
+        @if (canEdit()) {
+          <mat-icon fontIcon="delete_outline"></mat-icon>
+        } @else {
+          <mat-icon fontIcon="favorite_border"></mat-icon>
+        }
       </button>
 
       <!-- აქ მოვაბამთ ფუნქციას რო გადაისროლოს ივენთს დეტალების გვერდზე -->

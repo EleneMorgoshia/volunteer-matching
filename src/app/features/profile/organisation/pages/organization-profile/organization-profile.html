@@ -51,7 +51,11 @@
 
       <div class="events-container">
         @if (myEvents$ | async; as currentEvents) {
-          <app-event-list [events]="currentEvents" [canEdit]="true"></app-event-list>
+          <app-event-list
+            [events]="currentEvents"
+            [canEdit]="true"
+            (eventDeleted)="refreshEvents()"
+          ></app-event-list>
         }
         <button
           class="add-event-button"

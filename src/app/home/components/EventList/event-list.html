@@ -2,7 +2,11 @@
   <div class="card-container">
     @for (item of tmpArr; track $index) {
       <div class="card">
-        <app-event-card [eventItem]="item" [canEdit]="canEdit()"></app-event-card>
+        <app-event-card
+          [eventItem]="item"
+          [canEdit]="canEdit()"
+          (eventDeleted)="eventDeleted.emit()"
+        ></app-event-card>
       </div>
     }
   </div>

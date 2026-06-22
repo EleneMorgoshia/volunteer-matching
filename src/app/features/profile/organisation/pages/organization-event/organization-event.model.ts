@@ -26,4 +26,14 @@ export interface EventModel {
   shortDescription: string;
   theme: string;
   mainPhotoUrl: string;
+  photo2Url: string;
+  photo3Url: string;
+  description: string;
+  requirements: string;
+  dailyStartTime: string; //hh:mm:ss
+  dailyEndTime: string; //hh:mm:ss
+  volunteersAmount: number;
+  benefits: string;
+  additionalInfo: string;
+  selectedTagIds: string[];
 }

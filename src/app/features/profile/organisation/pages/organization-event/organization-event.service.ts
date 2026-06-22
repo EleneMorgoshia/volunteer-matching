@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { EventModel, EventParams } from './organization-event.model';
 import { environment } from '../../../../../../environments/environment';
+import { EventEditModel } from '../organization-event-edit/organization-event-edit-model';
 
 @Injectable({ providedIn: 'root' })
 export class EventService {

@@ -1,4 +1,4 @@
-import { Component, input, Input, OnInit } from '@angular/core';
+import { Component, input, Input, OnInit, output } from '@angular/core';
 import { EventCard } from '../../../shared/ui/cards/event-card/event-card';
 import { Pagination } from '../../../shared/ui/pagination/pagination';
 import { NotificationCard } from '../../../shared/ui/cards/notification-card/notification-card';
@@ -18,6 +18,7 @@ export class EventList implements OnInit {
   perPage = 12;
   @Input() events!: EventModel[];
   canEdit = input<boolean>(false);
+  eventDeleted = output();
 
   tmpArr: EventModel[] = [];
 
@@ -29,6 +30,8 @@ export class EventList implements OnInit {
   ngOnInit(): void {
     this.handlePageChange(1);
   }
+
+ 
 
   private handlePageChange(page: number) {
     this.tmpArr = this.events.slice(

@@ -26,6 +26,10 @@ export class OrganizationProfile implements OnInit {
   // private cdr = inject(ChangeDetectorRef);
 
   ngOnInit(): void {
+    this.refreshEvents();
+  }
+
+  refreshEvents() {
     this.myEvents$ = this.eventsService.getOrganizationEvents();
   }
 
