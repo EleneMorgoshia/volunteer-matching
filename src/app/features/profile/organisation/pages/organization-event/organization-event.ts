@@ -27,7 +27,6 @@ import { ComponentType } from '@angular/cdk/overlay';
     MatInput,
     FormField,
     CommonModule,
-    MatSnackBarLabel,
   ],
   templateUrl: './organization-event.html',
   styleUrl: './organization-event.scss',
@@ -36,6 +35,7 @@ export class OrganizationEvent implements OnInit {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private eventService = inject(EventService);
+  private snackBar = inject(MatSnackBar);
   editMode = false;
 
   readonly messageText = signal<string>('');
@@ -68,11 +68,9 @@ export class OrganizationEvent implements OnInit {
     // required(schema.selectedTagIds, { message: 'გთხოვთ შეავსოთ' });
   });
 
-
   tags$!: Observable<{ tagId: string; name: string }[]>;
   submitted = false;
   private sharedService = inject(SharedService);
-
 
   onSend() {
     console.log('VOLUNTEER SEND CLICKED');
@@ -90,7 +88,12 @@ export class OrganizationEvent implements OnInit {
     this.eventService
       .createEvent({ ...this.form().value(), startDate, endDate })
       .subscribe((res) => {
-        this.messageText.set(res?.messageContent);
+        // this.messageText.set(res?.messageContent);
+        this.snackBar.open(res?.messageContent, 'დახურვა', {
+          duration: 3000,
+          horizontalPosition: 'end',
+          verticalPosition: 'top',
+        });
       });
   }
 

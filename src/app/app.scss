@@ -3,7 +3,7 @@
 }
 
 .page-wrapper {
-   min-height: 100vh;
+  min-height: 100vh;
 
   display: flex;
   flex-direction: column;
@@ -17,6 +17,11 @@
   display: flex;
   flex-direction: column;
   min-height: 0;
+}
+.error-snackbar {
+  --mdc-snackbar-container-color: #d32f2f;
+  --mat-snack-bar-button-color: white;
+  --mdc-snackbar-supporting-text-color: white;
 }
 
 @media (max-width: 1200px) {
