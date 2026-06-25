@@ -8,9 +8,25 @@ import { HeaderService } from './header-service';
 import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FavouritesOverlay } from '../overlays/favourites-overlay/favourites-overlay';
+import { NotificationOverlay } from '../overlays/notification-overlay/notification-overlay';
+import { FavouritesCard } from '../cards/favourites-card/favourites-card';
+import {
+  FavoriteEventModel,
+  FavoriteEventsResponse,
+} from '../cards/favourites-card/favorite-event.model';
 @Component({
   selector: 'app-header',
-  imports: [RouterLink, MatToolbarModule, MatButtonModule, MatIconModule, CommonModule],
+  imports: [
+    RouterLink,
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule,
+    CommonModule,
+    FavouritesOverlay,
+    NotificationOverlay,
+    FavouritesCard,
+  ],
   templateUrl: './header.html',
   styleUrl: './header.scss',
 })
@@ -19,6 +35,8 @@ export class Header {
   private destroyRef = inject(DestroyRef);
   private authService = inject(AuthService);
   headerService = inject(HeaderService);
+  isFavoritesOpen = false;
+  favoriteEvents$!: Observable<FavoriteEventsResponse>;
 
   constructor() {
     this.authService.isLoggedInSubject$.pipe(takeUntilDestroyed()).subscribe(() => {
@@ -45,4 +63,19 @@ export class Header {
   // profileLink() {
   //   return this.authService.isOrganization() ? '/organization/profile' : '/volunteer/profile';
   // }
+
+  openFavoritesOverlay() {
+    this.isFavoritesOpen = true;
+    this.favoriteEvents$ = this.headerService.getFavoriteEvents();
+  }
+
+  onDeleteEvent(eventId: string) {
+    this.headerService.deleteFavoriteEvent(eventId).subscribe((res) => {
+      this.favoriteEvents$ = this.headerService.getFavoriteEvents();
+    });
+  }
+
+  closeFavoritesOverlay() {
+    this.isFavoritesOpen = false;
+  }
 }

@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { FavouritesCard } from "../../cards/favourites-card/favourites-card";
-import { MatIcon } from "@angular/material/icon";
+import { Component, output } from '@angular/core';
+import { FavouritesCard } from '../../cards/favourites-card/favourites-card';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-favourites-overlay',
@@ -9,5 +9,9 @@ import { MatIcon } from "@angular/material/icon";
   styleUrl: './favourites-overlay.scss',
 })
 export class FavouritesOverlay {
+  closeOverlay = output<void>();
 
+  close() {
+    this.closeOverlay.emit();
+  }
 }

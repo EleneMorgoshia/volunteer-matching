@@ -1,6 +1,6 @@
 <div>
   <div class="card-container">
-    @for (item of tmpArr; track $index) {
+    @for (item of tmpArr(); track $index) {
       <div class="card">
         <app-event-card
           [eventItem]="item"
@@ -11,13 +11,8 @@
     }
   </div>
   <app-pagination
-    [currentPage]="currentPage"
-    [totalItems]="events?.length || 0"
+    [currentPage]="currentPage()"
+    [totalItems]="events()?.length || 0"
     (pageChanged)="onPageChange($event)"
   ></app-pagination>
-
-  <!-- ძაან დროებით დავაგდებ აქ გასტილვისთვის -->
-  <app-notification-card></app-notification-card>
-  <app-favourites-card></app-favourites-card>
-  <!-- <app-favourites-overlay></app-favourites-overlay> -->
 </div>

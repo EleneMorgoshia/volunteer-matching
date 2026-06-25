@@ -8,7 +8,6 @@ export interface FavoriteEventsResponse {
 }
 
 export interface FavoriteEventModel {
-  isFavorite: boolean;
   eventId: string;
   title: string;
   organizationName: string;
@@ -16,6 +15,6 @@ export interface FavoriteEventModel {
   location: string;
   startDate: string;
   endDate: string;
-  theme: string | null;
-  mainPhotoUrl: string | null;
+  theme: string;
+  mainPhotoUrl: string;
 }

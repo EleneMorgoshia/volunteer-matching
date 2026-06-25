@@ -1,3 +1,15 @@
-<div class="ai-matched-event-list-container">
-  <!-- //event cardებს ხო უნდა გაატანო ინფო რა გამოიტანოს. მაგისთვის გააკეთე typescipt -->
-</div>
+<section class="ai-matched-section">
+  <div class="section-header">
+    <h1>დამთხვევული ღონისძიებები</h1>
+  </div>
+
+  @if (events().length > 0) {
+    <app-event-list [events]="events()"></app-event-list>
+  } @else {
+    <div class="empty-state">
+      <mat-icon fontIcon="auto_awesome"></mat-icon>
+      <h2>დამთხვევული ღონისძიებები ჯერ არ არის</h2>
+      <p>AI დამთხვევის შემდეგ აქ გამოჩნდება თქვენზე მორგებული ღონისძიებები.</p>
+    </div>
+  }
+</section>

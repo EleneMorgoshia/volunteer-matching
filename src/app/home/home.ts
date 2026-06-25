@@ -1,14 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Hero } from './components/Hero/hero';
-import { EventCard } from "../shared/ui/cards/event-card/event-card";
-import { EventList } from "./components/EventList/event-list";
-import { NotificationOverlay } from "../shared/ui/overlays/notification-overlay/notification-overlay";
-import { FavouritesOverlay } from "../shared/ui/overlays/favourites-overlay/favourites-overlay";
+import { EventCard } from '../shared/ui/cards/event-card/event-card';
+import { EventList } from './components/EventList/event-list';
+import { NotificationOverlay } from '../shared/ui/overlays/notification-overlay/notification-overlay';
+import { FavouritesOverlay } from '../shared/ui/overlays/favourites-overlay/favourites-overlay';
+import { Observable } from 'rxjs';
+import { EventService } from '../features/profile/organisation/pages/organization-event/organization-event.service';
+import { EventModel } from '../features/profile/organisation/pages/organization-event/organization-event.model';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-home',
-  imports: [Hero, EventCard, EventList, NotificationOverlay, FavouritesOverlay],
+  imports: [Hero, EventList, CommonModule],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })
-export class Home {}
+export class Home implements OnInit {
+  eventList$!: Observable<{ items: EventModel[] }>;
+  private eventsService = inject(EventService);
+
+  ngOnInit(): void {
+    this.eventList$ = this.eventsService.getEvents();
+  }
+}

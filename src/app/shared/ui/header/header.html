@@ -29,13 +29,21 @@
           {{ headerService.firstLetter() }}
         </button>
 
-        <button class="icon-button" type="button">
+        <button class="icon-button" type="button" (click)="openFavoritesOverlay()">
           <mat-icon fontIcon="favorite_border"></mat-icon>
         </button>
 
-        <button class="icon-button" type="button">
-          <mat-icon fontIcon="notifications_none"></mat-icon>
-        </button>
+        @if (isFavoritesOpen) {
+          <app-favourites-overlay (closeOverlay)="closeFavoritesOverlay()">
+            @if (favoriteEvents$ | async; as events) {
+              @for (elem of events.items; track elem.eventId) {
+                <app-favourites-card [favoriteEvent]="elem" (deleteEvent)="onDeleteEvent(elem.eventId)"></app-favourites-card>
+              }
+            }
+          </app-favourites-overlay>
+        }
+
+        <app-notification-overlay></app-notification-overlay>
       </div>
     </div>
   }

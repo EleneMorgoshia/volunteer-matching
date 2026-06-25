@@ -22,6 +22,7 @@ export class EventCard {
         .deleteEvent(this.eventItem()?.eventId || '')
         .subscribe(() => this.eventDeleted.emit());
     } else {
+      this.eventsService.favoriteEvent(this.eventItem()?.eventId).subscribe();
     }
     // todo: call favorite api
   }

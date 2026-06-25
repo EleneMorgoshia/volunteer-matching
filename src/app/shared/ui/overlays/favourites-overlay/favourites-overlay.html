@@ -1,15 +1,18 @@
-<div class="favorites-overlay">
-  <div class="favorites-modal">
+<div class="favorites-overlay" (click)="close()">
+  <div class="favorites-panel" (click)="$event.stopPropagation()">
     <div class="favorites-header">
-      <h2>დამატებული ივენთები</h2>
+      <div>
+        <p class="favorites-small-title">რჩეული</p>
+        <h2>დამატებული ივენთები</h2>
+      </div>
 
-      <button class="close-button" type="button">
-        <mat-icon>close</mat-icon>
+      <button class="close-button" type="button" (click)="close()">
+        <mat-icon fontIcon="close"></mat-icon>
       </button>
     </div>
 
     <div class="favorites-list">
-      <app-favourites-card></app-favourites-card>
+      <ng-content></ng-content>
     </div>
   </div>
 </div>

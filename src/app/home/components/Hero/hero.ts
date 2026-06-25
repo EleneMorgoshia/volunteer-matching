@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-hero',
@@ -7,5 +8,9 @@ import { Component } from '@angular/core';
   styleUrl: './hero.scss',
 })
 export class Hero {
+ private readonly router = inject(Router);
 
+  onNavigateToAiMatched(): void {
+    this.router.navigate(['/ai-matched-events']);
+  }
 }

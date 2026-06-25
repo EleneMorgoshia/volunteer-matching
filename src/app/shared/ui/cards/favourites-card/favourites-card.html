@@ -1,30 +1,30 @@
 <div class="favourites-card-container">
   <img
     class="event-image"
-    [src]="favoriteEvent()?.mainPhotoUrl || testEvent.mainPhotoUrl || 'assets/event-default-background.png'"
-    [alt]="favoriteEvent()?.title || testEvent.title"
+    [src]="favoriteEvent()?.mainPhotoUrl || 'assets/event-default-background.png'"
+    [alt]="favoriteEvent()?.title"
   />
 
   <div class="left-content-container">
     <div class="first-info-container">
       <div class="title-container">
         <p class="event-title">
-          {{ favoriteEvent()?.title || testEvent.title }}
+          {{ favoriteEvent()?.title }}
         </p>
 
-        <button class="remove-button" type="button">
+        <button class="remove-button" type="button" (click)="deleteEvent.emit()">
           <mat-icon fontIcon="close"></mat-icon>
         </button>
       </div>
 
       <p class="organisation-name">
-        {{ favoriteEvent()?.organizationName || testEvent.organizationName }}
+        {{ favoriteEvent()?.organizationName }}
       </p>
     </div>
 
     <div class="description-container">
       <p>
-        {{ favoriteEvent()?.shortDescription || testEvent.shortDescription }}
+        {{ favoriteEvent()?.shortDescription }}
       </p>
     </div>
 
@@ -32,21 +32,21 @@
       <div class="date-container">
         <mat-icon fontIcon="schedule"></mat-icon>
         <p>
-          {{ favoriteEvent()?.startDate || testEvent.startDate }}
+          {{ favoriteEvent()?.startDate }}
           -
-          {{ favoriteEvent()?.endDate || testEvent.endDate }}
+          {{ favoriteEvent()?.endDate }}
         </p>
       </div>
 
       <div class="location-theme-down-container">
         <div class="location-container">
           <mat-icon fontIcon="location_on"></mat-icon>
-          <p>{{ favoriteEvent()?.location || testEvent.location }}</p>
+          <p>{{ favoriteEvent()?.location }}</p>
         </div>
 
         <div class="theme-container">
           <mat-icon fontIcon="auto_awesome"></mat-icon>
-          <p>{{ favoriteEvent()?.theme || testEvent.theme }}</p>
+          <p>{{ favoriteEvent()?.theme }}</p>
         </div>
       </div>
     </div>

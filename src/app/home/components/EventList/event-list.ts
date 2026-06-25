@@ -1,42 +1,37 @@
-import { Component, input, Input, OnInit, output } from '@angular/core';
+import { Component, computed, input, output, signal } from '@angular/core';
 import { EventCard } from '../../../shared/ui/cards/event-card/event-card';
 import { Pagination } from '../../../shared/ui/pagination/pagination';
-import { NotificationCard } from '../../../shared/ui/cards/notification-card/notification-card';
-import { FavouritesCard } from '../../../shared/ui/cards/favourites-card/favourites-card';
-import { FavouritesOverlay } from '../../../shared/ui/overlays/favourites-overlay/favourites-overlay';
 import { EventModel } from '../../../features/profile/organisation/pages/organization-event/organization-event.model';
 
 @Component({
   selector: 'app-event-list',
-  imports: [EventCard, Pagination, NotificationCard, FavouritesCard, FavouritesOverlay],
+  imports: [EventCard, Pagination],
   templateUrl: './event-list.html',
   styleUrl: './event-list.scss',
 })
-export class EventList implements OnInit {
-  //todo: აქ დავამატოთ ინფუთები ამ შემტხვევაში ევენთ ქარდების მასივი
-  currentPage = 1;
-  perPage = 12;
-  @Input() events!: EventModel[];
-  canEdit = input<boolean>(false);
-  eventDeleted = output();
+export class EventList {
+  events = input<EventModel[] | null>(null);
+  canEdit = input(false);
 
-  tmpArr: EventModel[] = [];
+  eventDeleted = output<void>();
+
+  readonly currentPage = signal(1);
+
+  readonly perPage = 12;
+
+  readonly tmpArr = computed(() => {
+    const events = this.events();
+
+    if (!events) {
+      return [];
+    }
+
+    const page = this.currentPage();
+
+    return events.slice((page - 1) * this.perPage, page * this.perPage);
+  });
 
   onPageChange(page: number) {
-    this.currentPage = page;
-    this.handlePageChange(page);
-  }
-
-  ngOnInit(): void {
-    this.handlePageChange(1);
-  }
-
- 
-
-  private handlePageChange(page: number) {
-    this.tmpArr = this.events.slice(
-      (this.currentPage - 1) * this.perPage, //0
-      this.currentPage * this.perPage, //
-    );
+    this.currentPage.set(page);
   }
 }

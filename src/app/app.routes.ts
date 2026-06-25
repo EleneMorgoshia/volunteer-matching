@@ -6,6 +6,7 @@ import { VOLUNTEER_ROUTES } from './features/profile/volunteer/volunteer.routes'
 import { ORGANIZATION_ROUTES } from './features/profile/organisation/organisaton.routes';
 import { ABOUT_US_ROUTES } from './features/about-us/about-us.routes';
 import { DETAILS_ROUTES } from './shared/ui/details/detail.routes';
+import { AI_MATCHED_EVENTS_ROUTES } from './ai-matched-events/ai-matched-events.routes';
 
 export const routes: Routes = [
   ...LOGIN_ROUTES,
@@ -14,8 +15,9 @@ export const routes: Routes = [
   ...VOLUNTEER_ROUTES,
   ...ORGANIZATION_ROUTES,
   ...ABOUT_US_ROUTES,
-  //ეს როუთ დავამატე 
+  //ეს როუთ დავამატე
   ...DETAILS_ROUTES,
+  ...AI_MATCHED_EVENTS_ROUTES,
   {
     path: '',
     redirectTo: 'login',
