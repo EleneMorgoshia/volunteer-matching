@@ -3,8 +3,8 @@
     <h1>დამთხვევული ღონისძიებები</h1>
   </div>
 
-  @if (events().length > 0) {
-    <app-event-list [events]="events()"></app-event-list>
+  @if (matchedEvents$ | async; as eventDetails) {
+    <app-event-list [events]="eventDetails"></app-event-list>
   } @else {
     <div class="empty-state">
       <mat-icon fontIcon="auto_awesome"></mat-icon>

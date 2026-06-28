@@ -1,7 +1,9 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { EventDetailModel } from './event-details-model';
+import { EventDetailsService } from './event-details.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-event-details',
@@ -10,14 +12,22 @@ import { EventDetailModel } from './event-details-model';
   templateUrl: './event-details.html',
   styleUrl: './event-details.scss',
 })
-export class EventDetails {
+export class EventDetails implements OnInit {
   private router = inject(Router);
+  private eventDetailsService = inject(EventDetailsService);
+  private route = inject(ActivatedRoute);
+  eventDetails$!: Observable<EventDetailModel>;
+
+  ngOnInit() {
+    const id = this.route.snapshot.paramMap.get('id');
+    this.eventDetails$ = this.eventDetailsService.getEventDetails(id ?? '');
+  }
 
   goToHomeEvents(): void {
     this.router.navigateByUrl('home').then();
   }
 
-  event: EventDetailModel = {
+  event: Partial<EventDetailModel> = {
     title: 'Random Event Name',
 
     organizationName: 'Random Organisation name',
@@ -65,6 +75,5 @@ export class EventDetails {
     additionalInfo: 'ივენთის შესახებ განსაკუთრებული ინფორმაცია',
 
     mainPhotoUrl: '',
-    galleryPhotoUrls: [],
   };
 }

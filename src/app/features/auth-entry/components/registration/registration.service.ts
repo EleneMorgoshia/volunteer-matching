@@ -19,7 +19,7 @@ export class RegistrationService {
 
   registerVolunteer(params: RegistrationVolunteerInfo) {
     return this.http
-      .post<RegisterModelResponse>(this.apiUrl + '/register/volunteer', params)
+      .post<RegisterModelResponse>(this.apiUrl + '/auth/register/volunteer', params)
       .pipe(
         tap((resp) => {
           console.log('TOKEN RESPONSE:', resp);
@@ -30,7 +30,7 @@ export class RegistrationService {
 
   registerOrganisation(params: RegistrationOrganisationInfo) {
     return this.http
-      .post<RegisterModelResponse>(this.apiUrl + '/register/organization', params)
+      .post<RegisterModelResponse>(this.apiUrl + '/auth/register/organization', params)
       .pipe(
         tap((resp) => {
           this.authService.setNewToken(resp);

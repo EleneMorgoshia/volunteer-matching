@@ -13,8 +13,8 @@
 
     <div class="small-images">
       <div class="small-image image-box">
-        @if (event.galleryPhotoUrls?.[0]) {
-          <img [src]="event.galleryPhotoUrls?.[0]" [alt]="event.title" />
+        @if (event.photo1Url) {
+          <img [src]="event.photo1Url" [alt]="event.title" />
         } @else {
           <div class="image-placeholder small-placeholder">
             <mat-icon>photo</mat-icon>
@@ -23,8 +23,8 @@
       </div>
 
       <div class="small-image image-box">
-        @if (event.galleryPhotoUrls?.[1]) {
-          <img [src]="event.galleryPhotoUrls?.[1]" [alt]="event.title" />
+        @if (event.photo2Url) {
+          <img [src]="event.photo2Url" [alt]="event.title" />
         } @else {
           <div class="image-placeholder small-placeholder">
             <mat-icon>photo</mat-icon>

@@ -36,6 +36,7 @@ export class Header {
   private authService = inject(AuthService);
   headerService = inject(HeaderService);
   isFavoritesOpen = false;
+  isLogoutOpen = false;
   favoriteEvents$!: Observable<FavoriteEventsResponse>;
 
   constructor() {
@@ -69,6 +70,10 @@ export class Header {
     this.favoriteEvents$ = this.headerService.getFavoriteEvents();
   }
 
+  openLogoutOverlay() {
+    this.isLogoutOpen = true;
+  }
+
   onDeleteEvent(eventId: string) {
     this.headerService.deleteFavoriteEvent(eventId).subscribe((res) => {
       this.favoriteEvents$ = this.headerService.getFavoriteEvents();
@@ -77,5 +82,9 @@ export class Header {
 
   closeFavoritesOverlay() {
     this.isFavoritesOpen = false;
+  }
+
+  onLogout() {
+    this.authService.logout();
   }
 }

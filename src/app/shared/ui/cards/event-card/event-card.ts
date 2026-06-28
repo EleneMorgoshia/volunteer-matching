@@ -1,8 +1,10 @@
-import { Component, inject, input, output, signal } from '@angular/core';
+import { Component, computed, inject, input, output } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { EventModel } from '../../../../features/profile/organisation/pages/organization-event/organization-event.model';
 import { Router } from '@angular/router';
+
+import { EventModel } from '../../../../features/profile/organisation/pages/organization-event/organization-event.model';
 import { EventService } from '../../../../features/profile/organisation/pages/organization-event/organization-event.service';
+import { MatchedDetails } from '../../../../ai-matched-events/ai-matched-events.model';
 
 @Component({
   selector: 'app-event-card',
@@ -11,31 +13,55 @@ import { EventService } from '../../../../features/profile/organisation/pages/or
   styleUrl: './event-card.scss',
 })
 export class EventCard {
-  eventItem = input<EventModel>();
+  eventItem = input<EventModel | MatchedDetails>();
+
   canEdit = input<boolean>(false);
-  eventDeleted = output();
+  eventDeleted = output<void>();
+
   private router = inject(Router);
   private eventsService = inject(EventService);
-  onToggleFavorite() {
-    if (this.canEdit()) {
-      this.eventsService
-        .deleteEvent(this.eventItem()?.eventId || '')
-        .subscribe(() => this.eventDeleted.emit());
-    } else {
-      this.eventsService.favoriteEvent(this.eventItem()?.eventId).subscribe();
+
+  readonly event = computed<Partial<EventModel> | undefined>(() => {
+    const item = this.eventItem();
+
+    if (!item) {
+      return undefined;
     }
-    // todo: call favorite api
+
+    if ('event' in item) {
+      return item.event;
+    }
+
+    return item;
+  });
+
+  onToggleFavorite() {
+    const eventId = this.event()?.eventId;
+
+    if (!eventId) {
+      return;
+    }
+
+    if (this.canEdit()) {
+      this.eventsService.deleteEvent(eventId).subscribe(() => this.eventDeleted.emit());
+    } else {
+      this.eventsService.favoriteEvent(eventId).subscribe();
+    }
   }
 
   onNavigateToEventDetails() {
-    if (this.canEdit() && this.eventItem()) {
+    const eventId = this.event()?.eventId;
+
+    if (!eventId) {
+      return;
+    }
+
+    if (this.canEdit()) {
       this.router.navigate(['organization/event/edit'], {
-        queryParams: {
-          eventId: this.eventItem()?.eventId,
-        },
+        queryParams: { eventId },
       });
-    } else if (!this.canEdit()) {
-      this.router.navigateByUrl('event/' + this.eventItem()?.eventId);
+    } else {
+      this.router.navigateByUrl('event/' + eventId);
     }
   }
 }

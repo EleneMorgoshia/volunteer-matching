@@ -12,5 +12,6 @@ export interface loginModelResponse {
   accessToken: string;
   userId: string;
   role: string;
+  refreshToken: string;
   message: string;
 }

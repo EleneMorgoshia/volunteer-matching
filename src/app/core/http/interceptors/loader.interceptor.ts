@@ -10,7 +10,7 @@ export const loaderInterceptor: HttpInterceptorFn = (req, next) => {
   const authService = inject(AuthService);
   const snackBar = inject(MatSnackBar);
 
-  const isAuthReq = req.url.includes('/login') || req.url.includes('/register');
+  const isAuthReq = req.url.includes('/auth/login') || req.url.includes('/auth/register');
 
   if (isAuthReq) {
     return next(req);

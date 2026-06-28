@@ -11,8 +11,12 @@ export class AuthService {
   private readonly accessToken = 'access_token';
   private readonly user = 'user_info';
   private readonly role = 'user_role';
+  private readonly refreshToken = 'refresh_token';
 
   private readonly accessTknSignal = signal<string | null>(localStorage.getItem(this.accessToken));
+  private readonly refreshTknSignal = signal<string | null>(
+    localStorage.getItem(this.refreshToken),
+  );
   private readonly userId = signal<string | null>(localStorage.getItem(this.user));
   private readonly userRole = signal<string | null>(localStorage.getItem(this.role));
 
@@ -24,7 +28,7 @@ export class AuthService {
   isLoggedInSubject$ = new BehaviorSubject<boolean>(false);
 
   login(params: loginModelParams) {
-    return this.http.post<loginModelResponse>(this.apiUrl + '/login', params).pipe(
+    return this.http.post<loginModelResponse>(this.apiUrl + '/auth/login', params).pipe(
       tap((resp) => {
         this.setNewToken(resp);
       }),
@@ -35,7 +39,9 @@ export class AuthService {
   // სვაგერში ვერ ვნახეთ და როცა ერორი იქნება,
   // თუ ეს ერორი ტოკენის ბრალი არაა 401-სგან განსხვავებული ერორ კოდი რომ დაბრუნდეს
   logout() {
-    [this.accessToken, this.user, this.role].forEach((el) => localStorage.removeItem(el));
+    [this.accessToken, this.user, this.role, this.refreshToken].forEach((el) =>
+      localStorage.removeItem(el),
+    );
     this.isLoggedInSubject$.next(false);
     this.router.navigate(['/login']);
   }
@@ -44,18 +50,14 @@ export class AuthService {
     console.log('Seinaxe tokeni:', resp);
 
     localStorage.setItem(this.accessToken, resp.accessToken);
+    localStorage.setItem(this.refreshToken, resp.refreshToken);
     localStorage.setItem(this.user, resp.userId);
     localStorage.setItem(this.role, resp.role);
 
     this.accessTknSignal.set(resp.accessToken);
+    this.refreshTknSignal.set(resp.refreshToken);
     this.userId.set(resp.userId);
     this.userRole.set(resp.role);
-
-    console.log(
-      localStorage.getItem(this.accessToken),
-      localStorage.getItem(this.user),
-      localStorage.getItem(this.role),
-    );
     // this.navigateToCorrectProfile();
     this.isLoggedInSubject$.next(true);
   }
@@ -100,6 +102,7 @@ export class AuthService {
 
   private saveToken(resp: loginModelResponse) {
     localStorage.setItem(this.accessToken, resp.accessToken);
+    localStorage.setItem(this.refreshToken, resp.refreshToken);
     localStorage.setItem(this.user, resp.userId);
     localStorage.setItem(this.role, resp.role);
   }

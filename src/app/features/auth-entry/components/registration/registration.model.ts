@@ -24,6 +24,7 @@ export interface RegistrationOrganisationInfo {
 
 export interface RegisterModelResponse {
   accessToken: string;
+  refreshToken: string;
   userId: string;
   role: string;
   message: string;

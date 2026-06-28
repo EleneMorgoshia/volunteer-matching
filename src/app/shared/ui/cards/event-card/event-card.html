@@ -1,10 +1,9 @@
-@if (eventItem(); as event) {
+@if (event(); as event) {
   <div class="event-card-container">
-    <!-- IMAGE SECTION -->
     <div class="image-container">
       <img
         [src]="event.mainPhotoUrl || 'assets/event-default-background.png'"
-        [alt]="event.title"
+        [alt]="event.title || 'event image'"
         class="event-image"
       />
 
@@ -16,13 +15,11 @@
         }
       </button>
 
-      <!-- აქ მოვაბამთ ფუნქციას რო გადაისროლოს ივენთს დეტალების გვერდზე -->
       <button class="see-more-button" type="button" (click)="onNavigateToEventDetails()">
         იხილეთ მეტი
       </button>
     </div>
 
-    <!-- TEXT SECTION -->
     <div class="texts-container">
       <p class="event-title">
         {{ event.title }}
@@ -39,38 +36,24 @@
       </div>
     </div>
 
-    <!-- DETAILS SECTION -->
     <div class="detailed-info-container">
-      <!-- LOCATION -->
       <div class="info-item">
         <mat-icon fontIcon="location_on"></mat-icon>
-
-        <p>
-          {{ event.location }}
-        </p>
+        <p>{{ event.location }}</p>
       </div>
 
       <div class="divider"></div>
 
-      <!-- DATE -->
       <div class="info-item">
         <mat-icon fontIcon="schedule"></mat-icon>
-
-        <p>
-          {{ event.startDate }} -
-          {{ event.endDate }}
-        </p>
+        <p>{{ event.startDate }} - {{ event.endDate }}</p>
       </div>
 
       <div class="divider"></div>
 
-      <!-- THEME -->
       <div class="info-item">
         <mat-icon fontIcon="auto_awesome"></mat-icon>
-
-        <p>
-          {{ event.theme }}
-        </p>
+        <p>{{ event.theme }}</p>
       </div>
     </div>
   </div>
