@@ -4,7 +4,12 @@
   </div>
 
   @if (matchedEvents$ | async; as eventDetails) {
-    <app-event-list [events]="eventDetails"></app-event-list>
+    <app-event-list
+      [events]="eventDetails"
+      [isMatchVolunteer]="matchService.authService.isVolunteer()"
+      (requestMatch)="onRequestMatch($event)"
+      (rejectMatch)="onRejectMatch($event)"
+    ></app-event-list>
   } @else {
     <div class="empty-state">
       <mat-icon fontIcon="auto_awesome"></mat-icon>

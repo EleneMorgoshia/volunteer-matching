@@ -2,24 +2,30 @@
   <div class="event-card-container">
     <div class="image-container">
       <img
-        [src]="event.mainPhotoUrl || 'assets/event-default-background.png'"
+        [src]="event?.mainPhotoUrl || 'assets/event-default-background.png'"
         [alt]="event.title || 'event image'"
         class="event-image"
       />
 
-      @if (canEdit()) {
-        <button class="icon-button ai-button" type="button" (click)="onAIMatch()">
-          <mat-icon fontIcon="add"></mat-icon>
-        </button>
+      <button
+        style="position: absolute; top: 16px"
+        type="button"
+        (click)="requestMatch.emit(matchEventId())"
+      >
+        accept
+      </button>
 
-        <button class="icon-button delete-button" type="button" (click)="onToggleFavorite()">
-          <mat-icon fontIcon="delete_outline"></mat-icon>
-        </button>
-      } @else {
-        <button class="heart-button" type="button" (click)="onToggleFavorite()">
-          <mat-icon fontIcon="favorite_border"></mat-icon>
-        </button>
-      }
+      <button
+        style="position: absolute; top: 4px"
+        type="button"
+        (click)="rejectMatch.emit(matchEventId())"
+      >
+        reject
+      </button>
+
+      <button class="heart-button" type="button" (click)="onToggleFavorite()">
+        <mat-icon fontIcon="favorite_border"></mat-icon>
+      </button>
 
       <button class="see-more-button" type="button" (click)="onNavigateToEventDetails()">
         იხილეთ მეტი

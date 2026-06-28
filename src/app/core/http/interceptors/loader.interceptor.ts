@@ -1,7 +1,7 @@
 import { HttpErrorResponse, HttpInterceptorFn, HttpResponse } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { LoaderService } from '../../loader/loader.service';
-import { catchError, finalize, tap, throwError } from 'rxjs';
+import { catchError, finalize, retry, tap, throwError } from 'rxjs';
 import { AuthService } from '../../auth/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -25,6 +25,7 @@ export const loaderInterceptor: HttpInterceptorFn = (req, next) => {
   });
 
   return next(newReq).pipe(
+    retry(3),
     tap((event) => {
       if (event instanceof HttpResponse && (event.body as any)?.message) {
         snackBar.open((event.body as any)?.message, 'დახურვა', {

@@ -15,13 +15,27 @@ import { CommonModule } from '@angular/common';
 })
 export class AiMatchedEvents {
   private route = inject(ActivatedRoute);
-  private matchService = inject(AiMatchService);
+  readonly matchService = inject(AiMatchService);
   matchedEvents$!: Observable<MatchedEvents>;
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
     console.log(id); // ეს არის ორგანიზაციიდან რომ გადმოვა მაშინ ურლ-დან ამოღებული პარამეტრი
+    this.matchService.aiMatch(id).subscribe(() => {
+      this.matchedEvents$ = this.matchService.getMatches(1, 6, id);
+    });
     //ეს არის მოხალისსისთვის
-    this.matchedEvents$ = this.matchService.getMatches();
+  }
+
+  onRequestMatch(id: string) {
+    this.matchService
+      .requestForVolunteer(id)
+      .subscribe(() => (this.matchedEvents$ = this.matchService.getMatches(1, 6, null)));
+  }
+
+  onRejectMatch(id: string) {
+    this.matchService
+      .rejectForVolunteer(id)
+      .subscribe(() => (this.matchedEvents$ = this.matchService.getMatches(1, 6, null)));
   }
 }

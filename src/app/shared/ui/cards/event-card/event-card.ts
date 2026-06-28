@@ -35,6 +35,11 @@ export class EventCard {
     return item;
   });
 
+  onAIMatch() {
+    const eventId = this.event()?.eventId;
+    this.router.navigateByUrl('ai-matched-events/' + eventId);
+  }
+
   onToggleFavorite() {
     const eventId = this.event()?.eventId;
 
