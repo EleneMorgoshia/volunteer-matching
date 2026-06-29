@@ -1,0 +1,78 @@
+@if (volunteer(); as volunteer) {
+  <div class="organization-match-card">
+    <div class="profile-section">
+      <div class="image-wrapper">
+        <img
+          [src]="volunteer.profilePhotoUrl || 'assets/profile-default.png'"
+          [alt]="fullName() || 'volunteer image'"
+          class="volunteer-image"
+        />
+      </div>
+
+      <div class="main-info">
+        <div class="top-row">
+          <div>
+            <p class="volunteer-name">{{ fullName() || 'მოხალისე' }}</p>
+            <p class="volunteer-profession">
+              {{ volunteer.profession || 'პროფესია არ არის მითითებული' }}
+            </p>
+          </div>
+
+          <div class="match-actions">
+            <button
+              class="action-button accept-button"
+              type="button"
+              (click)="requestMatch.emit(volunteerMatchId())"
+            >
+              <mat-icon fontIcon="check"></mat-icon>
+            </button>
+
+            <button
+              class="action-button reject-button"
+              type="button"
+              (click)="rejectMatch.emit(volunteerMatchId())"
+            >
+              <mat-icon fontIcon="close"></mat-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="short-info">
+          <div class="info-item">
+            <mat-icon fontIcon="mail"></mat-icon>
+            <span>{{ volunteer.email || 'ელ.ფოსტა არ არის მითითებული' }}</span>
+          </div>
+
+          <div class="info-item">
+            <mat-icon fontIcon="public"></mat-icon>
+            <span>{{ volunteer.citizenship || 'მოქალაქეობა არ არის მითითებული' }}</span>
+          </div>
+
+          <div class="info-item">
+            <mat-icon fontIcon="language"></mat-icon>
+            <span>{{ volunteer.languages || 'ენები არ არის მითითებული' }}</span>
+          </div>
+        </div>
+
+        <div class="description-block">
+          <p class="section-title">ჩემ შესახებ</p>
+          <p class="description-text">
+            {{ volunteer.description || 'მოხალისეს აღწერა ჯერ არ აქვს დამატებული.' }}
+          </p>
+        </div>
+
+        <div class="skills-block">
+          <div class="skill-chip">
+            <mat-icon fontIcon="auto_awesome"></mat-icon>
+            <span>{{ volunteer.skills || 'უნარები არ არის მითითებული' }}</span>
+          </div>
+
+          <div class="skill-chip">
+            <mat-icon fontIcon="favorite"></mat-icon>
+            <span>{{ volunteer.interests || 'ინტერესები არ არის მითითებული' }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+}

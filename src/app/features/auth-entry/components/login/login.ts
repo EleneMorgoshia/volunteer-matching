@@ -34,6 +34,7 @@ export class Login {
   loginForm = form(this.loginModel);
   authService = inject(AuthService);
   router = inject(Router);
+  showInfo = signal(false);
 
   constructor() {
     effect(() => {
@@ -56,5 +57,13 @@ export class Login {
     this.router.navigate(['/registration'], {
       queryParams: { role: 'volunteer' },
     });
+  }
+
+  openInfo() {
+    this.showInfo.set(true);
+  }
+
+  closeInfo() {
+    this.showInfo.set(false);
   }
 }

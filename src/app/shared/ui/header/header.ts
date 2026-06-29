@@ -15,6 +15,7 @@ import {
   FavoriteEventModel,
   FavoriteEventsResponse,
 } from '../cards/favourites-card/favorite-event.model';
+import { LogoutOveraly } from '../overlays/logout-overaly/logout-overaly';
 @Component({
   selector: 'app-header',
   imports: [
@@ -26,6 +27,7 @@ import {
     FavouritesOverlay,
     NotificationOverlay,
     FavouritesCard,
+    LogoutOveraly,
   ],
   templateUrl: './header.html',
   styleUrl: './header.scss',
@@ -84,7 +86,12 @@ export class Header {
     this.isFavoritesOpen = false;
   }
 
+  closeLogoutOverlay() {
+    this.isLogoutOpen = false;
+  }
+
   onLogout() {
+    this.closeLogoutOverlay();
     this.authService.logout();
   }
 }

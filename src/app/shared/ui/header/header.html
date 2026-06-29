@@ -28,10 +28,9 @@
         <button class="profile-button" type="button" (click)="openLogoutOverlay()">
           {{ headerService.firstLetter() }}
         </button>
+
         @if (isLogoutOpen) {
-          <app-favourites-overlay (closeOverlay)="this.isLogoutOpen = false">
-            <p (click)="onLogout()">Logout</p>
-          </app-favourites-overlay>
+          <app-logout-overaly (logout)="onLogout()" (closeOverlay)="openLogoutOverlay()" />
         }
 
         <button class="icon-button" type="button" (click)="openFavoritesOverlay()">

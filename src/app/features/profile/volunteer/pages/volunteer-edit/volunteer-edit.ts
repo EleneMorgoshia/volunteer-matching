@@ -111,22 +111,48 @@ export class VolunteerEdit implements OnInit {
       }
     });
   }
-
   onFileChosen(event: Event) {
     const fileSelect = event.target as HTMLInputElement;
 
-    if (fileSelect.files?.length === 1) {
-      const img = fileSelect.files[0];
-      const reader = new FileReader();
+    if (fileSelect.files?.length !== 1) {
+      return;
+    }
 
-      reader.onload = () => {
-        const content = reader.result as string;
-        this.selectedImage.set(content);
-        this.editForm.profilePhotoUrl().setControlValue(content);
+    const file = fileSelect.files[0];
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      const img = new Image();
+
+      img.onload = () => {
+        const maxWidth = 1200;
+        const maxHeight = 1200;
+        const quality = 0.7;
+
+        const scale = Math.min(1, maxWidth / img.width, maxHeight / img.height);
+
+        const canvas = document.createElement('canvas');
+        canvas.width = img.width * scale;
+        canvas.height = img.height * scale;
+
+        const ctx = canvas.getContext('2d');
+
+        if (!ctx) {
+          return;
+        }
+
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+        const compressedBase64 = canvas.toDataURL('image/jpeg', quality);
+
+        this.selectedImage.set(compressedBase64);
+        this.editForm.profilePhotoUrl().setControlValue(compressedBase64);
       };
 
-      reader.readAsDataURL(img);
-    }
+      img.src = reader.result as string;
+    };
+
+    reader.readAsDataURL(file);
   }
 
   onSubmit($event: any) {

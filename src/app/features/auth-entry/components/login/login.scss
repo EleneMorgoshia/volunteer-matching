@@ -1,3 +1,5 @@
+$primary: #c13de6;
+
 .login-page {
   flex: 1;
 
@@ -5,7 +7,70 @@
   justify-content: center;
   align-items: center;
 
+  position: relative;
+
   padding-top: clamp(20px, 4vw, 60px);
+  padding-bottom: clamp(20px, 4vw, 60px);
+}
+
+.login-side {
+  position: absolute;
+  top: 55px;
+  left: clamp(32px, 8vw, 150px);
+
+  z-index: 5;
+}
+
+.side-info-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+
+  padding: 12px 22px;
+
+  border: 1px solid rgba(193, 61, 230, 0.35);
+  border-radius: 999px;
+
+  background:
+    radial-gradient(circle at top right, rgba(193, 61, 230, 0.14), transparent 45%), #ffffff;
+
+  color: #151016;
+
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  box-shadow: 0 14px 34px rgba(193, 61, 230, 0.14);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.side-info-button:hover {
+  transform: translateY(-2px);
+
+  border-color: rgba(193, 61, 230, 0.75);
+  background: $primary;
+  color: #ffffff;
+
+  box-shadow: 0 20px 42px rgba(193, 61, 230, 0.24);
+}
+
+.side-info-icon {
+  font-size: 17px;
+  line-height: 1;
+}
+
+.side-info-text {
+  line-height: 1.2;
+  white-space: nowrap;
 }
 
 .login-card {
@@ -47,7 +112,7 @@ mat-form-field {
 }
 
 .button-group {
- margin-top: 18px;
+  margin-top: 18px;
 
   display: flex;
   flex-direction: column;
@@ -62,7 +127,7 @@ mat-form-field {
 
   border-radius: 30px;
 
-  background: #c13de6 !important;
+  background: $primary !important;
   color: white !important;
 
   font-size: 16px;
@@ -74,7 +139,7 @@ mat-form-field {
 }
 
 .register-link {
-   border: none;
+  border: none;
   outline: none;
   background: transparent;
 
@@ -95,7 +160,7 @@ mat-form-field {
 }
 
 .register-link:hover span {
-  color: #c13de6;
+  color: $primary;
 }
 
 .register-link:hover {
@@ -103,9 +168,334 @@ mat-form-field {
   color: #151016 !important;
 }
 
+/* INFO MODAL */
+.info-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 24px;
+
+  background: rgba(21, 16, 22, 0.55);
+  backdrop-filter: blur(8px);
+}
+
+.info-modal {
+  width: min(1100px, calc(100vw - 60px));
+  max-width: 1100px;
+  max-height: calc(100vh - 40px);
+
+  overflow-y: auto;
+  position: relative;
+
+  padding: 58px 72px;
+  border-radius: 42px;
+
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(193, 61, 230, 0.22) 0%,
+      rgba(193, 61, 230, 0.12) 16%,
+      rgba(193, 61, 230, 0.04) 34%,
+      transparent 52%
+    ),
+    #ffffff;
+
+  box-shadow:
+    0 30px 90px rgba(0, 0, 0, 0.25),
+    0 0 80px rgba(193, 61, 230, 0.08);
+
+  text-align: center;
+}
+
+.close-info-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+
+  width: 40px;
+  height: 40px;
+
+  border: none;
+  border-radius: 50%;
+
+  background: #f7effb;
+  color: #151016;
+
+  font-size: 22px;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.close-info-button:hover {
+  background: $primary;
+  color: #ffffff;
+  transform: rotate(90deg);
+}
+
+.modal-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 18px;
+  padding: 10px 22px;
+
+  border-radius: 999px;
+
+  background: rgba(193, 61, 230, 0.08);
+  color: $primary;
+
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.info-modal h2 {
+  margin: 0 0 16px;
+
+  font-size: 34px;
+  font-weight: 700;
+
+  color: #151016;
+}
+
+.modal-intro {
+  max-width: 820px;
+
+  margin: 0 auto 42px;
+
+  font-size: 16px;
+  line-height: 1.8;
+
+  color: #4b414d;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px;
+
+  margin-bottom: 34px;
+}
+
+.info-box {
+  padding: 34px 36px;
+  border-radius: 30px;
+  background: #f8f8f8;
+  text-align: left;
+}
+
+.info-icon {
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 14px;
+
+  border-radius: 50%;
+
+  background: rgba(193, 61, 230, 0.1);
+
+  font-size: 24px;
+}
+
+.info-box h3 {
+  margin: 0 0 10px;
+
+  font-size: 20px;
+  font-weight: 700;
+
+  color: #151016;
+}
+
+.info-box p {
+  margin: 0 0 10px;
+  font-size: 14px;
+  line-height: 1.75;
+  color: #5f5662;
+}
+
+.info-box p:last-child {
+  margin-bottom: 0;
+}
+
+.modal-bottom-text {
+  margin: 0 auto 32px;
+
+  max-width: 820px;
+
+  font-size: 15px;
+  line-height: 1.8;
+
+  color: #4b414d;
+}
+
+.understand-button {
+  min-width: 160px;
+  height: 48px;
+
+  border: none;
+  border-radius: 999px;
+
+  background: $primary;
+  color: #ffffff;
+
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.understand-button:hover {
+  background: #b030d8;
+  transform: translateY(-1px);
+}
+
+/* TABLET / SMALL LAPTOP */
+@media (max-width: 1200px) {
+  .login-page {
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 32px 24px;
+  }
+
+  .login-side {
+    position: static;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 24px;
+  }
+
+  .side-info-button {
+    width: 100%;
+    max-width: 700px;
+  }
+
+  .info-overlay {
+    align-items: flex-start;
+    padding: 20px;
+  }
+
+  .info-modal {
+    width: min(1120px, calc(100vw - 40px));
+    max-height: calc(100vh - 40px);
+
+    padding: 44px 56px;
+    border-radius: 36px;
+  }
+
+  .modal-logo {
+    margin-bottom: 14px;
+  }
+
+  .info-modal h2 {
+    font-size: 30px;
+    margin-bottom: 12px;
+  }
+
+  .modal-intro {
+    margin-bottom: 30px;
+    line-height: 1.65;
+  }
+
+  .info-grid {
+    gap: 28px;
+    margin-bottom: 28px;
+  }
+
+  .info-box {
+    padding: 28px 32px;
+  }
+
+  .info-box p {
+    font-size: 13.5px;
+    line-height: 1.65;
+  }
+
+  .modal-bottom-text {
+    margin-bottom: 24px;
+    line-height: 1.65;
+  }
+}
+
+/* IMPORTANT FIX FOR 1025px - 1100px HEIGHT */
+@media (max-width: 1100px) {
+  .info-modal {
+    width: calc(100vw - 36px);
+    padding: 38px 44px;
+  }
+
+  .info-modal h2 {
+    font-size: 28px;
+  }
+
+  .modal-intro {
+    font-size: 15px;
+    margin-bottom: 24px;
+  }
+
+  .info-grid {
+    gap: 24px;
+    margin-bottom: 24px;
+  }
+
+  .info-box {
+    padding: 24px 28px;
+  }
+
+  .info-icon {
+    width: 44px;
+    height: 44px;
+    font-size: 22px;
+    margin-bottom: 12px;
+  }
+
+  .info-box h3 {
+    font-size: 18px;
+  }
+
+  .info-box p {
+    font-size: 13px;
+    line-height: 1.55;
+    margin-bottom: 8px;
+  }
+
+  .modal-bottom-text {
+    font-size: 14px;
+    margin-bottom: 22px;
+  }
+
+  .understand-button {
+    height: 46px;
+  }
+}
 
 /* TABLET */
 @media (max-width: 768px) {
+  .login-page {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
   .login-card {
     padding: 30px;
   }
@@ -113,10 +503,53 @@ mat-form-field {
   .login-card h1 {
     font-size: 38px;
   }
+
+  .info-overlay {
+    padding: 16px;
+  }
+
+  .info-modal {
+    width: calc(100vw - 32px);
+    padding: 42px 32px 30px;
+    border-radius: 32px;
+  }
+
+  .info-modal h2 {
+    font-size: 26px;
+  }
+
+  .modal-intro {
+    font-size: 14px;
+    margin-bottom: 24px;
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .info-box {
+    padding: 24px;
+  }
 }
 
 /* MOBILE */
 @media (max-width: 480px) {
+  .login-page {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .side-info-button {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 13px;
+  }
+
+  .side-info-text {
+    white-space: normal;
+  }
+
   .login-card {
     padding: 24px;
   }
@@ -128,5 +561,68 @@ mat-form-field {
 
   .login-btn {
     height: 50px;
+  }
+
+  .info-overlay {
+    padding: 12px;
+  }
+
+  .info-modal {
+    width: calc(100vw - 24px);
+    max-height: calc(100vh - 24px);
+
+    padding: 34px 20px 24px;
+    border-radius: 26px;
+  }
+
+  .close-info-button {
+    top: 14px;
+    right: 14px;
+
+    width: 36px;
+    height: 36px;
+
+    font-size: 20px;
+  }
+
+  .modal-logo {
+    margin-top: 12px;
+    font-size: 13px;
+  }
+
+  .info-modal h2 {
+    font-size: 24px;
+  }
+
+  .modal-intro,
+  .modal-bottom-text {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .info-box {
+    padding: 20px;
+  }
+
+  .info-box h3 {
+    font-size: 18px;
+  }
+}
+
+/* BIG DESKTOP */
+@media (min-width: 1600px) {
+  .login-card {
+    max-width: 760px;
+    padding: 48px;
+  }
+
+  .login-card h1 {
+    font-size: 54px;
+  }
+
+  .info-modal {
+    width: min(1200px, calc(100vw - 80px));
+    max-width: 1200px;
+    padding: 64px 82px;
   }
 }

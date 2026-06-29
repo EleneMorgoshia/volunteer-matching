@@ -1,4 +1,11 @@
 <section class="login-page">
+  <aside class="login-side">
+    <button class="side-info-button" type="button" (click)="openInfo()">
+      <span class="side-info-icon">🤔</span>
+      <span class="side-info-text">რატომ უნდა დარეგისტრირდე?</span>
+    </button>
+  </aside>
+
   <div class="login-card">
     <h1>ავტორიზაცია</h1>
 
@@ -20,8 +27,64 @@
     <div class="button-group">
       <button class="login-btn" matButton="elevated" (click)="onLogin()">შესვლა</button>
 
-   
-      <button class="register-link" (click)="onRegiter()">არ გაქვთ ექაუნთი? <span>რეგისტრაცია</span> </button>
+      <button class="register-link" type="button" (click)="onRegiter()">
+        არ გაქვთ ექაუნთი?
+        <span>რეგისტრაცია</span>
+      </button>
     </div>
   </div>
+
+  @if (showInfo()) {
+    <div class="info-overlay" (click)="closeInfo()">
+      <section class="info-modal" (click)="$event.stopPropagation()">
+        <button class="close-info-button" type="button" (click)="closeInfo()">✕</button>
+
+        <div class="modal-logo">Speeding Hands</div>
+
+        <h2>რატომ უნდა დავრეგისტრირდე?</h2>
+
+        <p class="modal-intro">
+          Speeding Hands აერთიანებს მოხალისეებსა და ორგანიზაციებს ერთ სივრცეში და AI-ის დახმარებით
+          ეხმარება მათ ერთმანეთის პოვნაში.
+        </p>
+
+        <div class="info-grid">
+          <article class="info-box">
+            <div class="info-icon">👤</div>
+
+            <h3>თუ მოხალისე ხარ</h3>
+
+            <p>
+              რეგისტრაციისას გვიზიარებ შენს ინტერესებს, უნარებსა და გამოცდილებას. ამ ინფორმაციის
+              საფუძველზე Speeding Hands აანალიზებს შენს პროფილს და გთავაზობს იმ მოხალისეობრივ
+              შესაძლებლობებს, რომლებიც ყველაზე მეტად შეესაბამება შენს ცოდნასა და ინტერესებს.  <br> <br> ჩვენი
+              მიზანია, გაგიადვილოთ შესაბამისი ღონისძიებების პოვნა და დაგაკავშიროთ იმ
+              ორგანიზაციებთან, სადაც შენი უნარები და გამოცდილება ყველაზე მეტად იქნება დაფასებული.
+            </p>
+          </article>
+
+          <article class="info-box">
+            <div class="info-icon">🏢</div>
+
+            <h3>თუ ორგანიზაცია ხარ</h3>
+            <p>
+              რეგისტრაციის შემდეგ ორგანიზაციას შეუძლია დაამატოს ღონისძიებები და დეტალურად აღწეროს
+              მათი მიზანი, საჭირო უნარები და მოხალისეების როლი. ამ ინფორმაციის საფუძველზე Speeding
+              Hands აანალიზებს ღონისძიებას და პოულობს იმ მოხალისეებს, რომელთა ინტერესები და უნარები
+              ყველაზე მეტად შეესაბამება ორგანიზაციის ღონისძიების მოთხოვნებს. <br>  <br>
+              ჩვენ გეხმარებით, უფრო
+              სწრაფად იპოვო შესაბამისი მოხალისეები და შექმნა ძლიერი გუნდი თითოეული ღონისძიებისთვის.
+            </p>
+          </article>
+        </div>
+
+        <p class="modal-bottom-text">
+          რეგისტრაციის შემდეგ პლატფორმა შეძლებს შენზე მორგებული გამოცდილების შექმნას და შესაბამის
+          ადამიანებთან დაკავშირებას.
+        </p>
+
+        <button class="understand-button" type="button" (click)="closeInfo()">გასაგებია</button>
+      </section>
+    </div>
+  }
 </section>

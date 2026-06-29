@@ -126,37 +126,65 @@ export class OrganizationEventEdit implements OnInit {
     this.eventService.updateEvent(updatedEvent, this.eventId).subscribe();
   }
 
-  onPhotoChosen(event: Event, fieldName: 'mainPhotoUrl' | 'photo2Url' | 'photo3Url'): void {
-    const fileSelect = event.target as HTMLInputElement;
+onPhotoChosen(event: Event, fieldName: 'mainPhotoUrl' | 'photo2Url' | 'photo3Url'): void {
+  const fileSelect = event.target as HTMLInputElement;
 
-    if (fileSelect.files?.length !== 1) {
-      return;
-    }
+  if (fileSelect.files?.length !== 1) {
+    return;
+  }
 
-    const img = fileSelect.files[0];
-    const reader = new FileReader();
+  const file = fileSelect.files[0];
+  const reader = new FileReader();
 
-    reader.onload = () => {
-      const content = reader.result as string;
+  reader.onload = () => {
+    const img = new Image();
+
+    img.onload = () => {
+      const maxWidth = 1200;
+      const maxHeight = 1200;
+      const quality = 0.7;
+
+      const scale = Math.min(
+        1,
+        maxWidth / img.width,
+        maxHeight / img.height
+      );
+
+      const canvas = document.createElement('canvas');
+      canvas.width = img.width * scale;
+      canvas.height = img.height * scale;
+
+      const ctx = canvas.getContext('2d');
+
+      if (!ctx) {
+        return;
+      }
+
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+      const compressedBase64 = canvas.toDataURL('image/jpeg', quality);
 
       if (fieldName === 'mainPhotoUrl') {
-        this.selectedMainImage.set(content);
-        this.editForm.mainPhotoUrl().setControlValue(content);
+        this.selectedMainImage.set(compressedBase64);
+        this.editForm.mainPhotoUrl().setControlValue(compressedBase64);
       }
 
       if (fieldName === 'photo2Url') {
-        this.selectedPhoto2Image.set(content);
-        this.editForm.photo2Url().setControlValue(content);
+        this.selectedPhoto2Image.set(compressedBase64);
+        this.editForm.photo2Url().setControlValue(compressedBase64);
       }
 
       if (fieldName === 'photo3Url') {
-        this.selectedPhoto3Image.set(content);
-        this.editForm.photo3Url().setControlValue(content);
+        this.selectedPhoto3Image.set(compressedBase64);
+        this.editForm.photo3Url().setControlValue(compressedBase64);
       }
     };
 
-    reader.readAsDataURL(img);
-  }
+    img.src = reader.result as string;
+  };
+
+  reader.readAsDataURL(file);
+}
 
   goToProfile(): void {
     this.router.navigateByUrl('/organization/profile').then();

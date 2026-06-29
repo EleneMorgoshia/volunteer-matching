@@ -109,31 +109,57 @@ export class OrganizationEvent implements OnInit {
   onPhotoChosen(event: Event, fieldName: 'mainPhotoUrl' | 'photo2Url' | 'photo3Url') {
     const fileSelect = event.target as HTMLInputElement;
 
-    if (fileSelect.files?.length === 1) {
-      const img = fileSelect.files[0];
-      const reader = new FileReader();
+    if (fileSelect.files?.length !== 1) {
+      return;
+    }
 
-      reader.onload = () => {
-        const content = reader.result as string;
+    const file = fileSelect.files[0];
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      const img = new Image();
+
+      img.onload = () => {
+        const maxWidth = 1200;
+        const maxHeight = 1200;
+        const quality = 0.7;
+
+        const scale = Math.min(1, maxWidth / img.width, maxHeight / img.height);
+
+        const canvas = document.createElement('canvas');
+        canvas.width = img.width * scale;
+        canvas.height = img.height * scale;
+
+        const ctx = canvas.getContext('2d');
+
+        if (!ctx) {
+          return;
+        }
+
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+        const compressedBase64 = canvas.toDataURL('image/jpeg', quality);
 
         if (fieldName === 'mainPhotoUrl') {
-          this.selectedMainImage.set(content);
-          this.form.mainPhotoUrl().setControlValue(content);
+          this.selectedMainImage.set(compressedBase64);
+          this.form.mainPhotoUrl().setControlValue(compressedBase64);
         }
 
         if (fieldName === 'photo2Url') {
-          this.selectedPhoto2Image.set(content);
-          this.form.photo2Url().setControlValue(content);
+          this.selectedPhoto2Image.set(compressedBase64);
+          this.form.photo2Url().setControlValue(compressedBase64);
         }
 
         if (fieldName === 'photo3Url') {
-          this.selectedPhoto3Image.set(content);
-          this.form.photo3Url().setControlValue(content);
+          this.selectedPhoto3Image.set(compressedBase64);
+          this.form.photo3Url().setControlValue(compressedBase64);
         }
       };
 
-      reader.readAsDataURL(img);
-    }
+      img.src = reader.result as string;
+    };
+
+    reader.readAsDataURL(file);
   }
 
   goToProfile(): void {

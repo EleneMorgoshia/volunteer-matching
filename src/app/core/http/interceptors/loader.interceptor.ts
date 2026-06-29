@@ -25,7 +25,7 @@ export const loaderInterceptor: HttpInterceptorFn = (req, next) => {
   });
 
   return next(newReq).pipe(
-    retry(3),
+    // retry(3),
     tap((event) => {
       if (event instanceof HttpResponse && (event.body as any)?.message) {
         snackBar.open((event.body as any)?.message, 'დახურვა', {
