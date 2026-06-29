@@ -7,32 +7,26 @@
 
     <div class="header-text">
       <p class="notification-message">
-        {{ notification()?.message || testNotification.message }}
+        {{ notification()?.message }}
       </p>
 
       <p class="created-date">
-        {{ notification()?.createdAt || testNotification.createdAt }}
+        {{ notification()?.createdAt }}
       </p>
     </div>
   </div>
 
   <div class="event-info-box">
     <p class="event-title">
-      {{ notification()?.event?.title || testNotification.event.title }}
+      {{ notification()?.event?.title }}
     </p>
 
     <p class="organization-name">
-      {{
-        notification()?.event?.organizationName ||
-          testNotification.event.organizationName
-      }}
+      {{ notification()?.event?.organizationName }}
     </p>
 
     <p class="event-description">
-      {{
-        notification()?.event?.shortDescription ||
-          testNotification.event.shortDescription
-      }}
+      {{ notification()?.event?.shortDescription }}
     </p>
 
     <div class="details-container">
@@ -40,10 +34,7 @@
         <mat-icon fontIcon="location_on"></mat-icon>
 
         <p>
-          {{
-            notification()?.event?.location ||
-              testNotification.event.location
-          }}
+          {{ notification()?.event?.location }}
         </p>
       </div>
 
@@ -51,15 +42,9 @@
         <mat-icon fontIcon="schedule"></mat-icon>
 
         <p>
-          {{
-            notification()?.event?.startDate ||
-              testNotification.event.startDate
-          }}
+          {{ notification()?.event?.startDate }}
           -
-          {{
-            notification()?.event?.endDate ||
-              testNotification.event.endDate
-          }}
+          {{ notification()?.event?.endDate }}
         </p>
       </div>
 
@@ -67,24 +52,17 @@
         <mat-icon fontIcon="auto_awesome"></mat-icon>
 
         <p>
-          {{
-            notification()?.event?.theme ||
-              testNotification.event.theme
-          }}
+          {{ notification()?.event?.theme }}
         </p>
       </div>
     </div>
   </div>
 
-  @if ((notification()?.status || testNotification.status) === 3) {
+  @if (notification()?.status === 3) {
     <mat-card-actions class="actions">
-      <button matButton class="reject-button">
-        უარყოფა
-      </button>
+      <button matButton class="reject-button" (click)="decline.emit()">უარყოფა</button>
 
-      <button matButton class="accept-button">
-        დადასტურება
-      </button>
+      <button matButton class="accept-button" (click)="accept.emit()">დადასტურება</button>
     </mat-card-actions>
   }
 </mat-card>

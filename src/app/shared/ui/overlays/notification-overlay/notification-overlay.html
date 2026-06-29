@@ -50,19 +50,24 @@
         დამთხვევები
       </button>
     </div>
-
-    <div class="notifications-list">
-      @if (activeTab === 'notifications') {
-        @for (item of [1, 2, 3]; track item) {
-          <app-notification-card></app-notification-card>
+    @if (notifications$ | async; as notification) {
+      <div class="notifications-list">
+        @if (activeTab === 'notifications') {
+          @for (item of notification.incoming.items; track item) {
+            <app-notification-card
+              [notification]="item"
+              (accept)="onAcceptMatch(item.volunteerEventMatchId)"
+              (decline)="onDeclineMatch(item.volunteerEventMatchId)"
+            ></app-notification-card>
+          }
         }
-      }
 
-      @if (activeTab === 'matches') {
-        @for (item of [1]; track item) {
-          <app-notification-card></app-notification-card>
+        @if (activeTab === 'matches') {
+          @for (item of notification.accepted.items; track item) {
+            <app-notification-card [notification]="item"></app-notification-card>
+          }
         }
-      }
-    </div>
+      </div>
+    }
   </div>
 </ng-template>

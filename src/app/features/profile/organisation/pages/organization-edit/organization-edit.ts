@@ -15,7 +15,7 @@ interface EditForm {
 }
 @Component({
   selector: 'app-organization-edit',
-  imports: [MatFormField, MatLabel, MatInput, FormField, MatError, MatIconModule],
+  imports: [MatFormField, MatLabel, MatInput, FormField, MatIconModule],
   templateUrl: './organization-edit.html',
   styleUrl: './organization-edit.scss',
 })
@@ -60,48 +60,48 @@ export class OrganizationEdit {
     });
   }
 
-onFileChosen(event: Event) {
-  const fileSelect = event.target as HTMLInputElement;
+  onFileChosen(event: Event) {
+    const fileSelect = event.target as HTMLInputElement;
 
-  if (fileSelect.files?.length !== 1) {
-    return;
-  }
+    if (fileSelect.files?.length !== 1) {
+      return;
+    }
 
-  const file = fileSelect.files[0];
-  const reader = new FileReader();
+    const file = fileSelect.files[0];
+    const reader = new FileReader();
 
-  reader.onload = () => {
-    const img = new Image();
+    reader.onload = () => {
+      const img = new Image();
 
-    img.onload = () => {
-      const maxWidth = 1200;
-      const quality = 0.7;
+      img.onload = () => {
+        const maxWidth = 1200;
+        const quality = 0.7;
 
-      const scale = Math.min(1, maxWidth / img.width);
+        const scale = Math.min(1, maxWidth / img.width);
 
-      const canvas = document.createElement('canvas');
-      canvas.width = img.width * scale;
-      canvas.height = img.height * scale;
+        const canvas = document.createElement('canvas');
+        canvas.width = img.width * scale;
+        canvas.height = img.height * scale;
 
-      const ctx = canvas.getContext('2d');
+        const ctx = canvas.getContext('2d');
 
-      if (!ctx) {
-        return;
-      }
+        if (!ctx) {
+          return;
+        }
 
-      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
-      const compressedBase64 = canvas.toDataURL('image/jpeg', quality);
+        const compressedBase64 = canvas.toDataURL('image/jpeg', quality);
 
-      this.selectedImage.set(compressedBase64);
-      this.editForm.profilePhotoUrl().setControlValue(compressedBase64);
+        this.selectedImage.set(compressedBase64);
+        this.editForm.profilePhotoUrl().setControlValue(compressedBase64);
+      };
+
+      img.src = reader.result as string;
     };
 
-    img.src = reader.result as string;
-  };
-
-  reader.readAsDataURL(file);
-}
+    reader.readAsDataURL(file);
+  }
 
   onSubmit($event: any) {
     $event.preventDefault();
@@ -114,8 +114,6 @@ onFileChosen(event: Event) {
       .pipe(switchMap((res) => this.service.getProfileInfo()))
       .subscribe();
   }
-
-
 
   goToProfile(): void {
     this.router.navigateByUrl('/organization/profile').then();

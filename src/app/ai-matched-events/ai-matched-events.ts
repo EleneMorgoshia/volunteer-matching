@@ -21,9 +21,11 @@ export class AiMatchedEvents {
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
     console.log(id); // ეს არის ორგანიზაციიდან რომ გადმოვა მაშინ ურლ-დან ამოღებული პარამეტრი
-    this.matchService.aiMatch(id).subscribe(() => {
-      this.matchedEvents$ = this.matchService.getMatches(1, 6, id);
-    });
+    // this.matchService.aiMatch(id).subscribe(() => {
+    //   this.matchedEvents$ = this.matchService.getMatches(1, 6, id);
+    // });
+
+    this.matchedEvents$ = this.matchService.getMatches(1, 6, id);
     //ეს არის მოხალისსისთვის
   }
 
