@@ -4,11 +4,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { EventDetailModel } from './event-details-model';
 import { EventDetailsService } from './event-details.service';
 import { Observable } from 'rxjs';
+import { CommonModule, DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-event-details',
   standalone: true,
-  imports: [MatIcon],
+  imports: [MatIcon, CommonModule, DatePipe],
   templateUrl: './event-details.html',
   styleUrl: './event-details.scss',
 })

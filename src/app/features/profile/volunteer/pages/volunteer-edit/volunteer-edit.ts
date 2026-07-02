@@ -1,6 +1,7 @@
-import { Component, computed, effect, inject, input, OnInit, signal } from '@angular/core';
-import { email, form, minLength, required, FormField } from '@angular/forms/signals';
-import { MatFormField, MatLabel, MatError, MatOption, MatSelect } from '@angular/material/select';
+import { Component, computed, effect, inject, OnInit, signal } from '@angular/core';
+import { form, required, FormField } from '@angular/forms/signals';
+import { MatFormField, MatLabel, MatError } from '@angular/material/form-field';
+import { MatOption, MatSelect } from '@angular/material/select';
 import { MatInput } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { Observable, switchMap, tap } from 'rxjs';
@@ -44,17 +45,18 @@ interface EditForm {
   styleUrl: './volunteer-edit.scss',
 })
 export class VolunteerEdit implements OnInit {
-  //ეს 48 ლაინი დავამატე იმიტორო რო გადაიყვანოს პროფილის გვერდზე თუ აღარ მოუნდა ედიტი
   private router = inject(Router);
+  private sharedService = inject(SharedService);
+  private volunteerProfileService = inject(VolunteerProfileService);
+
   formSubmitted = false;
+
   tags$!: Observable<{ tagId: string; name: string }[]>;
+
   profileOptions$!: Observable<{
     skills: { id: string; name: string }[];
     interests: { id: string; name: string }[];
   }>;
-  readonly isFormValid = computed(() => this.editForm().valid());
-  private sharedService = inject(SharedService);
-  private volunteerProfileService = inject(VolunteerProfileService);
 
   selectedImage = signal<string>('');
 
@@ -78,39 +80,101 @@ export class VolunteerEdit implements OnInit {
 
   readonly editForm = form(this.model, (schemaPath) => {
     required(schemaPath.firstName, { message: 'გთხოვთ, შეავსოთ' });
-
     required(schemaPath.lastName, { message: 'გთხოვთ, შეავსოთ' });
-
-    // required(schemaPath.email, { message: 'გთხოვთ, შეავსოთ' });
-    // email(schemaPath.email, { message: 'გთხოვთ, შეავსოთ სწორი ელ.ფოსტის ფორმატით' });
-
     required(schemaPath.birthDate, { message: 'გთხოვთ, შეავსოთ' });
-
-    // required(schemaPath.nationality, { message: 'გთხოვთ, შეავსოთ' });
-
     required(schemaPath.experience, { message: 'გთხოვთ, შეავსოთ' });
-
-    //   required(schemaPath.themes, { message: 'გთხოვთ, შეავსოთ' });
-    //   minLength(schemaPath.themes, 1, { message: 'გთხოვთ, აირჩიოთ მინიმუმ 1 მნიშვნელობა' });
   });
 
-  ngOnInit(): void {
-    this.tags$ = this.sharedService.getTags();
-    this.profileOptions$ = this.sharedService.getProfileOptions();
-  }
+  readonly isFormValid = computed(() => this.editForm().valid());
+
   constructor() {
     effect(() => {
       const currValue = this.volunteerProfileService.profileSignal();
-      if (currValue) {
-        // ეს გასასწორებელია
-        currValue.selectedInterestIds = [];
-        currValue.selectedSkillIds = [];
-        currValue.selectedTagIds = [];
 
-        this.editForm().value.set({ ...currValue });
+      if (!currValue) {
+        return;
       }
+
+      this.editForm().value.set({
+        ...currValue,
+        selectedSkillIds: currValue.selectedSkillIds ?? [],
+        selectedInterestIds: currValue.selectedInterestIds ?? [],
+        selectedTagIds: currValue.selectedTagIds ?? [],
+      });
+
+      this.selectedImage.set(currValue.profilePhotoUrl ?? '');
+
+      this.tags$ = this.sharedService.getTags().pipe(
+        tap((tags) => {
+          const currValue = this.volunteerProfileService.profileSignal();
+
+          if (!currValue) {
+            return;
+          }
+
+          const tagNames = currValue.selectedTagIds || currValue.volunteerTagIds;
+
+          const selectedTagIds = tags
+            ?.filter((tag) => tagNames.includes(tag.tagId))
+            .map((tag) => tag.tagId);
+
+          console.log(selectedTagIds, tagNames, tags);
+          this.editForm.selectedTagIds().setControlValue(selectedTagIds);
+        }),
+      );
+
+      this.profileOptions$ = this.sharedService.getProfileOptions().pipe(
+        tap((options) => {
+          const currValue = this.volunteerProfileService.profileSignal();
+          if (!currValue) {
+            return;
+          }
+          const skillNames = this.toNameArray((currValue as any).skills);
+          const interestNames = this.toNameArray((currValue as any).interests);
+
+          const selectedSkillIds = options.skills
+            .filter((skill) => skillNames.includes(skill.name))
+            .map((skill) => skill.id);
+
+          const selectedInterestIds = options.interests
+            .filter((interest) => interestNames.includes(interest.name))
+            .map((interest) => interest.id);
+
+          this.editForm.selectedSkillIds().setControlValue(selectedSkillIds);
+          this.editForm.selectedInterestIds().setControlValue(selectedInterestIds);
+          console.log(this.editForm.selectedSkillIds());
+          console.log(this.editForm.selectedInterestIds());
+        }),
+      );
     });
   }
+
+  ngOnInit(): void {}
+
+  private toNameArray(value: any): string[] {
+    if (!value) {
+      return [];
+    }
+
+    if (Array.isArray(value)) {
+      return value
+        .map((item) => {
+          if (typeof item === 'string') {
+            return item.trim();
+          }
+
+          return item.name?.trim();
+        })
+        .filter(Boolean);
+    }
+
+    if (typeof value === 'string') {
+      return value.split(',').map((item) => item.trim());
+    }
+
+    return [];
+  }
+
   onFileChosen(event: Event) {
     const fileSelect = event.target as HTMLInputElement;
 
@@ -155,30 +219,28 @@ export class VolunteerEdit implements OnInit {
     reader.readAsDataURL(file);
   }
 
-  onSubmit($event: any) {
-    $event.preventDefault();
+  onSubmit(event: Event) {
+    event.preventDefault();
+
     this.formSubmitted = true;
-    const date = new Date(this.editForm().value().birthDate);
-    const formattedDate = date.toISOString().split('T')[0];
-    console.log(formattedDate); // 2026-06-09
-    this.editForm.birthDate().setControlValue(formattedDate);
+
+    const birthDateValue = this.editForm().value().birthDate;
+
+    if (birthDateValue) {
+      const date = new Date(birthDateValue);
+      const formattedDate = date.toISOString().split('T')[0];
+      this.editForm.birthDate().setControlValue(formattedDate);
+    }
+
     if (!this.isFormValid()) {
       return;
     }
-    console.log(this.editForm().value());
-    // this.volunteerProfileService
-    //   .updateProfile(this.editForm().value())
-    //   .pipe(switchMap(() => this.volunteerProfileService.getProfileInfo()))
-    //   .subscribe();
 
     this.volunteerProfileService
       .updateProfile(this.editForm().value())
       .pipe(
         tap(() => console.log('update finished')),
-        switchMap(() => {
-          console.log('starting get profile');
-          return this.volunteerProfileService.getProfileInfo();
-        }),
+        switchMap(() => this.volunteerProfileService.getProfileInfo()),
       )
       .subscribe({
         next: (profile) => {

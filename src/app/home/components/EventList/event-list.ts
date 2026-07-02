@@ -4,10 +4,11 @@ import { Pagination } from '../../../shared/ui/pagination/pagination';
 import { EventModel } from '../../../features/profile/organisation/pages/organization-event/organization-event.model';
 import { MatchedDetails, MatchedEvents } from '../../../ai-matched-events/ai-matched-events.model';
 import { VolunteerMatchCard } from '../../../shared/ui/cards/volunteer-match-card/volunteer-match-card';
+import { OrganizationMatchCard } from '../../../shared/ui/cards/organization-match-card/organization-match-card';
 
 @Component({
   selector: 'app-event-list',
-  imports: [EventCard, Pagination, VolunteerMatchCard],
+  imports: [EventCard, Pagination, VolunteerMatchCard, OrganizationMatchCard],
   templateUrl: './event-list.html',
   styleUrl: './event-list.scss',
 })
@@ -15,6 +16,7 @@ export class EventList {
   events = input<EventModel[] | MatchedEvents | null>(null);
   canEdit = input(false);
   isMatchVolunteer = input(false);
+  isMatchOrg = input(false);
 
   eventDeleted = output<void>();
   requestMatch = output<string>();

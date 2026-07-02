@@ -17,27 +17,49 @@ export class AiMatchedEvents {
   private route = inject(ActivatedRoute);
   readonly matchService = inject(AiMatchService);
   matchedEvents$!: Observable<MatchedEvents>;
+  eventId!: string;
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
     console.log(id); // ეს არის ორგანიზაციიდან რომ გადმოვა მაშინ ურლ-დან ამოღებული პარამეტრი
-    // this.matchService.aiMatch(id).subscribe(() => {
-    //   this.matchedEvents$ = this.matchService.getMatches(1, 6, id);
-    // });
+    this.eventId = id || '';
+    this.matchService.aiMatch(id).subscribe(() => {
+      this.matchedEvents$ = this.matchService.getMatches(1, 6, id);
+    });
 
-    this.matchedEvents$ = this.matchService.getMatches(1, 6, id);
+    // this.matchedEvents$ = this.matchService.getMatches(1, 6, id);
     //ეს არის მოხალისსისთვის
   }
 
   onRequestMatch(id: string) {
-    this.matchService
-      .requestForVolunteer(id)
-      .subscribe(() => (this.matchedEvents$ = this.matchService.getMatches(1, 6, null)));
+    if (this.matchService.authService.isVolunteer()) {
+      this.matchService
+        .requestForVolunteer(id)
+        .subscribe(() => (this.matchedEvents$ = this.matchService.getMatches(1, 6, null)));
+    } else {
+      this.onRequestMatchOrg(id);
+    }
   }
 
   onRejectMatch(id: string) {
+    if (this.matchService.authService.isVolunteer()) {
+      this.matchService
+        .rejectForVolunteer(id)
+        .subscribe(() => (this.matchedEvents$ = this.matchService.getMatches(1, 6, null)));
+    } else {
+      this.onRejectMatchOrg(id);
+    }
+  }
+
+  onRequestMatchOrg(id: string) {
     this.matchService
-      .rejectForVolunteer(id)
-      .subscribe(() => (this.matchedEvents$ = this.matchService.getMatches(1, 6, null)));
+      .requestForOrg(this.eventId, id)
+      .subscribe(() => (this.matchedEvents$ = this.matchService.getMatches(1, 6, this.eventId)));
+  }
+
+  onRejectMatchOrg(id: string) {
+    this.matchService
+      .rejectForOrg(this.eventId, id)
+      .subscribe(() => (this.matchedEvents$ = this.matchService.getMatches(1, 6, this.eventId)));
   }
 }

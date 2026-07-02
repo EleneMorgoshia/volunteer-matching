@@ -27,8 +27,8 @@ export class Volunteer implements OnInit {
     citizenship: '',
     profession: '',
     languages: '',
-    skills: [],
-    interests: [],
+    selectedSkillIds: [],
+    selectedInterestIds: [],
     selectedTagIds: [],
   });
 
@@ -51,8 +51,8 @@ export class Volunteer implements OnInit {
     required(schema.citizenship, { message: 'გთხოვთ შეავსოთ' });
     required(schema.profession, { message: 'გთხოვთ შეავსოთ' });
     required(schema.languages, { message: 'გთხოვთ შეავსოთ' });
-    required(schema.skills, { message: 'გთხოვთ შეავსოთ' });
-    required(schema.interests, { message: 'გთხოვთ შეავსოთ' });
+    required(schema.selectedSkillIds, { message: 'გთხოვთ შეავსოთ' });
+    required(schema.selectedInterestIds, { message: 'გთხოვთ შეავსოთ' });
     required(schema.selectedTagIds, { message: 'გთხოვთ შეავსოთ' });
   });
 
@@ -91,16 +91,6 @@ export class Volunteer implements OnInit {
     console.log('Form value:', this.form().value());
 
     if (this.form().invalid()) {
-      console.log('email errors:', this.form.email().errors());
-      console.log('password errors:', this.form.password().errors());
-      console.log('confirmPassword errors:', this.form.confirmPassword().errors());
-      console.log('firstName errors:', this.form.firstName().errors());
-      console.log('lastName errors:', this.form.lastName().errors());
-      console.log('citizenship errors:', this.form.citizenship().errors());
-      console.log('profession errors:', this.form.profession().errors());
-      console.log('languages errors:', this.form.languages().errors());
-      console.log('skills errors:', this.form.skills().errors());
-      console.log('interests errors:', this.form.interests().errors());
       return;
     }
 
@@ -126,8 +116,8 @@ export class Volunteer implements OnInit {
       citizenship: this.form.citizenship().value(),
       profession: this.form.profession().value(),
       languages: this.form.languages().value(),
-      skills: this.form.skills().value(),
-      interests: this.form.interests().value(),
+      selectedSkillIds: this.form.selectedSkillIds().value(),
+      selectedInterestIds: this.form.selectedInterestIds().value(),
       selectedTagIds: this.form.selectedTagIds().value(),
     };
 

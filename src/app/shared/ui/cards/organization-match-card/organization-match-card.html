@@ -10,69 +10,56 @@
       </div>
 
       <div class="main-info">
-        <div class="top-row">
-          <div>
-            <p class="volunteer-name">{{ fullName() || 'მოხალისე' }}</p>
-            <p class="volunteer-profession">
-              {{ volunteer.profession || 'პროფესია არ არის მითითებული' }}
-            </p>
-          </div>
-
-          <div class="match-actions">
-            <button
-              class="action-button accept-button"
-              type="button"
-              (click)="requestMatch.emit(volunteerMatchId())"
-            >
-              <mat-icon fontIcon="check"></mat-icon>
-            </button>
-
-            <button
-              class="action-button reject-button"
-              type="button"
-              (click)="rejectMatch.emit(volunteerMatchId())"
-            >
-              <mat-icon fontIcon="close"></mat-icon>
-            </button>
-          </div>
-        </div>
+        <p class="volunteer-name">{{ fullName() || 'მოხალისე' }}</p>
 
         <div class="short-info">
-          <div class="info-item">
-            <mat-icon fontIcon="mail"></mat-icon>
-            <span>{{ volunteer.email || 'ელ.ფოსტა არ არის მითითებული' }}</span>
-          </div>
+          <p>
+            <strong>იმეილი:</strong>
+            {{ volunteer.email || 'ელ.ფოსტა არ არის მითითებული' }}
+          </p>
 
-          <div class="info-item">
-            <mat-icon fontIcon="public"></mat-icon>
-            <span>{{ volunteer.citizenship || 'მოქალაქეობა არ არის მითითებული' }}</span>
-          </div>
+          <p>
+            <strong>მოქალაქეობა:</strong>
+            {{ volunteer.citizenship || 'მოქალაქეობა არ არის მითითებული' }}
+          </p>
 
-          <div class="info-item">
-            <mat-icon fontIcon="language"></mat-icon>
-            <span>{{ volunteer.languages || 'ენები არ არის მითითებული' }}</span>
-          </div>
+          <p>
+            <strong>დაბადების თარიღი:</strong>
+            {{ volunteer.dateOfBirth || 'არ არის მითითებული' }}
+          </p>
+
+          <p>
+            <strong>ენები:</strong>
+            {{ volunteer.languages || 'ენები არ არის მითითებული' }}
+          </p>
         </div>
 
         <div class="description-block">
           <p class="section-title">ჩემ შესახებ</p>
+
           <p class="description-text">
             {{ volunteer.description || 'მოხალისეს აღწერა ჯერ არ აქვს დამატებული.' }}
           </p>
         </div>
-
-        <div class="skills-block">
-          <div class="skill-chip">
-            <mat-icon fontIcon="auto_awesome"></mat-icon>
-            <span>{{ volunteer.skills || 'უნარები არ არის მითითებული' }}</span>
-          </div>
-
-          <div class="skill-chip">
-            <mat-icon fontIcon="favorite"></mat-icon>
-            <span>{{ volunteer.interests || 'ინტერესები არ არის მითითებული' }}</span>
-          </div>
-        </div>
       </div>
+    </div>
+
+    <div class="match-actions">
+      <button
+        class="match-button accept-button"
+        type="button"
+        (click)="requestMatch.emit(volunteerMatchId())"
+      >
+        დადასტურება
+      </button>
+
+      <button
+        class="match-button reject-button"
+        type="button"
+        (click)="rejectMatch.emit(volunteerMatchId())"
+      >
+        უარყოფა
+      </button>
     </div>
   </div>
 }

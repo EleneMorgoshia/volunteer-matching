@@ -2,199 +2,111 @@ $primary: #c13de6;
 
 .organization-match-card {
   width: 100%;
-
-  padding: 28px;
+  padding: 36px 48px;
   border-radius: 34px;
 
-  background:
-    radial-gradient(circle at top right, rgba(193, 61, 230, 0.12), transparent 42%),
-    #ffffff;
+  background: #d9d9d9;
 
-  box-shadow: 0 18px 48px rgba(193, 61, 230, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
 
   box-sizing: border-box;
 }
 
 .profile-section {
   display: grid;
-  grid-template-columns: 160px 1fr;
+  grid-template-columns: 240px 1fr;
   gap: 28px;
   align-items: center;
 }
 
 .image-wrapper {
-  width: 160px;
-  height: 160px;
+  width: 220px;
+  height: 220px;
 
   border-radius: 50%;
+
+  background: #ffffff;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  background: #f8f8f8;
-  box-shadow: inset 0 0 0 1px rgba(193, 61, 230, 0.08);
+  overflow: hidden;
 }
 
 .volunteer-image {
-  width: 142px;
-  height: 142px;
+  width: 100%;
+  height: 100%;
 
   border-radius: 50%;
 
   object-fit: cover;
   display: block;
-
-  background: #ffffff;
 }
 
 .main-info {
   min-width: 0;
-
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.top-row {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 18px;
 }
 
 .volunteer-name {
-  margin: 0 0 4px;
+  margin: 0 0 8px;
 
   font-size: 28px;
-  font-weight: 700;
+  font-weight: 500;
+  line-height: 1.2;
 
-  color: #151016;
-}
-
-.volunteer-profession {
-  margin: 0;
-
-  font-size: 16px;
-  font-weight: 600;
-
-  color: $primary;
-}
-
-.match-actions {
-  display: flex;
-  gap: 10px;
-  flex-shrink: 0;
-}
-
-.action-button {
-  width: 42px;
-  height: 42px;
-
-  border: none;
-  border-radius: 50%;
-
-  background: #f8f8f8;
-  color: #151016;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  cursor: pointer;
-
-  transition:
-    transform 0.25s ease,
-    background 0.25s ease,
-    color 0.25s ease,
-    box-shadow 0.25s ease;
-
-  mat-icon {
-    font-size: 22px;
-  }
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 24px rgba(21, 16, 22, 0.12);
-  }
-}
-
-.accept-button {
-  color: #229c5b;
-
-  &:hover {
-    background: #229c5b;
-    color: #ffffff;
-  }
-}
-
-.reject-button {
-  color: #d93b3b;
-
-  &:hover {
-    background: #d93b3b;
-    color: #ffffff;
-  }
+  color: #111111;
 }
 
 .short-info {
   display: flex;
-  align-items: center;
   flex-wrap: wrap;
-  gap: 10px 18px;
-}
+  column-gap: 18px;
+  row-gap: 4px;
 
-.info-item {
-  min-width: 0;
+  margin-bottom: 14px;
 
-  display: flex;
-  align-items: center;
-  gap: 6px;
+  p {
+    margin: 0;
 
-  color: #4b414d;
+    font-size: 18px;
+    line-height: 1.5;
 
-  mat-icon {
-    flex-shrink: 0;
-    font-size: 20px;
-    color: $primary;
+    color: #111111;
   }
 
-  span {
-    max-width: 240px;
-
-    font-size: 14px;
-    line-height: 1.4;
-
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+  strong {
+    font-weight: 800;
   }
 }
 
 .description-block {
-  padding-top: 4px;
+  max-width: 590px;
 }
 
 .section-title {
-  width: fit-content;
-
   margin: 0 0 8px;
 
-  font-size: 15px;
-  font-weight: 700;
+  width: 100%;
 
-  color: #151016;
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1.3;
 
-  border-bottom: 2px solid $primary;
+  color: #111111;
+
+  border-bottom: 2px solid #111111;
 }
 
 .description-text {
   margin: 0;
 
-  font-size: 14px;
-  line-height: 1.65;
+  font-size: 18px;
+  line-height: 1.28;
 
-  color: #4b414d;
+  color: #111111;
 
   display: -webkit-box;
   -webkit-line-clamp: 3;
@@ -204,131 +116,108 @@ $primary: #c13de6;
   overflow: hidden;
 }
 
-.skills-block {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+.match-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 84px;
 }
 
-.skill-chip {
-  max-width: 100%;
+.match-button {
+  height: 56px;
 
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-
-  padding: 9px 14px;
+  border: none;
   border-radius: 999px;
 
-  background: rgba(193, 61, 230, 0.08);
-  color: #151016;
+  background: #ababab;
+  color: #111111;
 
-  mat-icon {
-    flex-shrink: 0;
-    font-size: 18px;
-    color: $primary;
-  }
+  font-family: inherit;
+  font-size: 18px;
+  font-weight: 700;
 
-  span {
-    font-size: 13px;
-    line-height: 1.3;
+  cursor: pointer;
 
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.match-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+}
+
+.accept-button:hover {
+  background: #229c5b;
+  color: #ffffff;
+}
+
+.reject-button:hover {
+  background: #d93b3b;
+  color: #ffffff;
 }
 
 @media (max-width: 900px) {
   .organization-match-card {
-    padding: 24px;
+    padding: 32px;
   }
 
   .profile-section {
-    grid-template-columns: 130px 1fr;
-    gap: 22px;
+    grid-template-columns: 180px 1fr;
   }
 
   .image-wrapper {
-    width: 130px;
-    height: 130px;
-  }
-
-  .volunteer-image {
-    width: 116px;
-    height: 116px;
+    width: 170px;
+    height: 170px;
   }
 
   .volunteer-name {
     font-size: 24px;
   }
 
-  .short-info {
-    flex-direction: column;
-    align-items: flex-start;
+  .short-info p,
+  .description-text {
+    font-size: 16px;
   }
 
-  .info-item span {
-    max-width: 100%;
+  .match-actions {
+    gap: 32px;
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 650px) {
   .organization-match-card {
-    padding: 22px;
+    padding: 24px;
     border-radius: 28px;
   }
 
   .profile-section {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
   }
 
   .image-wrapper {
-    width: 120px;
-    height: 120px;
+    width: 150px;
+    height: 150px;
   }
 
-  .volunteer-image {
-    width: 108px;
-    height: 108px;
+  .short-info {
+    justify-content: center;
   }
 
-  .main-info {
-    width: 100%;
-  }
-
-  .top-row {
-    width: 100%;
-    align-items: center;
-  }
-
-  .volunteer-name {
-    font-size: 22px;
-  }
-
-  .volunteer-profession {
-    font-size: 15px;
-  }
-
-  .action-button {
-    width: 38px;
-    height: 38px;
-  }
-
-  .skill-chip span {
-    white-space: normal;
-  }
-}
-
-@media (max-width: 420px) {
-  .top-row {
-    flex-direction: column;
-    align-items: flex-start;
+  .description-block {
+    max-width: 100%;
   }
 
   .match-actions {
-    align-self: flex-end;
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .match-button {
+    height: 52px;
   }
 }

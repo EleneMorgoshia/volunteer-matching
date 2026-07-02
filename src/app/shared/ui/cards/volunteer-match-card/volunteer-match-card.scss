@@ -2,32 +2,42 @@ $primary: #c13de6;
 
 .event-card-container {
   width: 100%;
+
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 18px;
+
+  background: #ffffff;
 }
 
 .image-container {
   position: relative;
+
   width: 100%;
-  aspect-ratio: 1 / 0.65;
+  aspect-ratio: 1 / 0.84;
+
   overflow: hidden;
-  border-radius: 30px;
+  border-radius: 34px;
+
   cursor: pointer;
+  background: #d9d9d9;
 }
 
 .event-image {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+
   display: block;
-  filter: brightness(98%);
+  object-fit: cover;
+
+  filter: brightness(96%);
 }
 
 .image-container::after {
   content: '';
   position: absolute;
   inset: 0;
+
   background: transparent;
   transition: 0.3s ease;
 }
@@ -38,34 +48,46 @@ $primary: #c13de6;
 
 .heart-button {
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 28px;
+  right: 28px;
+  z-index: 3;
 
-  width: 40px;
-  height: 40px;
+  width: 62px;
+  height: 62px;
 
   border: none;
   border-radius: 50%;
 
-  background-color: #ffffff;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  background: rgba(255, 255, 255, 0.9);
+  color: #111111;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
   cursor: pointer;
-  z-index: 2;
 
-  transition: 0.25s ease;
-
-  &:hover {
-    transform: scale(1.08);
-    box-shadow: 0 4px 12px rgba(21, 16, 22, 0.12);
-  }
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    color 0.25s ease;
 
   mat-icon {
+    width: 36px;
+    height: 36px;
+
+    font-size: 36px;
+    color: #111111;
+  }
+
+  &:hover {
+    transform: scale(1.06);
+    background: #ffffff;
     color: $primary;
+
+    mat-icon {
+      color: $primary;
+    }
   }
 }
 
@@ -73,27 +95,33 @@ $primary: #c13de6;
   position: absolute;
   left: 50%;
   top: 50%;
+  z-index: 3;
 
   transform: translate(-50%, -50%);
+
+  min-width: 128px;
+  height: 40px;
+  padding: 0 22px;
 
   border: none;
   border-radius: 999px;
 
-  padding: 14px 48px;
-
   background: #ffffff;
   color: #111111;
 
-  font-size: 18px;
-  font-weight: 500;
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
 
   cursor: pointer;
-  z-index: 2;
 
   opacity: 0;
   visibility: hidden;
 
-  transition: 0.3s ease;
+  transition:
+    opacity 0.25s ease,
+    visibility 0.25s ease,
+    transform 0.25s ease;
 }
 
 .image-container:hover .see-more-button {
@@ -104,7 +132,7 @@ $primary: #c13de6;
 .texts-container {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
 }
 
 .event-title {
@@ -112,6 +140,7 @@ $primary: #c13de6;
 
   font-size: 28px;
   font-weight: 600;
+  line-height: 1.2;
 
   color: #111111;
 }
@@ -119,119 +148,201 @@ $primary: #c13de6;
 .organisation-name {
   margin: 0;
 
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 400;
+  line-height: 1.25;
 
-  color: #555555;
+  color: #222222;
 }
 
-.description-container {
-  p {
-    margin: 8px 0 0;
+.description-container p {
+  margin: 12px 0 0;
 
-    font-size: 18px;
-    line-height: 1.5;
+  font-size: 21px;
+  line-height: 1.28;
+  font-weight: 400;
 
-    color: #333333;
+  color: #111111;
 
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    line-clamp: 3;
-    -webkit-box-orient: vertical;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
 
-    overflow: hidden;
-  }
+  overflow: hidden;
 }
 
 .detailed-info-container {
   display: flex;
   align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
+  gap: 18px;
+
+  flex-wrap: nowrap;
+  white-space: nowrap;
 }
 
 .info-item {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 10px;
+
+  min-width: 0;
 
   mat-icon {
-    color: $primary;
+    width: 34px;
+    height: 34px;
+
+    font-size: 34px;
+    color: #111111;
   }
 
   p {
     margin: 0;
-    font-size: 18px;
-    color: #222222;
+
+    font-size: 22px;
+    line-height: 1.2;
+    font-weight: 400;
+
+    color: #111111;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 }
 
 .divider {
-  width: 1px;
-  height: 28px;
-  background: #d7d7d7;
+  width: 2px;
+  min-width: 2px;
+  height: 42px;
+
+  background: #111111;
+  opacity: 0.85;
 }
 
 .icon-button {
   position: absolute;
-  top: 20px;
+  top: 28px;
+  z-index: 3;
 
-  width: 40px;
-  height: 40px;
+  width: 62px;
+  height: 62px;
 
   border: none;
   border-radius: 50%;
 
-  background-color: #ffffff;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  background: rgba(255, 255, 255, 0.9);
+  color: #111111;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
   cursor: pointer;
-  z-index: 2;
 
-  transition: 0.25s ease;
-
-  &:hover {
-    transform: scale(1.08);
-    box-shadow: 0 4px 12px rgba(21, 16, 22, 0.12);
-  }
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    color 0.25s ease;
 
   mat-icon {
+    width: 34px;
+    height: 34px;
+
+    font-size: 34px;
     color: $primary;
+  }
+
+  &:hover {
+    transform: scale(1.06);
+    background: #ffffff;
   }
 }
 
 .ai-button {
-  right: 68px;
+  right: 98px;
 }
 
 .delete-button {
-  right: 20px;
+  right: 28px;
+}
+
+.match-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 72px;
+
+  margin-top: 4px;
+}
+
+.action-button {
+  height: 70px;
+
+  border: none;
+  border-radius: 999px;
+
+  background: #d9d9d9;
+  color: #111111;
+
+  font-size: 20px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.action-button:hover {
+  transform: translateY(-2px);
+}
+
+.accept-button:hover {
+  background: #e8f7ea;
+  color: #168a2f;
+}
+
+.reject-button:hover {
+  background: #fdecec;
+  color: #d32f2f;
 }
 
 @media (max-width: 768px) {
-  .event-card-container {
-    max-width: 100%;
-  }
-
   .image-container {
-    border-radius: 24px;
+    border-radius: 28px;
   }
 
-  .heart-button {
-    width: 46px;
-    height: 46px;
+  .heart-button,
+  .icon-button {
+    width: 52px;
+    height: 52px;
 
-    top: 14px;
-    right: 14px;
+    top: 18px;
+    right: 18px;
+
+    mat-icon {
+      width: 30px;
+      height: 30px;
+      font-size: 30px;
+    }
+  }
+
+  .ai-button {
+    right: 78px;
+  }
+
+  .delete-button {
+    right: 18px;
   }
 
   .see-more-button {
-    padding: 10px 34px;
-    font-size: 15px;
+    min-width: 118px;
+    height: 38px;
+    padding: 0 20px;
+
+    font-size: 14px;
   }
 
   .event-title {
@@ -239,23 +350,42 @@ $primary: #c13de6;
   }
 
   .organisation-name {
-    font-size: 17px;
+    font-size: 18px;
   }
 
   .description-container p {
-    font-size: 15px;
+    font-size: 16px;
   }
 
   .detailed-info-container {
-    gap: 10px;
+    gap: 12px;
   }
 
-  .info-item p {
-    font-size: 14px;
+  .info-item {
+    gap: 8px;
+
+    mat-icon {
+      width: 26px;
+      height: 26px;
+      font-size: 26px;
+    }
+
+    p {
+      font-size: 16px;
+    }
   }
 
   .divider {
-    height: 22px;
+    height: 30px;
+  }
+
+  .match-actions {
+    gap: 24px;
+  }
+
+  .action-button {
+    height: 56px;
+    font-size: 16px;
   }
 }
 
@@ -265,11 +395,16 @@ $primary: #c13de6;
   }
 
   .detailed-info-container {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 12px;
   }
 
   .divider {
     display: none;
+  }
+
+  .match-actions {
+    grid-template-columns: 1fr;
+    gap: 12px;
   }
 }

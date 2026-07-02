@@ -11,15 +11,23 @@ export class EventService {
   private http = inject(HttpClient);
 
   createEvent(params: EventParams) {
-    return this.http.post<any>(this.url + '/organizations/me/events', params);
+    return this.http.post<any>(this.url + '/organizations/me/events', {
+      ...params,
+      showSnackBar: true,
+    });
   }
 
   updateEvent(params: EventParams, eventId: string) {
-    return this.http.put<any>(this.url + '/organizations/me/events/' + eventId, params);
+    return this.http.put<any>(this.url + '/organizations/me/events/' + eventId, {
+      ...params,
+      showSnackBar: true,
+    });
   }
 
   deleteEvent(id: string) {
-    return this.http.delete<any>(this.url + '/organizations/me/events/' + id);
+    return this.http.delete<any>(this.url + '/organizations/me/events/' + id, {
+      params: { showSnackBar: true },
+    });
   }
 
   getOrganizationEvents() {
@@ -31,7 +39,9 @@ export class EventService {
   }
 
   favoriteEvent(eventId: string | undefined) {
-    return this.http.post<any>(this.url + '/volunteers/me/favorites/' + eventId, {});
+    return this.http.post<any>(this.url + '/volunteers/me/favorites/' + eventId, {
+      showSnackBar: true,
+    });
   }
 
   getEvents(page = 1, pageSize = 9) {

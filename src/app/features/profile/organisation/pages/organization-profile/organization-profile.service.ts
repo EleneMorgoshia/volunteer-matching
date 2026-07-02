@@ -21,7 +21,7 @@ export class OrganizationProfileService {
   }
 
   updateProfile(params: OrganizationParams) {
-    return this.http.put(this.url + '/organizations/me', params, {
+    return this.http.put(this.url + '/organizations/me', {...params, showSnackBar: true}, {
       responseType: 'text',
     });
   }

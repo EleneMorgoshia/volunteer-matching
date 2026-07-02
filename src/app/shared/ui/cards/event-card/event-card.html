@@ -16,9 +16,11 @@
           <mat-icon fontIcon="delete_outline"></mat-icon>
         </button>
       } @else {
-        <button class="heart-button" type="button" (click)="onToggleFavorite()">
-          <mat-icon fontIcon="favorite_border"></mat-icon>
-        </button>
+        @if (isVolunteer()) {
+          <button class="heart-button" type="button" (click)="onToggleFavorite()">
+            <mat-icon fontIcon="favorite_border"></mat-icon>
+          </button>
+        }
       }
 
       <button class="see-more-button" type="button" (click)="onNavigateToEventDetails()">
@@ -52,7 +54,7 @@
 
       <div class="info-item">
         <mat-icon fontIcon="schedule"></mat-icon>
-        <p>{{ event.startDate }} - {{ event.endDate }}</p>
+        <p>{{ event.startDate | date: 'dd/MM/yyyy' }} - {{ event.endDate | date: 'dd/MM/yyyy' }}</p>
       </div>
 
       <div class="divider"></div>

@@ -7,6 +7,7 @@
     <app-event-list
       [events]="eventDetails"
       [isMatchVolunteer]="matchService.authService.isVolunteer()"
+      [isMatchOrg]="matchService.authService.isOrganization()"
       (requestMatch)="onRequestMatch($event)"
       (rejectMatch)="onRejectMatch($event)"
     ></app-event-list>

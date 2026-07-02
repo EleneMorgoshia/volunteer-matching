@@ -58,9 +58,10 @@
 
   @if (profileOptions$ | async; as profileOptions) {
     <div class="input-div">
+      <label for="selectedSkillIds">უნარები</label>
+
       <mat-form-field>
-        <mat-label>უნარები</mat-label>
-        <mat-select multiple [formField]="form.skills">
+        <mat-select placeholder="უნარები*" id="skills" multiple [formField]="form.selectedSkillIds">
           @for (skill of profileOptions.skills; track skill.id) {
             <mat-option [value]="skill.id">{{ skill.name }}</mat-option>
           }
@@ -69,9 +70,15 @@
     </div>
 
     <div class="input-div">
+      <label for="interests">ინტერესები</label>
+
       <mat-form-field>
-        <mat-label>ინტერესები</mat-label>
-        <mat-select multiple [formField]="form.interests">
+        <mat-select
+          placeholder="ინტერესები*"
+          id="interests"
+          multiple
+          [formField]="form.selectedInterestIds"
+        >
           @for (interest of profileOptions.interests; track interest.id) {
             <mat-option [value]="interest.id">{{ interest.name }}</mat-option>
           }
@@ -81,9 +88,12 @@
   }
 
   <div class="input-div">
+    <label for="tags">თემატიკა</label>
+
     <mat-form-field>
-      <mat-label>თემატიკა</mat-label>
       <mat-select
+        placeholder="თემატიკა*"
+        id="tags"
         multiple
         [formField]="form.selectedTagIds"
         (selectionChange)="onTagChange($event)"

@@ -9,11 +9,19 @@
             (requestMatch)="requestMatch.emit($event)"
           ></app-volunteer-match-card>
         } @else {
-          <app-event-card
-            [eventItem]="item"
-            [canEdit]="canEdit()"
-            (eventDeleted)="eventDeleted.emit()"
-          ></app-event-card>
+          @if (isMatchOrg()) {
+            <app-organization-match-card
+              [volunteerItem]="item"
+              (rejectMatch)="rejectMatch.emit($event)"
+              (requestMatch)="requestMatch.emit($event)"
+            ></app-organization-match-card>
+          } @else {
+            <app-event-card
+              [eventItem]="item"
+              [canEdit]="canEdit()"
+              (eventDeleted)="eventDeleted.emit()"
+            ></app-event-card>
+          }
         }
       </div>
     }

@@ -17,7 +17,7 @@ export class NotificationService {
     } else {
       url += `/volunteers/me/matches/${matchId}/accept`;
     }
-    return this.http.post(url, {});
+    return this.http.post(url, { showSnackBar: true });
   }
 
   declineMatch(matchId: string) {
@@ -27,7 +27,7 @@ export class NotificationService {
     } else {
       url += `/volunteers/me/matches/${matchId}/decline`;
     }
-    return this.http.post(url, {});
+    return this.http.post(url, { showSnackBar: true });
   }
 
   getNotifications(incomingPage = 1, acceptedPage = 1, pageSize = 6) {

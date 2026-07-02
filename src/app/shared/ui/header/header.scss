@@ -7,14 +7,15 @@
 }
 
 .header-left {
-  width: 120px;
-  height: 90px;
+ width: 70px;
+  height: 70px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   text-decoration: none;
   flex-shrink: 0;
   cursor: pointer;
+  overflow: hidden;
 }
 
 .LOGO {

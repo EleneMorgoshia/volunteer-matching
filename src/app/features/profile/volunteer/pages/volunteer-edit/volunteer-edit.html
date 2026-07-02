@@ -19,6 +19,7 @@
 
           <mat-form-field class="image-pill">
             <mat-label>სურათი</mat-label>
+
             <input matInput placeholder="სურათის ბმული" [formField]="editForm.profilePhotoUrl" />
 
             <input type="file" accept=".png,.jpg,.jpeg" (change)="onFileChosen($event)" />
@@ -57,7 +58,7 @@
 
         <mat-form-field>
           <mat-label>დაბადების თარიღი</mat-label>
-          <input matInput placeholder="dd/mm/yyyy" [formField]="editForm.birthDate" />
+          <input matInput placeholder="yyyy-mm-dd" [formField]="editForm.birthDate" />
 
           @if (formSubmitted && editForm.birthDate().invalid()) {
             @for (error of editForm.birthDate().errors(); track error) {
@@ -176,13 +177,15 @@
       <div class="input-div">
         <mat-form-field>
           <mat-label>უნარები</mat-label>
+
           <mat-select multiple [formField]="editForm.selectedSkillIds">
             @for (skill of profileOptions.skills; track skill.id) {
               <mat-option [value]="skill.id">{{ skill.name }}</mat-option>
             }
           </mat-select>
-          @if (formSubmitted && editForm.selectedInterestIds().invalid()) {
-            @for (error of editForm.selectedInterestIds().errors(); track error) {
+
+          @if (formSubmitted && editForm.selectedSkillIds().invalid()) {
+            @for (error of editForm.selectedSkillIds().errors(); track error) {
               <mat-error>{{ error.message }}</mat-error>
             }
           }
@@ -192,11 +195,13 @@
       <div class="input-div">
         <mat-form-field>
           <mat-label>ინტერესები</mat-label>
+
           <mat-select multiple [formField]="editForm.selectedInterestIds">
             @for (interest of profileOptions.interests; track interest.id) {
               <mat-option [value]="interest.id">{{ interest.name }}</mat-option>
             }
           </mat-select>
+
           @if (formSubmitted && editForm.selectedInterestIds().invalid()) {
             @for (error of editForm.selectedInterestIds().errors(); track error) {
               <mat-error>{{ error.message }}</mat-error>
@@ -208,17 +213,26 @@
 
     <mat-form-field class="full-field">
       <mat-label>თემები</mat-label>
+
       <mat-select multiple [formField]="editForm.selectedTagIds">
-        @for (tag of tags$ | async; track tag) {
+        @for (tag of tags$ | async; track tag.tagId) {
           <mat-option [value]="tag.tagId">{{ tag.name }}</mat-option>
         }
       </mat-select>
+
+      @if (formSubmitted && editForm.selectedTagIds().invalid()) {
+        @for (error of editForm.selectedTagIds().errors(); track error) {
+          <mat-error>{{ error.message }}</mat-error>
+        }
+      }
     </mat-form-field>
   </div>
 
   <div class="actions">
     <button class="password-button" type="button" mat-raised-button>პაროლის შეცვლა</button>
 
-    <button class="save-button" mat-raised-button (click)="onSubmit($event)">შენახვა</button>
+    <button class="save-button" type="submit" mat-raised-button (click)="onSubmit($event)">
+      შენახვა
+    </button>
   </div>
 </form>

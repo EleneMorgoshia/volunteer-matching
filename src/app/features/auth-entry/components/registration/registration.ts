@@ -7,7 +7,6 @@ import { Organization } from './components/organization/organization';
 import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { ActivatedRoute } from '@angular/router';
 
-
 export const fields: (keyof RegistrationVolunteerInfo)[] = [
   'firstName',
   'lastName',
@@ -15,8 +14,8 @@ export const fields: (keyof RegistrationVolunteerInfo)[] = [
   'citizenship',
   'languages',
   'profession',
-  'skills',
-  'interests',
+  'selectedInterestIds',
+  'selectedSkillIds',
   'password',
   'confirmPassword',
   'email',
@@ -32,14 +31,13 @@ export const fields: (keyof RegistrationVolunteerInfo)[] = [
 export class Registration {
   organisation = false;
   volunteer = false;
- private route = inject(ActivatedRoute);
- 
+  private route = inject(ActivatedRoute);
 
   constructor() {
     effect(() => {});
   }
 
-   ngOnInit(): void {
+  ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
       const role = params['role'];
 

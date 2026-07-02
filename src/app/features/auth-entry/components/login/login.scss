@@ -33,7 +33,8 @@ $primary: #c13de6;
   border-radius: 999px;
 
   background:
-    radial-gradient(circle at top right, rgba(193, 61, 230, 0.14), transparent 45%), #ffffff;
+    radial-gradient(circle at top right, rgba(193, 61, 230, 0.14), transparent 45%),
+    #ffffff;
 
   color: #151016;
 
@@ -99,6 +100,25 @@ $primary: #c13de6;
 mat-form-field {
   width: 100%;
   margin-bottom: 12px;
+}
+
+.login-error {
+  width: 100%;
+
+  margin: -4px 0 12px;
+
+  color: #d32f2f;
+
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+
+  text-align: left;
+}
+
+::ng-deep mat-error {
+  font-size: 13px;
+  font-weight: 500;
 }
 
 /* Inputs */
@@ -390,6 +410,11 @@ mat-form-field {
     max-width: 700px;
   }
 
+  .login-error {
+    margin-bottom: 10px;
+    font-size: 13px;
+  }
+
   .info-overlay {
     align-items: flex-start;
     padding: 20px;
@@ -504,6 +529,11 @@ mat-form-field {
     font-size: 38px;
   }
 
+  .login-error {
+    font-size: 13px;
+    margin-bottom: 8px;
+  }
+
   .info-overlay {
     padding: 16px;
   }
@@ -563,6 +593,15 @@ mat-form-field {
     height: 50px;
   }
 
+  .login-error {
+    font-size: 12px;
+    margin-bottom: 8px;
+  }
+
+  ::ng-deep mat-error {
+    font-size: 12px;
+  }
+
   .info-overlay {
     padding: 12px;
   }
@@ -618,6 +657,14 @@ mat-form-field {
 
   .login-card h1 {
     font-size: 54px;
+  }
+
+  .login-error {
+    font-size: 15px;
+  }
+
+  ::ng-deep mat-error {
+    font-size: 14px;
   }
 
   .info-modal {

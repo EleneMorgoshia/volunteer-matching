@@ -42,8 +42,17 @@ export class AuthService {
     [this.accessToken, this.user, this.role, this.refreshToken].forEach((el) =>
       localStorage.removeItem(el),
     );
+    this.accessTknSignal.set('');
+    this.refreshTknSignal.set('');
     this.isLoggedInSubject$.next(false);
     this.router.navigate(['/login']);
+  }
+
+  refresh() {
+    const refreshToken = this.refreshTknSignal();
+    return this.http
+      .post<loginModelResponse>(this.apiUrl + '/auth/refresh', { refreshToken })
+      .pipe(tap((res) => this.setNewToken(res)));
   }
 
   setNewToken(resp: loginModelResponse) {

@@ -12,6 +12,12 @@
     <mat-form-field appearance="fill">
       <mat-label>იმეილი</mat-label>
       <input matInput placeholder="შეიყვანეთ თქვენი იმეილი" [formField]="loginForm.email" />
+
+      @if (formSubmitted && loginForm.email().invalid()) {
+        @for (error of loginForm.email().errors(); track error) {
+          <mat-error>{{ error.message }}</mat-error>
+        }
+      }
     </mat-form-field>
 
     <mat-form-field appearance="fill">
@@ -22,7 +28,17 @@
         placeholder="შეიყვანეთ თქვენი პაროლი"
         [formField]="loginForm.password"
       />
+
+      @if (formSubmitted && loginForm.password().invalid()) {
+        @for (error of loginForm.password().errors(); track error) {
+          <mat-error>{{ error.message }}</mat-error>
+        }
+      }
     </mat-form-field>
+
+    @if (loginErrorMessage) {
+      <p class="login-error">{{ loginErrorMessage }}</p>
+    }
 
     <div class="button-group">
       <button class="login-btn" matButton="elevated" (click)="onLogin()">შესვლა</button>
@@ -57,8 +73,9 @@
             <p>
               რეგისტრაციისას გვიზიარებ შენს ინტერესებს, უნარებსა და გამოცდილებას. ამ ინფორმაციის
               საფუძველზე Speeding Hands აანალიზებს შენს პროფილს და გთავაზობს იმ მოხალისეობრივ
-              შესაძლებლობებს, რომლებიც ყველაზე მეტად შეესაბამება შენს ცოდნასა და ინტერესებს.  <br> <br> ჩვენი
-              მიზანია, გაგიადვილოთ შესაბამისი ღონისძიებების პოვნა და დაგაკავშიროთ იმ
+              შესაძლებლობებს, რომლებიც ყველაზე მეტად შეესაბამება შენს ცოდნასა და ინტერესებს.
+              <br /><br />
+              ჩვენი მიზანია, გაგიადვილოთ შესაბამისი ღონისძიებების პოვნა და დაგაკავშიროთ იმ
               ორგანიზაციებთან, სადაც შენი უნარები და გამოცდილება ყველაზე მეტად იქნება დაფასებული.
             </p>
           </article>
@@ -71,9 +88,10 @@
               რეგისტრაციის შემდეგ ორგანიზაციას შეუძლია დაამატოს ღონისძიებები და დეტალურად აღწეროს
               მათი მიზანი, საჭირო უნარები და მოხალისეების როლი. ამ ინფორმაციის საფუძველზე Speeding
               Hands აანალიზებს ღონისძიებას და პოულობს იმ მოხალისეებს, რომელთა ინტერესები და უნარები
-              ყველაზე მეტად შეესაბამება ორგანიზაციის ღონისძიების მოთხოვნებს. <br>  <br>
-              ჩვენ გეხმარებით, უფრო
-              სწრაფად იპოვო შესაბამისი მოხალისეები და შექმნა ძლიერი გუნდი თითოეული ღონისძიებისთვის.
+              ყველაზე მეტად შეესაბამება ორგანიზაციის ღონისძიების მოთხოვნებს.
+              <br /><br />
+              ჩვენ გეხმარებით, უფრო სწრაფად იპოვო შესაბამისი მოხალისეები და შექმნა ძლიერი გუნდი
+              თითოეული ღონისძიებისთვის.
             </p>
           </article>
         </div>

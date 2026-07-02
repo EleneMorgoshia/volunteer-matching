@@ -58,6 +58,7 @@ export class OrganizationEventEdit implements OnInit {
     benefits: '',
     additionalInfo: '',
     selectedTagIds: [],
+    eventTagIds: [],
   });
 
   readonly editForm = form(this.model, () => {});
@@ -100,8 +101,8 @@ export class OrganizationEventEdit implements OnInit {
         this.editForm.volunteersAmount().setControlValue(event.volunteersAmount ?? 0);
         this.editForm.benefits().setControlValue(event.benefits ?? '');
         this.editForm.additionalInfo().setControlValue(event.additionalInfo ?? '');
-        this.selectedTagIds.set(event.selectedTagIds ?? []);
-        this.editForm.selectedTagIds().setControlValue(event.selectedTagIds ?? []);
+        this.selectedTagIds.set(event.selectedTagIds ?? event.eventTagIds);
+        this.editForm.selectedTagIds().setControlValue(event.selectedTagIds ?? event.eventTagIds);
       });
     });
   }
@@ -126,65 +127,61 @@ export class OrganizationEventEdit implements OnInit {
     this.eventService.updateEvent(updatedEvent, this.eventId).subscribe();
   }
 
-onPhotoChosen(event: Event, fieldName: 'mainPhotoUrl' | 'photo2Url' | 'photo3Url'): void {
-  const fileSelect = event.target as HTMLInputElement;
+  onPhotoChosen(event: Event, fieldName: 'mainPhotoUrl' | 'photo2Url' | 'photo3Url'): void {
+    const fileSelect = event.target as HTMLInputElement;
 
-  if (fileSelect.files?.length !== 1) {
-    return;
-  }
+    if (fileSelect.files?.length !== 1) {
+      return;
+    }
 
-  const file = fileSelect.files[0];
-  const reader = new FileReader();
+    const file = fileSelect.files[0];
+    const reader = new FileReader();
 
-  reader.onload = () => {
-    const img = new Image();
+    reader.onload = () => {
+      const img = new Image();
 
-    img.onload = () => {
-      const maxWidth = 1200;
-      const maxHeight = 1200;
-      const quality = 0.7;
+      img.onload = () => {
+        const maxWidth = 1200;
+        const maxHeight = 1200;
+        const quality = 0.7;
 
-      const scale = Math.min(
-        1,
-        maxWidth / img.width,
-        maxHeight / img.height
-      );
+        const scale = Math.min(1, maxWidth / img.width, maxHeight / img.height);
 
-      const canvas = document.createElement('canvas');
-      canvas.width = img.width * scale;
-      canvas.height = img.height * scale;
+        const canvas = document.createElement('canvas');
+        canvas.width = img.width * scale;
+        canvas.height = img.height * scale;
 
-      const ctx = canvas.getContext('2d');
+        const ctx = canvas.getContext('2d');
 
-      if (!ctx) {
-        return;
-      }
+        if (!ctx) {
+          return;
+        }
 
-      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
-      const compressedBase64 = canvas.toDataURL('image/jpeg', quality);
+        const compressedBase64 = canvas.toDataURL('image/jpeg', quality);
 
-      if (fieldName === 'mainPhotoUrl') {
-        this.selectedMainImage.set(compressedBase64);
-        this.editForm.mainPhotoUrl().setControlValue(compressedBase64);
-      }
+        if (fieldName === 'mainPhotoUrl') {
+          this.selectedMainImage.set(compressedBase64);
+          this.editForm.mainPhotoUrl().setControlValue(compressedBase64);
+        }
 
-      if (fieldName === 'photo2Url') {
-        this.selectedPhoto2Image.set(compressedBase64);
-        this.editForm.photo2Url().setControlValue(compressedBase64);
-      }
+        if (fieldName === 'photo2Url') {
+          this.selectedPhoto2Image.set(compressedBase64);
+          this.editForm.photo2Url().setControlValue(compressedBase64);
+        }
 
-      if (fieldName === 'photo3Url') {
-        this.selectedPhoto3Image.set(compressedBase64);
-        this.editForm.photo3Url().setControlValue(compressedBase64);
-      }
+        if (fieldName === 'photo3Url') {
+          this.selectedPhoto3Image.set(compressedBase64);
+          this.editForm.photo3Url().setControlValue(compressedBase64);
+        }
+      };
+
+      img.src = reader.result as string;
     };
 
-    img.src = reader.result as string;
-  };
-
-  reader.readAsDataURL(file);
-}
+    reader.readAsDataURL(file);
+  }
 
   goToProfile(): void {
     this.router.navigateByUrl('/organization/profile').then();

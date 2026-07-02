@@ -22,6 +22,7 @@ export interface VolunteerModel {
   description: string;
 
   selectedTagIds: string[];
+  volunteerTagIds: string[];
 }
 
 export interface UpdateProfileParams {

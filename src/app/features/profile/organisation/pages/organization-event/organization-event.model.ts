@@ -36,4 +36,5 @@ export interface EventModel {
   benefits: string;
   additionalInfo: string;
   selectedTagIds: string[];
+  eventTagIds: string[];
 }

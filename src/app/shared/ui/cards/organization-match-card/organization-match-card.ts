@@ -1,9 +1,11 @@
 import { Component, computed, input, output } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
+import { MatchedVolunteerDetails, VolunteerModel } from './organization-match-card.model';
 import {
-  MatchedVolunteerDetails,
-  VolunteerModel,
-} from './organization-match-card.model';
+  MatchedDetails,
+  MatchedEvents,
+} from '../../../../ai-matched-events/ai-matched-events.model';
+import { EventModel } from '../../../../features/profile/organisation/pages/organization-event/organization-event.model';
 
 @Component({
   selector: 'app-organization-match-card',
@@ -12,12 +14,25 @@ import {
   styleUrl: './organization-match-card.scss',
 })
 export class OrganizationMatchCard {
-  volunteerItem = input<VolunteerModel | MatchedVolunteerDetails>();
+  volunteerItem = input<EventModel | MatchedDetails | undefined>();
 
   requestMatch = output<string>();
   rejectMatch = output<string>();
 
-  readonly volunteer = computed<VolunteerModel | undefined>(() => {
+  readonly volunteer = computed<
+    | {
+        volunteerId: string;
+        firstName: string;
+        lastName: string;
+        email: string;
+        dateOfBirth: string;
+        citizenship: string;
+        profilePhotoUrl: string;
+        description: string;
+        languages: string;
+      }
+    | undefined
+  >(() => {
     const item = this.volunteerItem();
 
     if (!item) {
@@ -27,8 +42,7 @@ export class OrganizationMatchCard {
     if ('volunteer' in item) {
       return item.volunteer;
     }
-
-    return item;
+    return undefined;
   });
 
   readonly volunteerMatchId = computed(() => {
@@ -39,7 +53,7 @@ export class OrganizationMatchCard {
     }
 
     if ('volunteer' in item) {
-      return item.volunteerEventMatchId;
+      return item['volunteerEventMatchId'];
     }
 
     return '';

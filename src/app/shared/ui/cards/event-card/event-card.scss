@@ -76,16 +76,19 @@ $primary: #c13de6;
 
   transform: translate(-50%, -50%);
 
+  min-width: 130px;
+  height: 42px;
+  padding: 0 26px;
+
   border: none;
   border-radius: 999px;
-
-  padding: 14px 48px;
 
   background: #ffffff;
   color: #111111;
 
-  font-size: 18px;
-  font-weight: 500;
+  font-size: 15px;
+  font-weight: 600;
+  white-space: nowrap;
 
   cursor: pointer;
   z-index: 2;
@@ -230,8 +233,10 @@ $primary: #c13de6;
   }
 
   .see-more-button {
-    padding: 10px 34px;
-    font-size: 15px;
+    min-width: 118px;
+    height: 38px;
+    padding: 0 20px;
+    font-size: 14px;
   }
 
   .event-title {

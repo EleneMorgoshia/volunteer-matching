@@ -42,8 +42,8 @@ export class Header {
   favoriteEvents$!: Observable<FavoriteEventsResponse>;
 
   constructor() {
-    this.authService.isLoggedInSubject$.pipe(takeUntilDestroyed()).subscribe(() => {
-      if (this.isLoggedIn()) {
+    this.authService.isLoggedInSubject$.pipe(takeUntilDestroyed()).subscribe((res) => {
+      if (res) {
         this.headerService.getCurrentProfile().subscribe();
       }
     });
@@ -63,6 +63,10 @@ export class Header {
     return this.authService.isOrganization();
   }
 
+  //ჰართ აიქონის აკონტროლებალდ რომ როც ორგანიზაციაა ვაფშე არ გამოჩდნეს
+  isVolunteer() {
+    return !this.authService.isOrganization();
+  }
   // profileLink() {
   //   return this.authService.isOrganization() ? '/organization/profile' : '/volunteer/profile';
   // }

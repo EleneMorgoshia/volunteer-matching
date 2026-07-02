@@ -1,9 +1,9 @@
-import { Component, effect, inject, signal } from '@angular/core';
+import { Component, computed, effect, inject, signal } from '@angular/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
-import { form, FormField } from '@angular/forms/signals';
+import { email, form, FormField, minLength, required } from '@angular/forms/signals';
 import { LoginInfo } from './login.model';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -31,7 +31,57 @@ export class Login {
     password: '',
   });
 
-  loginForm = form(this.loginModel);
+  // loginForm = form(this.loginModel);
+  // authService = inject(AuthService);
+  // router = inject(Router);
+  // showInfo = signal(false);
+
+  // constructor() {
+  //   effect(() => {
+  //     console.log(this.loginForm.email());
+  //     console.log(this.loginForm.password().value());
+  //     console.log(this.loginForm().value());
+  //   });
+  // }
+
+  // onLogin() {
+  //   console.log('login');
+  //   console.log(this.loginForm.email());
+  //   console.log(this.loginForm.password());
+  //   this.authService
+  //     .login(this.loginForm().value())
+  //     .subscribe((res) => this.authService.navigateToCorrectProfile());
+  // }
+
+  // onRegiter() {
+  //   this.router.navigate(['/registration'], {
+  //     queryParams: { role: 'volunteer' },
+  //   });
+  // }
+
+  // openInfo() {
+  //   this.showInfo.set(true);
+  // }
+
+  // closeInfo() {
+  //   this.showInfo.set(false);
+  // }
+
+  formSubmitted = false;
+  loginErrorMessage = '';
+
+  loginForm = form(this.loginModel, (schemaPath) => {
+    required(schemaPath.email, { message: 'გთხოვთ, შეიყვანოთ იმეილი' });
+    email(schemaPath.email, { message: 'გთხოვთ, შეიყვანოთ სწორი იმეილი' });
+
+    required(schemaPath.password, { message: 'გთხოვთ, შეიყვანოთ პაროლი' });
+    minLength(schemaPath.password, 6, {
+      message: 'პაროლი უნდა შეიცავდეს მინიმუმ 6 სიმბოლოს',
+    });
+  });
+
+  isFormValid = computed(() => this.loginForm().valid());
+
   authService = inject(AuthService);
   router = inject(Router);
   showInfo = signal(false);
@@ -45,12 +95,28 @@ export class Login {
   }
 
   onLogin() {
+    this.formSubmitted = true;
+    this.loginErrorMessage = '';
+
+    if (!this.isFormValid()) {
+      return;
+    }
+
     console.log('login');
     console.log(this.loginForm.email());
     console.log(this.loginForm.password());
-    this.authService
-      .login(this.loginForm().value())
-      .subscribe((res) => this.authService.navigateToCorrectProfile());
+
+    this.authService.login(this.loginForm().value()).subscribe({
+      next: (res) => this.authService.navigateToCorrectProfile(),
+      error: (err) => {
+        if (err.status === 400 || err.status === 401) {
+          this.loginErrorMessage = 'იმეილი ან პაროლი არასწორია';
+          return;
+        }
+
+        this.loginErrorMessage = 'დაფიქსირდა შეცდომა. გთხოვთ, სცადოთ თავიდან';
+      },
+    });
   }
 
   onRegiter() {

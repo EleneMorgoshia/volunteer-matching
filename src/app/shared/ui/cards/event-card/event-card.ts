@@ -5,10 +5,12 @@ import { Router } from '@angular/router';
 import { EventModel } from '../../../../features/profile/organisation/pages/organization-event/organization-event.model';
 import { EventService } from '../../../../features/profile/organisation/pages/organization-event/organization-event.service';
 import { MatchedDetails } from '../../../../ai-matched-events/ai-matched-events.model';
+import { AuthService } from '../../../../core/auth/auth.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-event-card',
-  imports: [MatIconModule],
+  imports: [MatIconModule, DatePipe],
   templateUrl: './event-card.html',
   styleUrl: './event-card.scss',
 })
@@ -20,6 +22,9 @@ export class EventCard {
 
   private router = inject(Router);
   private eventsService = inject(EventService);
+  //ორგანიზაციას რო არ უჩანდეს ჰართ აიქონი
+  private authService = inject(AuthService);
+  readonly isVolunteer = computed(() => this.authService.isVolunteer());
 
   readonly event = computed<Partial<EventModel> | undefined>(() => {
     const item = this.eventItem();

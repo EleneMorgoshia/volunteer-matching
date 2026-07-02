@@ -13,4 +13,15 @@ export interface MatchedDetails {
   volunteerEventMatchId: string;
   isFavorite: boolean;
   event: Partial<EventModel>;
+  volunteer?: {
+    volunteerId: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    dateOfBirth: string;
+    citizenship: string;
+    profilePhotoUrl: string;
+    description: string;
+    languages: string;
+  };
 }

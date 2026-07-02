@@ -26,6 +26,22 @@ export const authGuard: CanActivateFn = (
   // return router.createUrlTree(currentProfileUrl);
   return true;
 };
+
+export const loginGuard: CanActivateFn = (
+  route: ActivatedRouteSnapshot,
+  state: RouterStateSnapshot,
+) => {
+  //ეს დავაკომენტარეთ დროებით იმიტორო გავსტილო ჰოუმი
+  const authService = inject(AuthService);
+  const router = inject(Router);
+
+  if (authService.isAuthenticated()) {
+    return false;
+  }
+
+  return true;
+};
+
 export const volunteerGuard: CanActivateFn = () => {
   //სულ ორი წამი ვაკომენტარებ გასასტილად
   const authService = inject(AuthService);

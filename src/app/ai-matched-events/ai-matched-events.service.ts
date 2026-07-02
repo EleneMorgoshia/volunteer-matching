@@ -22,12 +22,12 @@ export class AiMatchService {
     } else {
       url = url + '/volunteers/me/matches/generate';
     }
-    return this.http.post(url, {});
+    return this.http.post(url, { showSnackBar: true });
   }
 
   getMatches(page = 1, pageSize = 6, id: string | null) {
     if (this.authService.isOrganization()) {
-      return this.http.get<any>(
+      return this.http.get<MatchedEvents>(
         this.apiUrl + `/organizations/me/events/${id}/matches?page=${page}&pageSize=${pageSize}`,
       );
     }
@@ -37,10 +37,32 @@ export class AiMatchService {
   }
 
   requestForVolunteer(id: string) {
-    return this.http.post(this.apiUrl + `/volunteers/me/matches/${id}/request`, {});
+    return this.http.post(this.apiUrl + `/volunteers/me/matches/${id}/request`, {
+      showSnackBar: true,
+    });
   }
 
   rejectForVolunteer(id: string) {
-    return this.http.post(this.apiUrl + `/volunteers/me/matches/${id}/reject`, {});
+    return this.http.post(this.apiUrl + `/volunteers/me/matches/${id}/reject`, {
+      showSnackBar: true,
+    });
+  }
+
+  requestForOrg(id: string, matchId: string) {
+    return this.http.post(
+      this.apiUrl + `/organizations/me/events/${id}/matches/${matchId}/request`,
+      {
+        showSnackBar: true,
+      },
+    );
+  }
+
+  rejectForOrg(id: string, matchId: string) {
+    return this.http.post(
+      this.apiUrl + `/organizations/me/events/${id}/matches/${matchId}/reject`,
+      {
+        showSnackBar: true,
+      },
+    );
   }
 }

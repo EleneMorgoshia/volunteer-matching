@@ -8,10 +8,11 @@ import { Observable } from 'rxjs';
 import { EventService } from '../features/profile/organisation/pages/organization-event/organization-event.service';
 import { EventModel } from '../features/profile/organisation/pages/organization-event/organization-event.model';
 import { CommonModule } from '@angular/common';
+import { OrganizationMatchCard } from "../shared/ui/cards/organization-match-card/organization-match-card";
 
 @Component({
   selector: 'app-home',
-  imports: [Hero, EventList, CommonModule],
+  imports: [Hero, EventList, CommonModule, OrganizationMatchCard],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })
