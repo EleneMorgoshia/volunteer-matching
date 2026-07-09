@@ -175,6 +175,7 @@ export class VolunteerEdit implements OnInit {
     return [];
   }
 
+  //ფოტოს დამატება
   onFileChosen(event: Event) {
     const fileSelect = event.target as HTMLInputElement;
 
@@ -253,6 +254,6 @@ export class VolunteerEdit implements OnInit {
   }
 
   goToProfile(): void {
-    this.router.navigateByUrl('./pages/voluteer-profile/voluteer-profile').then();
+    this.router.navigateByUrl('/volunteer/profile');
   }
 }

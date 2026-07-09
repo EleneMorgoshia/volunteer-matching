@@ -45,23 +45,23 @@
     </div>
 
     <div class="detailed-info-container">
-      <div class="info-item">
+      <div class="info-item location-item">
         <mat-icon fontIcon="location_on"></mat-icon>
         <p>{{ event.location }}</p>
       </div>
 
-      <div class="divider"></div>
+      <div class="info-row-bottom">
+        <div class="info-item">
+          <mat-icon fontIcon="schedule"></mat-icon>
+          <p>{{ event.startDate | date: 'dd/MM/yyyy' }} - {{ event.endDate | date: 'dd/MM/yyyy' }}</p>
+        </div>
 
-      <div class="info-item">
-        <mat-icon fontIcon="schedule"></mat-icon>
-        <p>{{ event.startDate | date: 'dd/MM/yyyy' }} - {{ event.endDate | date: 'dd/MM/yyyy' }}</p>
-      </div>
+        <div class="divider"></div>
 
-      <div class="divider"></div>
-
-      <div class="info-item">
-        <mat-icon fontIcon="auto_awesome"></mat-icon>
-        <p>{{ event.theme }}</p>
+        <div class="info-item">
+          <mat-icon fontIcon="auto_awesome"></mat-icon>
+          <p>{{ event.theme || "ტექნოლოგიები" }}</p>
+        </div>
       </div>
     </div>
   </div>

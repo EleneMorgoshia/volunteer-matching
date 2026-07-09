@@ -31,41 +31,6 @@ export class Login {
     password: '',
   });
 
-  // loginForm = form(this.loginModel);
-  // authService = inject(AuthService);
-  // router = inject(Router);
-  // showInfo = signal(false);
-
-  // constructor() {
-  //   effect(() => {
-  //     console.log(this.loginForm.email());
-  //     console.log(this.loginForm.password().value());
-  //     console.log(this.loginForm().value());
-  //   });
-  // }
-
-  // onLogin() {
-  //   console.log('login');
-  //   console.log(this.loginForm.email());
-  //   console.log(this.loginForm.password());
-  //   this.authService
-  //     .login(this.loginForm().value())
-  //     .subscribe((res) => this.authService.navigateToCorrectProfile());
-  // }
-
-  // onRegiter() {
-  //   this.router.navigate(['/registration'], {
-  //     queryParams: { role: 'volunteer' },
-  //   });
-  // }
-
-  // openInfo() {
-  //   this.showInfo.set(true);
-  // }
-
-  // closeInfo() {
-  //   this.showInfo.set(false);
-  // }
 
   formSubmitted = false;
   loginErrorMessage = '';

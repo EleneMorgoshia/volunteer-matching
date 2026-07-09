@@ -35,9 +35,7 @@ export class AuthService {
     );
   }
 
-  // ანას ვკითხოთ,
-  // სვაგერში ვერ ვნახეთ და როცა ერორი იქნება,
-  // თუ ეს ერორი ტოკენის ბრალი არაა 401-სგან განსხვავებული ერორ კოდი რომ დაბრუნდეს
+
   logout() {
     [this.accessToken, this.user, this.role, this.refreshToken].forEach((el) =>
       localStorage.removeItem(el),

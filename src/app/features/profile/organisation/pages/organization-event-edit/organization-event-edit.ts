@@ -107,8 +107,8 @@ export class OrganizationEventEdit implements OnInit {
     });
   }
 
-  onSubmit(event: Event): void {
-    event.preventDefault();
+  onSubmit(event?: Event): void {
+    event?.preventDefault();
     this.formSubmitted = true;
 
     if (this.editForm().invalid()) {
@@ -125,6 +125,24 @@ export class OrganizationEventEdit implements OnInit {
     };
 
     this.eventService.updateEvent(updatedEvent, this.eventId).subscribe();
+  }
+
+  onDeletMainImage() {
+    this.selectedMainImage.set('');
+    this.editForm.mainPhotoUrl().setControlValue('');
+    this.onSubmit();
+  }
+
+  onDeleteImage2() {
+    this.selectedPhoto2Image.set('');
+    this.editForm.photo2Url().setControlValue('');
+    this.onSubmit();
+  }
+
+  onDeleteImage3() {
+    this.selectedPhoto3Image.set('');
+    this.editForm.photo3Url().setControlValue('');
+    this.onSubmit();
   }
 
   onPhotoChosen(event: Event, fieldName: 'mainPhotoUrl' | 'photo2Url' | 'photo3Url'): void {
@@ -159,6 +177,7 @@ export class OrganizationEventEdit implements OnInit {
 
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
+        //converted into base64
         const compressedBase64 = canvas.toDataURL('image/jpeg', quality);
 
         if (fieldName === 'mainPhotoUrl') {

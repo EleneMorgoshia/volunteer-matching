@@ -207,11 +207,13 @@ textarea[matInput] {
   background-color: #fff !important;
   color: $primary !important;
   border: 2px solid $primary;
+  cursor: pointer;
 }
 
 .save-button {
   background-color: $primary !important;
   color: #fff !important;
+  cursor: pointer;
 }
 
 .password-button:hover,

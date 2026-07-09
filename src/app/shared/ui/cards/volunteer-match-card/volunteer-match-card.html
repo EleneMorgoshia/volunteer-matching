@@ -7,22 +7,6 @@
         class="event-image"
       />
 
-      <button
-        style="position: absolute; top: 16px"
-        type="button"
-        (click)="requestMatch.emit(matchEventId())"
-      >
-        accept
-      </button>
-
-      <button
-        style="position: absolute; top: 4px"
-        type="button"
-        (click)="rejectMatch.emit(matchEventId())"
-      >
-        reject
-      </button>
-
       <button class="heart-button" type="button" (click)="onToggleFavorite()">
         <mat-icon fontIcon="favorite_border"></mat-icon>
       </button>
@@ -49,24 +33,42 @@
     </div>
 
     <div class="detailed-info-container">
-      <div class="info-item">
+      <div class="info-item location-item">
         <mat-icon fontIcon="location_on"></mat-icon>
         <p>{{ event.location }}</p>
       </div>
 
-      <div class="divider"></div>
+      <div class="info-row-bottom">
+        <div class="info-item">
+          <mat-icon fontIcon="schedule"></mat-icon>
+          <p>{{ event.startDate }} - {{ event.endDate }}</p>
+        </div>
 
-      <div class="info-item">
-        <mat-icon fontIcon="schedule"></mat-icon>
-        <p>{{ event.startDate }} - {{ event.endDate }}</p>
+        <div class="divider"></div>
+
+        <div class="info-item">
+          <mat-icon fontIcon="auto_awesome"></mat-icon>
+          <p>{{ event.theme }}</p>
+        </div>
       </div>
+    </div>
 
-      <div class="divider"></div>
+    <div class="match-actions">
+      <button
+        class="action-button accept-button"
+        type="button"
+        (click)="requestMatch.emit(matchEventId())"
+      >
+        დადასტურება
+      </button>
 
-      <div class="info-item">
-        <mat-icon fontIcon="auto_awesome"></mat-icon>
-        <p>{{ event.theme }}</p>
-      </div>
+      <button
+        class="action-button reject-button"
+        type="button"
+        (click)="rejectMatch.emit(matchEventId())"
+      >
+        უარყოფა
+      </button>
     </div>
   </div>
 }

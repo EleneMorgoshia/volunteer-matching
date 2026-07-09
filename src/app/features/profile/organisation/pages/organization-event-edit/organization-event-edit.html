@@ -11,11 +11,16 @@
     <section class="images-section">
       <div class="main-image image-box">
         @if (selectedMainImage() || editForm.mainPhotoUrl().value()) {
+          <button class="back-button delete-button" type="button" (click)="onDeletMainImage()">
+              <mat-icon fontIcon="delete_outline"></mat-icon>
+            </button>
           <img [src]="selectedMainImage() || editForm.mainPhotoUrl().value()" alt="event image" />
         } @else {
           <mat-icon>add_photo_alternate</mat-icon>
           <p>მთავარი ფოტო</p>
         }
+
+        
 
         <input matInput [formField]="editForm.mainPhotoUrl" placeholder="ფოტოს ბმული" />
         <input
@@ -28,7 +33,10 @@
       <div class="small-images">
         <div class="small-image image-box">
           @if (selectedPhoto2Image() || editForm.photo2Url().value()) {
-            <img [src]="selectedPhoto2Image() || editForm.photo2Url().value()" alt="ფოტო 2" />
+            
+            <button class="back-button delete-button" type="button" (click)="onDeleteImage2()">
+              <mat-icon fontIcon="delete_outline"></mat-icon>
+            </button><img [src]="selectedPhoto2Image() || editForm.photo2Url().value()" alt="ფოტო 2" />
           } @else {
             <mat-icon>photo</mat-icon>
             <p>ფოტო 2</p>
@@ -44,6 +52,9 @@
 
         <div class="small-image image-box">
           @if (selectedPhoto3Image() || editForm.photo3Url().value()) {
+            <button class="back-button delete-button" type="button" (click)="onDeleteImage3()">
+              <mat-icon fontIcon="delete_outline"></mat-icon>
+            </button>
             <img [src]="selectedPhoto3Image() || editForm.photo3Url().value()" alt="ფოტო 3" />
           } @else {
             <mat-icon>photo</mat-icon>

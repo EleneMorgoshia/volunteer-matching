@@ -115,6 +115,15 @@ export class OrganizationEdit {
       .subscribe();
   }
 
+  onDeletePhoto() {
+    this.selectedImage.set('');
+    this.editForm.profilePhotoUrl().setControlValue('');
+    this.service
+      .updateProfile(this.editForm().value())
+      .pipe(switchMap((res) => this.service.getProfileInfo()))
+      .subscribe();
+  }
+
   goToProfile(): void {
     this.router.navigateByUrl('/organization/profile').then();
   }

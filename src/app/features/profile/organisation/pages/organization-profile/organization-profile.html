@@ -25,9 +25,20 @@
             <span>იმეილი:</span>
             <p>{{ profileInfo.email }}</p>
           </div>
-        </div>
 
-        <!-- აქ მერე არ დაგავიწყდეს ჩაამატო ის ლოგკა რომ თუ ლინკდინი შემოტანა გამოაჩნინოს ლინკდინი, თუ არადა არა -->
+          @if (profileInfo.linkedInUrl) {
+            <div class="info-row">
+              <span>LinkedIn:</span>
+              <a
+                [href]="profileInfo.linkedInUrl"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {{ profileInfo.linkedInUrl }}
+              </a>
+            </div>
+          }
+        </div>
 
         <div class="section">
           <h3>ორგანიზაციის შესახებ</h3>
@@ -57,6 +68,7 @@
             (eventDeleted)="refreshEvents()"
           ></app-event-list>
         }
+
         <button
           class="add-event-button"
           matFab

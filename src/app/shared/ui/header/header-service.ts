@@ -21,6 +21,7 @@ export class HeaderService {
   private organizationProfileService = inject(OrganizationProfileService);
   private volunteerProfileService = inject(VolunteerProfileService);
   private http = inject(HttpClient);
+  
   readonly firstLetter = computed(
     () =>
       this.organizationProfileService.firstLetterSignal() ||

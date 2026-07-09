@@ -12,3 +12,4 @@ export class Loader {
   public loaderService = inject(LoaderService);
   loading = this.loaderService.loading;
 }
+ 

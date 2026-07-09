@@ -12,7 +12,7 @@ export const authGuard: CanActivateFn = (
   route: ActivatedRouteSnapshot,
   state: RouterStateSnapshot,
 ) => {
-  //ეს დავაკომენტარეთ დროებით იმიტორო გავსტილო ჰოუმი
+
   const authService = inject(AuthService);
   const router = inject(Router);
 
@@ -31,7 +31,7 @@ export const loginGuard: CanActivateFn = (
   route: ActivatedRouteSnapshot,
   state: RouterStateSnapshot,
 ) => {
-  //ეს დავაკომენტარეთ დროებით იმიტორო გავსტილო ჰოუმი
+
   const authService = inject(AuthService);
   const router = inject(Router);
 
@@ -43,7 +43,7 @@ export const loginGuard: CanActivateFn = (
 };
 
 export const volunteerGuard: CanActivateFn = () => {
-  //სულ ორი წამი ვაკომენტარებ გასასტილად
+
   const authService = inject(AuthService);
   const router = inject(Router);
 

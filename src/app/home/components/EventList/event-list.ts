@@ -53,4 +53,6 @@ export class EventList {
   isMatchedEvents(events: EventModel[] | MatchedEvents | null): events is MatchedEvents {
     return !!events && !Array.isArray(events);
   }
+
+
 }

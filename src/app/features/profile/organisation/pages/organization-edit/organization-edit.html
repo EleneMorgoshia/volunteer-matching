@@ -1,5 +1,4 @@
 <form class="edit-form">
-
   <div class="form-header">
     <button class="back-button" type="button" (click)="goToProfile()">
       <mat-icon>arrow_back</mat-icon>
@@ -25,6 +24,11 @@
 
           <input matInput placeholder="სურათის ბმული" [formField]="editForm.profilePhotoUrl" />
           <input type="file" accept=".png,.jpg,.jpeg" (change)="onFileChosen($event)" />
+          @if (selectedImage() || editForm.profilePhotoUrl().value()) {
+            <button class="back-button delete-button" type="button" (click)="onDeletePhoto()">
+              <mat-icon fontIcon="delete_outline"></mat-icon>
+            </button>
+          }
         </mat-form-field>
       </div>
 

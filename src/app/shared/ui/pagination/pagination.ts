@@ -21,8 +21,9 @@ export class Pagination {
     const end = this.totalItems();
     const curr = this.currentPage();
     const perPg = this.perPage();
-    const totalPages = end % perPg ? end / perPg + 1 : end / perPg;
+    // const totalPages = end % perPg ? end / perPg + 1 : end / perPg;
 
+    const totalPages = Math.ceil(end / perPg);
     for (let i = 1; i <= totalPages; i++) {
       result.push({ type: 'page', value: i, key: 'page_' + i });
     }

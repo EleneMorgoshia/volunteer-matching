@@ -30,5 +30,6 @@
     [currentPage]="currentPage()"
     [totalItems]="events()?.length || 0"
     (pageChanged)="onPageChange($event)"
+    [perPage]="perPage"
   ></app-pagination>
 </div>

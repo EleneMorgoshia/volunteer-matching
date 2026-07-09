@@ -14,68 +14,60 @@ $primary: #c13de6;
   margin: 40px 0;
 }
 
-.form-card {
-  width: 100%;
-  padding: 32px 80px 80px;
-
-  display: grid;
-  grid-template-columns: 520px 1fr;
-  gap: 68px;
-
-  background:
-    radial-gradient(circle at top left, rgba(193, 61, 230, 0.14), transparent 36%), #ffffff;
-  border-radius: 36px;
-}
-
 .form-header {
   display: flex;
   align-items: center;
   gap: 18px;
   margin-bottom: 24px;
   padding-bottom: 12px;
-  margin-bottom: 24px;
 }
 
 .back-button {
   width: 46px;
   height: 46px;
-
   border: none;
   border-radius: 50%;
-
+  background: #f7effb;
+  color: $primary;
   display: flex;
   align-items: center;
   justify-content: center;
-
-  background: #f7effb;
-  color: $primary;
-
   cursor: pointer;
-
   transition:
     background 0.2s ease,
     color 0.2s ease,
     transform 0.2s ease;
-}
 
-.back-button:hover {
-  background: $primary;
-  color: #ffffff;
-  transform: translateX(-3px);
-}
+  mat-icon {
+    width: 24px;
+    height: 24px;
+    font-size: 24px;
+  }
 
-.back-button mat-icon {
-  width: 24px;
-  height: 24px;
-  font-size: 24px;
+  &:hover {
+    background: $primary;
+    color: #ffffff;
+    transform: translateX(-3px);
+  }
 }
 
 .form-header h1 {
   margin: 0;
-
   font-size: 38px;
   font-weight: 900;
   color: #111;
+}
+
+.form-card {
+  width: 100%;
+  padding: 32px 80px 80px;
+  display: grid;
+  grid-template-columns: 520px 1fr;
+  gap: 68px;
+  background:
+    radial-gradient(circle at top left, rgba(193, 61, 230, 0.14), transparent 36%),
+    #ffffff;
+  border-radius: 36px;
 }
 
 .images-section {
@@ -87,6 +79,7 @@ $primary: #c13de6;
 .image-box {
   position: relative;
   overflow: hidden;
+  isolation: isolate;
 
   display: flex;
   align-items: center;
@@ -97,11 +90,10 @@ $primary: #c13de6;
   background: linear-gradient(135deg, rgba(193, 61, 230, 0.16), #eeeeee 55%);
   border-radius: 26px;
   border: none;
-
   color: $primary;
   box-shadow: 0 18px 42px rgba(193, 61, 230, 0.16);
 
-  mat-icon {
+  > mat-icon {
     font-size: 52px;
     width: 52px;
     height: 52px;
@@ -117,6 +109,7 @@ $primary: #c13de6;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
   }
 
   input[type='file'] {
@@ -124,6 +117,7 @@ $primary: #c13de6;
     inset: 0;
     opacity: 0;
     cursor: pointer;
+    z-index: 2;
   }
 
   input[matInput] {
@@ -143,6 +137,57 @@ $primary: #c13de6;
 
 .small-image {
   height: 260px;
+}
+
+/* UPDATED DELETE BUTTON */
+.image-box .delete-button {
+  position: absolute;
+  right: 18px;
+  bottom: 18px;
+  z-index: 5;
+
+  width: 52px;
+  height: 52px;
+  min-width: 52px;
+  padding: 0;
+
+  border: 1px solid rgba(193, 61, 230, 0.18);
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.94);
+  color: $primary;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  box-shadow: 0 12px 26px rgba(40, 20, 50, 0.22);
+  backdrop-filter: blur(10px);
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+
+  mat-icon {
+    width: 26px;
+    height: 26px;
+    font-size: 26px;
+  }
+
+  &:hover {
+    background: #fff0f4;
+    color: #e53935;
+    border-color: rgba(229, 57, 53, 0.26);
+    transform: scale(1.08);
+  }
+}
+
+/* delete button must NOT behave like back button */
+.image-box .delete-button:hover {
+  transform: scale(1.08);
 }
 
 .content-section {
@@ -168,19 +213,14 @@ textarea {
 
 .save-button {
   align-self: flex-end;
-
   min-width: 180px;
   height: 56px;
   margin-top: 8px;
-
   border-radius: 999px !important;
-
   background: $primary !important;
   color: #ffffff !important;
-
   font-weight: 800;
   font-size: 15px;
-
   box-shadow: 0 14px 28px rgba(193, 61, 230, 0.28);
 }
 
@@ -200,7 +240,6 @@ textarea {
   .mat-mdc-text-field-wrapper {
     min-height: 64px;
     padding: 0 18px !important;
-
     background: rgba(248, 241, 250, 0.9) !important;
     border-radius: 18px !important;
   }
@@ -248,16 +287,16 @@ textarea {
   .form-card {
     grid-template-columns: 1fr;
   }
-
-  .content-section::before {
-    font-size: 32px;
-  }
 }
 
 @media (max-width: 650px) {
   .form-card {
     padding: 24px;
     border-radius: 28px;
+  }
+
+  .form-header h1 {
+    font-size: 28px;
   }
 
   .small-images,
@@ -270,8 +309,18 @@ textarea {
     height: 230px;
   }
 
-  .content-section::before {
-    font-size: 26px;
+  .image-box .delete-button {
+    width: 46px;
+    height: 46px;
+    min-width: 46px;
+    right: 14px;
+    bottom: 14px;
+
+    mat-icon {
+      width: 23px;
+      height: 23px;
+      font-size: 23px;
+    }
   }
 
   .save-button {
